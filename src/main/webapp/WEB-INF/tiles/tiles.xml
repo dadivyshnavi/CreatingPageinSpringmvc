@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+   "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+   "jndi:/localhost/myapp/WEB-INF/dtd/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<definition name="base.definition" template="/WEB-INF/jsp/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/jsp/header.jsp" />
+<!--        <put-attribute name="body" value="/WEB-INF/jsp/login1.jsp" /> -->
+        <put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />
+	</definition>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<definition name="dashBoard" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/dashBoard.jsp" />
+	</definition>
+	<definition name="changePassword" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/changePassword.jsp" />
+	</definition>
+
+     <definition name="employee" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/employee.jsp" />
+	</definition>
+	
+	<definition name="editProfile" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/editProfile.jsp" />
+	</definition>
+	
+	<definition name="403" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/403.jsp" />
+	</definition>
+	
+	<definition name="student" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/student.jsp" />
+	</definition>
+	
+	
+	
+		
+
+</tiles-definitions>

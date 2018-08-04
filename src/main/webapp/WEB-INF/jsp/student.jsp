@@ -1,0 +1,94 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Student Page</title>
+</head>
+<body>
+<div class="clearfix"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" style="background-color:  white !important; padding-top: 15PX;">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Student List</h4>
+						<div class="options">
+							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+						</div>
+					</div>
+					<div class="panel-body collapse in">
+					<span id="PasswordSuccessmsg"></span>
+					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
+						<div class="table-responsive" id="tableId">
+							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+								<thead><tr><th>First  Name</th><th>Last Name</th><th></th></tr></thead>
+								<tbody></tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- 		<a class="btn btn-info btn-lg"  onclick="PopupFillingStation();">Add Gas</a><br><br> -->
+		<div class="row" id="moveTo">
+			<div class="col-md-12 col-sm-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Add Student</h4>
+						
+						
+					</div>
+					
+					
+		<form:form modelAttribute="studentForm" action="student" class="form-horizontal " method="Post">
+	                  <form:hidden path="id"/>	
+						<div class="col-md-6"><br>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="fname" class="form-control validate onlyCharacters" placeholder="Enter First Name"/>
+									</div>
+								</div></div>
+								<div class="col-md-6"><br>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Last Name<span class="impColor">*</span></label>
+						<div class="col-md-6">
+										<form:input path="lname" class="form-control validate onlyCharacters" placeholder="Enter Last Name"/>
+									</div>
+								</div>
+								</div>
+									<div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-12">
+				      			<div class="btn-toolbar text-center">
+					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+					      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
+				      			</div>
+				      		</div>
+				      	</div>
+			      	</div>
+			</form:form>
+</div>
+</div>
+</div>
+</div>
+
+
+</body>
+<script type="text/javascript">
+
+
+$("#pageName").text("Student Master");
+$(".student").addClass("active"); 
+</script>
+
+
+
+</html>
