@@ -83,8 +83,39 @@
 
 </body>
 <script type="text/javascript">
-
-
+var listOrders1 = ${allOrders1};
+if (listOrders1 != "") {
+	displayTable(listOrders1);
+}
+function displayTable(listOrders) {
+	$('#tableId').html('');
+	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr><th>First  Name</th><th>Last Name</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+	$('#tableId').html(tableHead);
+	serviceUnitArray = {};
+	$.each(listOrders,function(i, orderObj) {
+		if(orderObj.status == "1"){
+			var deleterow = "<a class='deactivate' onclick='deleteStudent("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>";
+			var cls="activecss";
+		}else{  
+			var deleterow = "<a class='activate' onclick='deleteStudent("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>";
+			var cls="inactivecss";
+		}
+		var edit = "<a class='edit editIt' onclick='editStudent("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr class='"+ cls +"'>"
+			/* + "<td title='"+orderObj.id+"'>"+ orderObj.id + "</td>" */
+			
+			+ "<td title='"+orderObj.fname+"'>"+ orderObj.fname + "</td>"
+			+ "<td title='"+orderObj.lname+"'>"+ orderObj.lname + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+			/* + "<td ><a style='cursor:pointer' onclick='getPasswordModal("+ orderObj.id +")'>Change Password</a></td>" */ 
+			+ "</tr>";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
+	if(isClick=='Yes') $('.datatables').dataTable();
+	
+}
 $("#pageName").text("Student Master");
 $(".student").addClass("active"); 
 </script>

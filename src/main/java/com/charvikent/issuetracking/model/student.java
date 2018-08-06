@@ -15,6 +15,9 @@ public class student
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String fname;
+	private String lname;
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -33,7 +36,7 @@ public class student
 	public void setLname(String lname) {
 		this.lname = lname;
 	}
-	private String lname;
+	
 	@Override
 	public String toString() {
 		return "student [id=" + id + ", fname=" + fname + ", lname=" + lname + "]";
