@@ -16,7 +16,8 @@ public class student
 	private Integer id;
 	private String fname;
 	private String lname;
-	
+	private String mobile;
+	private String status;
 	
 	public Integer getId() {
 		return id;
@@ -37,10 +38,27 @@ public class student
 		this.lname = lname;
 	}
 	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
 	@Override
 	public String toString() {
-		return "student [id=" + id + ", fname=" + fname + ", lname=" + lname + "]";
+		return "student [id=" + id + ", fname=" + fname + ", lname=" + lname + ", mobile=" + mobile + ", status="
+				+ status + "]";
 	}
+	
+	
 	
 	
 	

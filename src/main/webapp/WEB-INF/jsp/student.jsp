@@ -59,8 +59,16 @@
 								<div class="col-md-6"><br>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last Name<span class="impColor">*</span></label>
-						<div class="col-md-6">
+								<div class="col-md-6">
 										<form:input path="lname" class="form-control validate onlyCharacters" placeholder="Enter Last Name"/>
+									</div>
+								</div>
+								</div>
+								<div class="col-md-6"><br>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Mobile No<span class="impColor">*</span></label>
+								<div class="col-md-6">
+										<form:input path="mobile" class="form-control validate numericOnly2" placeholder="Enter Mobileno"/>
 									</div>
 								</div>
 								</div>
@@ -90,7 +98,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>First  Name</th><th>Last Name</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>First  Name</th><th>Last Name</th><th>Mobile No </th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -108,6 +116,7 @@ function displayTable(listOrders) {
 			
 			+ "<td title='"+orderObj.fname+"'>"+ orderObj.fname + "</td>"
 			+ "<td title='"+orderObj.lname+"'>"+ orderObj.lname + "</td>"
+			+ "<td title='"+orderObj.mobile+"'>"+ orderObj.mobile + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			/* + "<td ><a style='cursor:pointer' onclick='getPasswordModal("+ orderObj.id +")'>Change Password</a></td>" */ 
 			+ "</tr>";
@@ -116,6 +125,58 @@ function displayTable(listOrders) {
 	if(isClick=='Yes') $('.datatables').dataTable();
 	
 }
+
+function deleteStudent(id,status){
+	var checkstr=null;
+	if(status == 0){
+		 checkstr = confirm('Are you sure you want to Deactivate?');
+	}else{
+		 checkstr = confirm('Are you sure you want to Activate?');
+	}
+	if(checkstr == true){
+		var formData = new FormData();
+	    formData.append('id', id);
+	    formData.append('status', status);
+		$.fn.makeMultipartRequest('POST', 'deleteStudent', false, formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.allOrders1;
+			displayTable(alldata);
+			toolTips(); //calling tool tips defined at header
+			$('#inActive').prop('checked', false);
+		});
+	}
+}
+
+function inactiveData() {
+	var status="0";
+	if($('#inActive').is(":checked") == true){
+		status="0";
+	}else{
+		status="1";
+	}
+		var formData = new FormData();
+		formData.append('status', status);
+		
+		$.fn.makeMultipartRequest('POST', 'inActiveStudents', false,
+				formData, false, 'text', function(data) {
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.allOrders1;
+			displayTable(alldata);
+			console.log(jsonobj.allOrders1);
+				});
+		
+}
+function editStudent(id) {
+	
+	$("#id").val(serviceUnitArray[id].id);
+	
+	$("#fname").val(serviceUnitArray[id].fname);
+	$("#lname").val(serviceUnitArray[id].lname);
+	$("#mobile").val(serviceUnitArray[id].mobile);
+	$("#submit1").val("Update");
+	$(window).scrollTop($('#moveTo').offset().top);
+}
+
 $("#pageName").text("Student Master");
 $(".student").addClass("active"); 
 </script>
