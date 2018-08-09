@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -17,9 +18,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.charvikent.issuetracking.config.FilesStuff;
+import com.charvikent.issuetracking.config.SendSMS;
 import com.charvikent.issuetracking.dao.studentDao;
 import com.charvikent.issuetracking.model.student;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,12 +32,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class StudentController {
 	
 	@Autowired studentDao studentdao; 
-	
+	@Autowired FilesStuff fileTemplate;
+	@Autowired
+	private Environment env;  
 	
 	@RequestMapping(value = "/student", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String showStudentPage(Model model,HttpServletRequest request)
 	{
 		model.addAttribute("studentForm" ,new student());
+		model.addAttribute("roles" ,studentdao.getCourseMap());
 		List<student> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -64,7 +72,7 @@ public class StudentController {
 	
 	@RequestMapping(value="/student" , method=RequestMethod.POST,headers = "Accept=application/json")
 	public String saveAdmin(@Valid @ModelAttribute  student user, BindingResult bindingresults,
-			RedirectAttributes redir) throws IOException {
+			RedirectAttributes redir,@RequestParam("file1") MultipartFile[] uploadedFiles, Model model) throws IOException {
 
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
@@ -87,12 +95,40 @@ public class StudentController {
 			{
 				if(dummyId ==0)
 				{
-
+					int filecount =0;
+		        	 
+		        	 for(MultipartFile multipartFile : uploadedFiles) {
+		    				String fileName = multipartFile.getOriginalFilename();
+		    				if(!multipartFile.isEmpty())
+		    				{
+		    					filecount++;
+		    				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+		    				}
+		    			}
+		        	 
+		        	 if(filecount>0)
+		        	 {
+		        		 user.setFiles(fileTemplate.concurrentFileNames());
+		        		 fileTemplate.clearFiles();
+		        		 
+		        	 }
+				
 
 					user.setStatus("1");
 
 					studentdao.addStudent(user);
-
+					String message= user.getFname()+"registered successfully";
+					
+					String str = env.getProperty("app.msg");
+					
+	                System.out.println(str);
+	                 str = str.replace("_user_", user.getFname());
+	                 str = str.replace("_address_", user.getLname());
+	                 str = str.replace("_course_", user.getCourse());
+	                 
+	                 System.out.println(str);
+	 				
+					SendSMS.sendSMS(str,user.getMobile());
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
 
@@ -111,7 +147,27 @@ public class StudentController {
 				id=user.getId();
 				if(id == dummyId || userBean == null)
 				{
-					studentdao.updateStudent(user);
+					
+					int filecount =0;
+		        	 
+		        	 for(MultipartFile multipartFile : uploadedFiles) {
+		    				String fileName = multipartFile.getOriginalFilename();
+		    				if(!multipartFile.isEmpty())
+		    				{
+		    					filecount++;
+		    				 multipartFile.transferTo(fileTemplate.moveFileTodir(fileName));
+		    				}
+		    			}
+		        	 
+		        	 if(filecount>0)
+		        	 {
+		        		 user.setFiles(fileTemplate.concurrentFileNames());
+		        		 fileTemplate.clearFiles();
+		        		 
+		        	 }
+					
+		        	
+		        	studentdao.updateStudent(user);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 

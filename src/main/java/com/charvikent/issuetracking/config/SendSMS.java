@@ -22,7 +22,7 @@ public class SendSMS {
 	     //public String message=null;
 	    
 	    
-	    public String sendSMS(String message, String mobileNumber) throws IOException
+	    public static String sendSMS(String message, String mobileNumber) throws IOException
 		{
 			System.out.println("hello sms class");
 			requestUrl  = "http://182.18.160.225/index.php/api/bulk-sms?username="+URLEncoder.encode(username, "UTF-8")+"&password="+ URLEncoder.encode(password, "UTF-8")+"&from="+from+"&to="+URLEncoder.encode(mobileNumber, "UTF-8")+"&message="+URLEncoder.encode(message, "UTF-8")+"&sms_type=2";

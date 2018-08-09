@@ -47,20 +47,20 @@
 					</div>
 					
 					
-		<form:form modelAttribute="studentForm" action="student" class="form-horizontal " method="Post">
+		<form:form modelAttribute="studentForm" action="student" class="form-horizontal " method="Post" enctype="multipart/form-data">
 	                  <form:hidden path="id"/>	
 						<div class="col-md-6"><br>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="fname" class="form-control validate onlyCharacters" placeholder="Enter First Name"/>
+										<form:input path="fname" class="form-control validate onlyCharacters" placeholder="Enter First Name" maxlength="20"/>
 									</div>
 								</div></div>
 								<div class="col-md-6"><br>
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last Name<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="lname" class="form-control validate onlyCharacters" placeholder="Enter Last Name"/>
+										<form:input path="lname" class="form-control validate onlyCharacters" placeholder="Enter Last Name" maxlength="20"/>
 									</div>
 								</div>
 								</div>
@@ -68,7 +68,36 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Mobile No<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:input path="mobile" class="form-control validate numericOnly2" placeholder="Enter Mobileno"/>
+										<form:input path="mobile" class="form-control validate numericOnly" placeholder="Enter Mobileno" maxlength="10"/>
+									</div>
+								</div>
+								</div>
+								<div class= "col-md-6"><br>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Course<span class="impColor">*</span></label>
+								<div class="col-md-6">
+										<form:select path="course" class="form-control validate">
+										<form:option value="">-- Select Course --</form:option>
+											<form:options items="${roles}"/>
+										</form:select>
+									</div>
+								</div>
+								</div>
+								
+								<div class="col-md-6"><br>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">DateOfBirth<span class="impColor">*</span></label>
+									 <form:input type="datetime-local" path="dob" />
+								<div class="col-md-6">
+									</div>
+								</div>
+								</div>
+								<div class= "col-md-6"><br>
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Files<span class="impColor">*</span></label>
+								<div class="col-md-6">
+										 <input type="file" name="file1" id="file1" multiple/>
+										
 									</div>
 								</div>
 								</div>
@@ -98,7 +127,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>First  Name</th><th>Last Name</th><th>Mobile No </th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>First  Name</th><th>Last Name</th><th>Mobile No </th><th>Course</th><th>Date Of Birth</th><th>Files</th><th style="text-align: center;">Options</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -117,6 +146,9 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.fname+"'>"+ orderObj.fname + "</td>"
 			+ "<td title='"+orderObj.lname+"'>"+ orderObj.lname + "</td>"
 			+ "<td title='"+orderObj.mobile+"'>"+ orderObj.mobile + "</td>"
+			+ "<td title='"+orderObj.course+"'>"+ orderObj.course + "</td>"
+			+ "<td title='"+orderObj.dob+"'>"+ orderObj.dob + "</td>"
+			+ "<td title='"+orderObj.files+"'>"+ orderObj.files + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			/* + "<td ><a style='cursor:pointer' onclick='getPasswordModal("+ orderObj.id +")'>Change Password</a></td>" */ 
 			+ "</tr>";
@@ -153,7 +185,7 @@ function inactiveData() {
 		status="0";
 	}else{
 		status="1";
-	}
+	     }
 		var formData = new FormData();
 		formData.append('status', status);
 		
@@ -173,8 +205,13 @@ function editStudent(id) {
 	$("#fname").val(serviceUnitArray[id].fname);
 	$("#lname").val(serviceUnitArray[id].lname);
 	$("#mobile").val(serviceUnitArray[id].mobile);
+	$("#course").val(serviceUnitArray[id].courseid);
+	$("#dob").val(serviceUnitArray[id].dob);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
+	
+	
+
 }
 
 $("#pageName").text("Student Master");

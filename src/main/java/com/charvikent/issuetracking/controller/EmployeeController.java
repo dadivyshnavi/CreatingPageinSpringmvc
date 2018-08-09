@@ -256,10 +256,7 @@ public class EmployeeController {
 		redir.addFlashAttribute("cssMsg", "warning");
 
 			return "editProfile";
-
-
-
-	}
+}
 
 
 	@RequestMapping("/getUserName")
