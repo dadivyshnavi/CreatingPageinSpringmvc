@@ -76,7 +76,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Course<span class="impColor">*</span></label>
 								<div class="col-md-6">
-										<form:select path="course" class="form-control validate">
+										<form:select path="course" class="form-control validate" onfocus="removeBorder(this.id)">
 										<form:option value="">-- Select Course --</form:option>
 											<form:options items="${roles}"/>
 										</form:select>

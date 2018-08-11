@@ -2,11 +2,11 @@
   <body>  
   <h3>Hi ${name}, </h3> 
   <div>
-  The user administrator has created an account for  you with username "${name}".
-  In order to complete your registration, visit the company official Site.
+  Successfully registered with AbheeSmartHomesSystems. 
   </div>
   <div> 
-  if y 
+   you can login using ${mobilenumber} or ${email}
+   and password :${password}
   </div>  
   </body>  ou did not request any registration, ignore this message and nothing will happen.
   </html> 

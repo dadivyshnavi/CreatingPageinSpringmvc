@@ -4,6 +4,7 @@ package com.charvikent.issuetracking.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.issuetracking.config.FilesStuff;
 import com.charvikent.issuetracking.config.SendSMS;
+import com.charvikent.issuetracking.config.SendingMail;
 import com.charvikent.issuetracking.dao.studentDao;
 import com.charvikent.issuetracking.model.student;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,12 +35,18 @@ public class StudentController {
 	
 	@Autowired studentDao studentdao; 
 	@Autowired FilesStuff fileTemplate;
+	
+	@Autowired 
+	private SendingMail mailTemplate;
 	@Autowired
 	private Environment env;  
 	
 	@RequestMapping(value = "/student", method = RequestMethod.GET, headers = "Accept=application/json")
-	public String showStudentPage(Model model,HttpServletRequest request)
+	public String showStudentPage(Model model,HttpServletRequest request) throws MessagingException
 	{
+		mailTemplate.sendConfirmationEmail();
+		
+		
 		model.addAttribute("studentForm" ,new student());
 		model.addAttribute("roles" ,studentdao.getCourseMap());
 		List<student> listOrderBeans = null;
@@ -265,5 +273,18 @@ public class StudentController {
 		}
 		return String.valueOf(jsonObj);
 	}
+	
+	
+	
+	@RequestMapping(value="/mail" , method=RequestMethod.POST,headers = "Accept=application/json")
+	public void sendMail() throws MessagingException
+	
+	{
+		System.out.println("mail block called");
+		mailTemplate.sendConfirmationEmail();
+		
+		//mailSender.sendConfirmationEmail();
+	}
+	
 
 }

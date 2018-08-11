@@ -13,7 +13,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
 
-import com.charvikent.issuetracking.model.User;
 @Component
 public class MailTemplate {
 	
@@ -24,20 +23,20 @@ public class MailTemplate {
 	private JavaMailSender javaMailSender; 
 
 	
-	private void sendEmail(final User user) {  
+	public void sendEmail() {  
 		try {
 			MimeMessagePreparator preparator = new MimeMessagePreparator() {  
 				@Override  
 				public void prepare(MimeMessage mimeMessage) throws Exception {  
 					MimeMessageHelper message = new MimeMessageHelper(mimeMessage);  
-					message.setTo(user.getEmail());
+					message.setTo("dhaadhivyshnavi@gmail.com");
 
-					message.setSubject("");  
+					message.setSubject("vyshu");  
 					VelocityContext velocityContext = new VelocityContext();
 				
 					
-					velocityContext.put("name",user.getUsername());
-					velocityContext.put("issueId",user.getId());
+					velocityContext.put("name","usename");
+					velocityContext.put("issueId","hi krishna");
 					StringWriter stringWriter = new StringWriter();
 					velocityEngine.mergeTemplate("emailtemplate.vm", "UTF-8", velocityContext, stringWriter);
 					

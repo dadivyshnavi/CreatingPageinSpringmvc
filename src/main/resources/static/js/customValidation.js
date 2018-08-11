@@ -35,7 +35,7 @@ $(".capsOnly").keyup(function() {
  */
 
 jQuery('.numericOnly').keyup(function() {
-	this.value = this.value.replace(/[^0-9\.]/g, '');
+	this.value = this.value.replace(/[^0-9]/g, '');
 });
 
 /*
@@ -136,8 +136,8 @@ $(".onlyCharacters").on("keypress",	function(event) {
 
 			// alert(event.keyCode);
 
-			if (event.keyCode == 8 || event.keyCode == 9 || event.keyCode == 37
-					|| event.keyCode == 39
+			if (event.keyCode == 8 || event.keyCode == 9 /*|| event.keyCode == 37*/
+					/*|| event.keyCode == 39*/
 					|| englishAlphabetAndWhiteSpace.test(key)) {
 				return true;
 			}
