@@ -42,7 +42,6 @@ public class SendingMail {
 		try {
 			
 			
-
 			
 			String email = "dhaadhivyshnavi@gmail.com";
 			MimeMessage message = javaMailSender.createMimeMessage();
@@ -61,13 +60,14 @@ public class SendingMail {
 			helper.setText(stringWriter.toString(), true);
 			helper.setTo( email);
 			helper.setSubject("Registration Successfully");  
+			
+			String path = request.getServletContext().getRealPath("/");
+			File  moveFile = new File(path +"reportDocuments","1.jpeg");
+			helper.addInline("id101",moveFile );
+			
+			
 			javaMailSender.send(message);
 			
-			
-			
-			
-			
-				
 			
 		} catch (MailException e) {
 			e.printStackTrace();
@@ -77,32 +77,7 @@ public class SendingMail {
 	
 	//sending with attachment
 	
-	/*public void sendAttachmentEmail() throws MessagingException {  
-		try {
-			
-			JavaMailSenderImpl sender = new JavaMailSenderImpl();  
-			 sender.setHost("mail.host.com");  
-			MimeMessage message = sender.createMimeMessage();  
-			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-			 // use the true flag to indicate you need a multipart message  
-			 helper.setTo("email");  
-			 helper.setText("Check out this image!");  
-			 // let's attach the infamous windows Sample file (this time copied to c:/)  
-			 FileSystemResource file = new FileSystemResource(new File("c:/sample.jpeg"));  
-			 helper.addAttachment("CoolImage.jpeg", file);  
-			 javaMailSender.send(message); 
-			
-			
-			
-	}catch (MailException e) {
-			e.printStackTrace();
-			System.out.println(e);
-		}  
-	}
-		
-		*/
-		
-		
+	
 		
 		
 		
