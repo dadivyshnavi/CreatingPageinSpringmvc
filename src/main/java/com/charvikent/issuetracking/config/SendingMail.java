@@ -42,7 +42,7 @@ public class SendingMail {
 		try {
 			
 			
-			
+			//sending mail statically code
 			String email = "dhaadhivyshnavi@gmail.com";
 			MimeMessage message = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -61,8 +61,9 @@ public class SendingMail {
 			helper.setTo( email);
 			helper.setSubject("Registration Successfully");  
 			
+			//sending mail(statically uploading) with file/picture attachment code
 			String path = request.getServletContext().getRealPath("/");
-			File  moveFile = new File(path +"reportDocuments","1.jpeg");
+			File  moveFile = new File(path +"reportDocuments","vyshnavi2-1.doc");
 			helper.addInline("id101",moveFile );
 			
 			
