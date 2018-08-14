@@ -31,7 +31,7 @@ public class FilesStuff {
 		extension = fileName.substring(idxOfDot + 1);
 		name = fileName.substring(0, idxOfDot);
 		 Date d= new Date();
-		    fileName = name+d.getTime()+"."+extension;
+		    fileName =d.getTime()+"."+extension;
 		
 	return fileName;	
 	}
