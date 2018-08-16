@@ -3,6 +3,7 @@ package com.charvikent.issuetracking.config;
 import java.io.File;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,7 @@ public class SendingMail {
 	HttpServletRequest request;
 	
 	
+	@SuppressWarnings("unused")
 	public void sendConfirmationEmail() throws MessagingException {  
 		try {
 			
@@ -46,7 +48,7 @@ public class SendingMail {
 			String email = "dhaadhivyshnavi@gmail.com";
 			MimeMessage message = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-
+			
 			
 			
 			VelocityContext velocityContext = new VelocityContext();
@@ -61,12 +63,14 @@ public class SendingMail {
 			helper.setTo( email);
 			helper.setSubject("Registration Successfully");  
 			
-			//sending mail(statically uploading) with file/picture attachment code
-			String path = request.getServletContext().getRealPath("/");
-			File  moveFile = new File(path +"reportDocuments","vyshnavi2-1.doc");
-			helper.addInline("id101",moveFile );
 			
+			 
+			JavaMailSenderImpl sender = new JavaMailSenderImpl();
 			
+			FileSystemResource file = new FileSystemResource(new File("C:/Users/Administrator/Desktop/download.jpg"));
+			helper.addAttachment("birdImage.jpg", file);
+			//sender.send(message);
+	
 			javaMailSender.send(message);
 			
 			
@@ -76,11 +80,6 @@ public class SendingMail {
 		}  
 	}
 	
-	//sending with attachment
 	
 	
-		
-		
-		
-			
-}
+ }

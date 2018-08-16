@@ -102,7 +102,8 @@ public class StudentController {
 			if(user.getId()==null)
 			{
 				if(dummyId ==0)
-				{
+				{ 
+					//------------coding for file upload---------------
 					int filecount =0;
 		        	 
 		        	 for(MultipartFile multipartFile : uploadedFiles) {
@@ -120,11 +121,14 @@ public class StudentController {
 		        		 fileTemplate.clearFiles();
 		        		 
 		        	 }
+		        	//----------coding for file upload---------------
 				
 
 					user.setStatus("1");
 
 					studentdao.addStudent(user);
+					//-----------sending message to mobile-------------
+					
 					String message= user.getFname()+"registered successfully";
 					
 					String str = env.getProperty("app.msg");
@@ -137,6 +141,9 @@ public class StudentController {
 	                 System.out.println(str);
 	 				
 					SendSMS.sendSMS(str,user.getMobile());
+					
+					//-----------sending message to mobile--------------
+					
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
 
@@ -155,7 +162,7 @@ public class StudentController {
 				id=user.getId();
 				if(id == dummyId || userBean == null)
 				{
-					
+					//----------coding for file upload---------------
 					int filecount =0;
 		        	 
 		        	 for(MultipartFile multipartFile : uploadedFiles) {
@@ -173,7 +180,7 @@ public class StudentController {
 		        		 fileTemplate.clearFiles();
 		        		 
 		        	 }
-					
+		        	//----------coding for file upload---------------
 		        	
 		        	studentdao.updateStudent(user);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
@@ -275,6 +282,7 @@ public class StudentController {
 	}
 	
 	
+	//-------- coding for sending mail-------------
 	
 	@RequestMapping(value="/mail" , method=RequestMethod.POST,headers = "Accept=application/json")
 	public void sendMail() throws MessagingException
@@ -286,5 +294,5 @@ public class StudentController {
 		//mailSender.sendConfirmationEmail();
 	}
 	
-
+	//-------- coding for sending mail-------------
 }

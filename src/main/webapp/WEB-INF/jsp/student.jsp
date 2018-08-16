@@ -119,6 +119,9 @@
 
 
 </body>
+
+<!-- Display records list table in JSP page -->
+
 <script type="text/javascript">
 var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
@@ -157,7 +160,9 @@ function displayTable(listOrders) {
 	if(isClick=='Yes') $('.datatables').dataTable();
 	
 }
+<!-- Display records list table in JSP page -->
 
+<!-- Display Deleted records list table in JSP page -->
 function deleteStudent(id,status){
 	var checkstr=null;
 	if(status == 0){
@@ -198,6 +203,8 @@ function inactiveData() {
 				});
 		
 }
+<!-- Display Deleted records list table in JSP page -->
+
 function editStudent(id) {
 	
 	$("#id").val(serviceUnitArray[id].id);
@@ -213,11 +220,11 @@ function editStudent(id) {
 	
 
 }
-/* this is code for files limitation */
+/*------------ this is code for files limitation */
 document.getElementById("file1").onchange = function () {
 alert("Vyshnavi here");
 var reader = new FileReader();
-    if(this.files[0].size>1000){
+    if(this.files[0].size>10000){
         alert("file Size should not be greater than 5mb");
         $("#file1").attr("src","blank");
        // $("#file1").hide();  
@@ -242,9 +249,12 @@ var reader = new FileReader();
     // read the image file as a data URL.
     reader.readAsDataURL(this.files[0]);
 };
+/*-------- this is code for files limitation*/
 
+/* To display page  */
 $("#pageName").text("Student Master");
 $(".student").addClass("active"); 
+/* To display page  */
 </script>
 
 

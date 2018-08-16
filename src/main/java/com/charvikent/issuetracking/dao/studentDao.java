@@ -29,6 +29,7 @@ public class studentDao {
 	    private EntityManager entityManager;
 	
 	
+	 //----------Coding for Add Student in list----------
 	 
 	 public void addStudent(student student) {
 		 
@@ -36,9 +37,14 @@ public class studentDao {
 		 
 		 entityManager.persist(student);
 		 
-		 
-	 }
+		 }
 	 
+	 
+	 //----------Coding for Add Student in list----------
+	 
+	 
+	 
+	 //--------------Coding for View List in Page------------
 	 public  List<student> getAllStudent() {
 			
 			String hql ="select s.id,s.fname,s.lname,s.status,s.mobile,s.course as courseid ,c.course as course,s.dob,s.files from student s,course c where s.course=c.id and s.status='1'";
@@ -49,10 +55,12 @@ public class studentDao {
 			      return  this.JdbcTemplate.query(hql, rowMapper);
 			
 			
-			
-		}
-
-	public boolean deleteStudent(Integer id, String status) {
+	 	}
+	//--------------Coding for View List in Page------------
+	 
+	
+	//-------------Coding for delete record from List----------- 
+	 public boolean deleteStudent(Integer id, String status) {
 		
 		Boolean delete=false;
 		try{
@@ -69,8 +77,12 @@ public class studentDao {
 		}
 		return delete;
 	}
-
-	public List<student> getInActiveList() {
+	//-------------Coding for delete record from List----------- 
+	
+	 
+	 //-----------Codign for View deleted records List---------
+	 
+	 public List<student> getInActiveList() {
 		String hql ="select * from student where status='0'";
 		
 		
@@ -78,7 +90,11 @@ public class studentDao {
 		      return  this.JdbcTemplate.query(hql, rowMapper);	
 		
 	}
-
+	 
+	//-----------Coding for View deleted records List---------
+	
+	 
+	 //-----------coding for Update Record in the list by ID--------
 	public void updateStudent(student user) 
 	{
 		student users=getStudentById(user.getId());
@@ -99,9 +115,13 @@ public class studentDao {
 		
 		return entityManager.find(student.class, id);
 
-		
-	}
-
+		}
+	 //-----------coding for Update Record in the list by ID--------
+	
+	
+	
+	//---------------- Coding for Duplicate Checking on Mobile Number----------
+	
 	@SuppressWarnings("unchecked")
 	public student getStudentByObject(student user) {
 
@@ -115,6 +135,12 @@ public class studentDao {
 	               else
 			return usersList.get(0);
 		}
+	
+	//---------------- Coding for Duplicate Checking on Mobile Number----------
+	
+	
+	
+	//----------------Coding to View list in Drop Down-----------------
 	
 	public List<student> getAllCourse()
 	{
@@ -135,4 +161,9 @@ public class studentDao {
 		 }
 		return map;
 	}
+	 
+	 
+	//----------------Coding to View list in Drop Down-----------------
+	 
+	 
 }

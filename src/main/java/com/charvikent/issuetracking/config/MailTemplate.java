@@ -7,6 +7,7 @@ import javax.mail.internet.MimeMessage;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -32,6 +33,7 @@ public class MailTemplate {
 					message.setTo("dhaadhivyshnavi@gmail.com");
 
 					message.setSubject("vyshu");  
+					//message.addAttachment("MyTestFile.txt", new ByteArrayResource(content));
 					VelocityContext velocityContext = new VelocityContext();
 				
 					
