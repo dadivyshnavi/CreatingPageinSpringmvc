@@ -44,7 +44,7 @@ public class StudentController {
 	@RequestMapping(value = "/student", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String showStudentPage(Model model,HttpServletRequest request) throws MessagingException
 	{
-		mailTemplate.sendConfirmationEmail();
+		//mailTemplate.sendConfirmationEmail();
 		
 		
 		model.addAttribute("studentForm" ,new student());
@@ -118,7 +118,7 @@ public class StudentController {
 		        	 if(filecount>0)
 		        	 {
 		        		 user.setFiles(fileTemplate.concurrentFileNames());
-		        		 fileTemplate.clearFiles();
+		        		 // fileTemplate.clearFiles();  //for multiple attachments we can put this line to comment
 		        		 
 		        	 }
 		        	//----------coding for file upload---------------
@@ -128,6 +128,13 @@ public class StudentController {
 
 					studentdao.addStudent(user);
 					//-----------sending message to mobile-------------
+					
+					String email = "dhaadhivyshnavi@gmail.com";
+					
+					mailTemplate.sendConfirmationEmail();
+					mailTemplate.sendFilesWithMultipleAttachment(email.toString(),uploadedFiles);
+				
+					
 					
 					String message= user.getFname()+"registered successfully";
 					
@@ -284,7 +291,7 @@ public class StudentController {
 	
 	//-------- coding for sending mail-------------
 	
-	@RequestMapping(value="/mail" , method=RequestMethod.POST,headers = "Accept=application/json")
+	/*@RequestMapping(value="/mail" , method=RequestMethod.POST,headers = "Accept=application/json")
 	public void sendMail() throws MessagingException
 	
 	{
@@ -292,7 +299,7 @@ public class StudentController {
 		mailTemplate.sendConfirmationEmail();
 		
 		//mailSender.sendConfirmationEmail();
-	}
+	}*/
 	
 	//-------- coding for sending mail-------------
 }

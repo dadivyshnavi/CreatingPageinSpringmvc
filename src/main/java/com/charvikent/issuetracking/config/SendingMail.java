@@ -20,9 +20,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
-
-
-
+import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class SendingMail {
@@ -38,7 +36,7 @@ public class SendingMail {
 	@Autowired
 	HttpServletRequest request;
 	
-	
+	@Autowired FilesStuff filePath;
 	@SuppressWarnings("unused")
 	public void sendConfirmationEmail() throws MessagingException {  
 		try {
@@ -63,14 +61,25 @@ public class SendingMail {
 			helper.setTo( email);
 			helper.setSubject("Registration Successfully");  
 			
+			//sending mail(means image save in resources with in current project) with file/picture attachment code by inline
 			
-			 
+			/*String path = request.getServletContext().getRealPath("/");
+			File  moveFile = new File(path +"reportDocuments","1.jpg");
+			helper.addInline("id101",moveFile );
+			*/
+			//sending mail(means image save in resources with in current project) with file/picture attachment code by inline
+			
+			
+			//sending mail(statically uploading) with file/picture attachment any where from system
+			
 			JavaMailSenderImpl sender = new JavaMailSenderImpl();
 			
 			FileSystemResource file = new FileSystemResource(new File("C:/Users/Administrator/Desktop/download.jpg"));
 			helper.addAttachment("birdImage.jpg", file);
 			//sender.send(message);
-	
+			
+			//sending mail(statically uploading) with file/picture attachment any where from system
+			
 			javaMailSender.send(message);
 			
 			
@@ -81,5 +90,47 @@ public class SendingMail {
 	}
 	
 	
+	 
+	//Sending mail Dynamically
+	
+	
+	public void sendFilesWithMultipleAttachment(String emailId,MultipartFile[] files) throws MessagingException {  
+		try {
+			
+			
+			String email =  emailId;
+			MimeMessage message = javaMailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			
+			
+			VelocityContext velocityContext = new VelocityContext();
+			//velocityContext.put("name",description);
+			
+			StringWriter stringWriter = new StringWriter();
+			velocityEngine.mergeTemplate("emailtemplate.vm", "UTF-8", velocityContext, stringWriter);
+			helper.setText(stringWriter.toString(), true);
+			helper.setTo( email);
+		    helper.setSubject("sending mail with multiple attachment");
+		  		   
+		   for(MultipartFile multipartFile : files) {
+				String fileName = multipartFile.getOriginalFilename();
+				if(!multipartFile.isEmpty())
+				{
+					FileSystemResource file = new FileSystemResource(filePath.makeDirectory() + File.separator + fileName);
+					helper.addAttachment(file.getFilename(), file);
+				}
+				
+			}
+			javaMailSender.send(message);
+				
+			
+		} catch (MailException e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}  
+	}
+	
+	
+	//Sending mail Dynamically
 	
  }

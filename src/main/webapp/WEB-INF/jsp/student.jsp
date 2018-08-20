@@ -224,7 +224,7 @@ function editStudent(id) {
 document.getElementById("file1").onchange = function () {
 alert("Vyshnavi here");
 var reader = new FileReader();
-    if(this.files[0].size>10000){
+    if(this.files[0].size>100000){
         alert("file Size should not be greater than 5mb");
         $("#file1").attr("src","blank");
        // $("#file1").hide();  
