@@ -20,7 +20,7 @@ public class CustomUsernamePasswordAuthenticationFilter extends GenericFilterBea
         if(servletRequest instanceof HttpServletRequest) {
             HttpServletRequest r = (HttpServletRequest)servletRequest;
             
-          /* Enumeration<String> str = r.getAttributeNames();
+         /* Enumeration<String> str = r.getAttributeNames();
            
            while (str.hasMoreElements()) {
                System.out.println(str.nextElement()); 

@@ -1,4 +1,4 @@
-package com.charvikent.issuetracking.controller;
+/*package com.charvikent.issuetracking.controller;
 
 import java.util.List;
 import java.util.Set;
@@ -311,12 +311,12 @@ public class DashBoardController {
 	
 	
 	
-	/**
+	*//**
 	 * timeline is string and 0 is loop iterate value in ddashboard,sjp page
 	 * 
 	 *  loop interate using jstl tag with varstatus property
 	 *
-	 */
+	 *//*
 	@RequestMapping(value = "/timeline0")
 	public String timelineTasksByOpen(	@RequestParam(value="range", required=true) String range,Model model,HttpServletRequest request,HttpSession session){
 		Set<ReportIssue> listOrderBeans = null;
@@ -477,12 +477,12 @@ public class DashBoardController {
 			return "task";
 
 	}
-	/**
+	*//**
 	 * timeline is string and 1 is loop iterate value in ddashboard,sjp page
 	 * 
 	 *  loop interate using jstl tag with varstatus property
 	 *
-	 */
+	 *
 	
 	@RequestMapping(value = "/timeline1")
 	public String timelineTasksByclose(	@RequestParam(value="range", required=true) String range,Model model,HttpServletRequest request,HttpSession session){
@@ -537,12 +537,12 @@ public class DashBoardController {
 	
 
 	
-	/**
+	*//**
 	 * timeline is string and 2 is loop iterate value in ddashboard,sjp page
 	 * 
 	 *  loop interate using jstl tag with varstatus property
 	 *
-	 */
+	 *//*
 	@RequestMapping(value = "/timeline2")
 	public String timelineTasksByBalaenced(	@RequestParam(value="range", required=true) String range,Model model,HttpServletRequest request,HttpSession session){
 		Set<ReportIssue> listOrderBeans = null;
@@ -808,3 +808,4 @@ public class DashBoardController {
 	
 	
 
+*/

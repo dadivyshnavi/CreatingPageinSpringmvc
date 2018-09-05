@@ -44,7 +44,10 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/student.jsp" />
 	</definition>
 	
-	
+	 <definition name="customer" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/customer.jsp" />
+	</definition>
+	 
 	
 		
 

@@ -1,4 +1,4 @@
-package com.charvikent.issuetracking.service;
+/*package com.charvikent.issuetracking.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -105,19 +105,19 @@ public class ReportIssueService {
 			int assignedUser = Integer.parseInt(reportIssue.getAssignto());
 			user = userDao.find(assignedUser);
 
-			/*String text1=reportIssue.getDescription();
+			String text1=reportIssue.getDescription();
 			
-			String text2= "hi you have have following issue";*/
+			String text2= "hi you have have following issue";
 			String email = user.getEmail();
 			MimeMessage message = javaMailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-			/*helper.setTo(email);
+			helper.setTo(email);
 			helper.setText(text2+text1);
 			helper.setSubject("Isuue id  "+reportIssue.getId());
 			helper.addAttachment("file", serverFile);
 			sender.send(message);
-*/
+
 			
 			VelocityContext velocityContext = new VelocityContext();
 			velocityContext.put("assignedName",user.getUsername());
@@ -139,7 +139,7 @@ public class ReportIssueService {
 			helper.addAttachment("file",serverFile);
 			javaMailSender.send(message);
 				
-			/*MimeMessagePreparator preparator = new MimeMessagePreparator() {  
+			MimeMessagePreparator preparator = new MimeMessagePreparator() {  
 				//@Autowired(required = false)
 				@SuppressWarnings({ "unchecked", "deprecation" })
 				@Override  
@@ -177,7 +177,7 @@ public class ReportIssueService {
 	
 				}  
 			};  
-			this.javaMailSender.send(preparator);*/
+			this.javaMailSender.send(preparator);
 		} catch (MailException e) {
 			e.printStackTrace();
 			System.out.println(e);
@@ -551,3 +551,4 @@ public Set<ReportIssue> getTaskByStatusDashBord(String status) {
 
 
 
+*/

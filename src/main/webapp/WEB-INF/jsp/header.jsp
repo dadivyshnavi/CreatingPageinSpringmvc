@@ -10,11 +10,7 @@
 	session.setAttribute("baseurl", baseurl);
 	
 	HttpSession sess = request.getSession(false);
-	User userDesignation = (User)sess.getAttribute("userDesignationSession");
-	if (userDesignation == null) {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/");
-		dispatcher.forward(request, response);
-	}
+	
 
 	
 %>
@@ -346,36 +342,7 @@ function getHeadersCounts(){
 
     <i class="fa fa-list-alt"></i><!-- <span class="badge">5</span> -->
     </div>
-     <c:if test="${not empty acknotification}">
-
-
-    <div id="ack" class="dropdown-content">
-      <a style="padding: 10px 16px;" href="#">
-      
-      	<table class="table1">
-        	<thead>
-
-            	<tr class="tr1" style="  background: #006699; color: #FFF;">               
-                	<th class="th1">Task No.</th>
-                	<th class="th1">Field</th>
-                	<!-- <th>Change</th> -->
-                </tr>
-            </thead>
-            <tbody>
-             <c:forEach var="issue" items="${acknotification}">
-            	<tr class="tr1">
-                	<td class="td1">${issue.taskno}</td>
-                    <td class="td1">${issue.kpfield}</td>
-                   <%--  <td>${issue.kpchange}</td> --%>
-                </tr>
-               </c:forEach>
-            	
-            </tbody>
-        </table>
-        
-      </a>
-    </div>
-    </c:if>
+     
   </div> 
 </div>
                 </li> 
@@ -387,38 +354,7 @@ function getHeadersCounts(){
 
       <i class="fa fa-bell-o"></i><!-- <span class="badge">5</span> -->
     </div>
-    <c:if test="${not empty notifications}">
-    <div class="dropdown-content">
-      <a style="padding: 10px 16px;" href="#">
-      
-      	<table class="table1">
-        	<thead>
-            	<tr class="tr1" style="
-    background: #006699;
-    color: #FFF;
-">
-                	<th class="th1">Task No.</th>
-                	<th class="th1">Field</th>
-                	<th class="th1">Change</th>
-                </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="issue" items="${notifications}">
-            	<tr class="tr1">
-                	<td class="td1">${issue.taskno}</td>
-                    <td class="td1">${issue.kpfield}</td>
-                    <td class="td1">${issue.kpchange}</td>
-                </tr>
-                </c:forEach>
-                
-                
-            	
-            </tbody>
-        </table>
-      
-      </a>
-    </div>
-      </c:if>
+    
   </div> 
 </div>
                 </li>
@@ -426,7 +362,7 @@ function getHeadersCounts(){
 	            <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/task" style="color:white;">Create Task</a></li>
 	   
 	            <li style=" margin-top:5px;" class="dropdown">
-	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown" style="color: white;"><span class="hidden-xs" > <%= userDesignation.getDesignationName() %> <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
+	                <%-- <a href="#" class="dropdown-toggle username" data-toggle="dropdown" style="color: white;"><span class="hidden-xs" > <%= userDesignation.getDesignationName() %> <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a> --%>
 	                <ul class="dropdown-menu userinfo arrow">
 	                    <li class="username">
 	                        <a href="#">
@@ -447,7 +383,7 @@ function getHeadersCounts(){
 	                         
 	                        </ul>
 	                        <li>Last LoginTime: </li>
-	                        <li>${lastLoginTime}</li>
+	                      
 	                    </li>
 	                </ul>
 	            </li>
@@ -469,6 +405,7 @@ function getHeadersCounts(){
               	
              	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users"></i> <span>Employees</span></a></li>
              	<li class="student"><a href="${baseurl }/student"><i class="fa fa-users"></i> <span>Students</span></a></li>
+             	<li class="customer"><a href="${baseurl }/customer"><i class="fa fa-users"></i> <span>Customers</span></a></li>
               </security:authorize>
            
 		</div>

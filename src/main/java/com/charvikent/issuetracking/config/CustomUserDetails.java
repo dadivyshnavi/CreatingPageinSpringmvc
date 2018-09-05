@@ -54,8 +54,15 @@ public class CustomUserDetails extends User implements UserDetails {
 
 
 	@Override
+	public String getMobileNo() {
+		return super.getMobileNo();
+	}
+
+
+	@Override
 	public String getUsername() {
-		return super.getUsername();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

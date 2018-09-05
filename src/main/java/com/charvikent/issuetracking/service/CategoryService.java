@@ -49,7 +49,7 @@ public class CategoryService {
 		{
 			
 			for(Category bean: rolesList){
-				if(bean.getKpOrgId().equals(objuserBean.getKpOrgId()))
+				if(bean.getKpOrgId().equals(objuserBean.getEmpId()))
 				{
 				cateMapForMaster.put(bean.getId(), bean.getCategory());
 				}
@@ -86,7 +86,7 @@ public class CategoryService {
 			 
 			 for(Category entry :cateListForMaster)
 			 {  
-				 if(entry.getKpOrgId().equals(objuserBean.getKpOrgId()))
+				 if(entry.getKpOrgId().equals(objuserBean.getEmpId()))
 				 cateListForAdmin.add(entry);
 			 }
 			 return cateListForAdmin;

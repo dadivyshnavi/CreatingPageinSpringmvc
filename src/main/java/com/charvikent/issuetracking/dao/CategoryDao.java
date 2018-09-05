@@ -27,7 +27,7 @@ public class CategoryDao {
 	public void saveCategory(Category category ) {
 		logger.info("saving category");
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		category.setKpOrgId(objuserBean.getKpOrgId());
+		//category.setKpOrgId(objuserBean.getKpOrgId());
 		entityManager.persist(category);
 
 	}

@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.charvikent.issuetracking.model.User;
+//import com.charvikent.issuetracking.service.UserService;
 import com.charvikent.issuetracking.service.UserService;
 
 @Controller
@@ -45,7 +46,7 @@ public class HomeController {
 		return "login";
 	}
 	
-	@RequestMapping("/logout")
+	/*@RequestMapping("/logout")
 	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
@@ -63,7 +64,7 @@ public class HomeController {
 	    }
 	    System.out.println("Called Logout");
 	    return "redirect:/login";//You can redirect wherever you want, but generally it's a good practice to show login screen again.
-	}
+	}*/
 	
 	@RequestMapping("/403")
 	public String failureLogin(Model model) {
@@ -76,6 +77,11 @@ public class HomeController {
 		return "login";
 	}
 	
+	@RequestMapping("/dashBoard")
+	public String showDashboardPage(Model model) {
+		System.out.println("hello world");
+		return "dashBoard";
+	}
 	
 
 }

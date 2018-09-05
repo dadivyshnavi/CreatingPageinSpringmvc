@@ -21,9 +21,9 @@ import org.springframework.stereotype.Service;
 
 import com.charvikent.issuetracking.config.SendSMS;
 import com.charvikent.issuetracking.dao.UserDao;
-import com.charvikent.issuetracking.model.Department;
-import com.charvikent.issuetracking.model.Designation;
 import com.charvikent.issuetracking.model.User;
+import com.charvikent.issuetracking.model.role;
+import com.charvikent.issuetracking.model.shift;
 
 @Service
 @Transactional
@@ -42,17 +42,18 @@ public class UserService {
 
 	public void saveUser(User user) throws IOException
 	{
-		if(user.getKpOrgId() ==null)
+		/*if(user.getEmpId() ==null)
 		{
 			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			user.setKpOrgId(objuserBean.getKpOrgId());
+			user.setEmpId(objuserBean.getEmpId());
 			
-		}
-		String msg =user.getFirstname()+" "+user.getLastname()+",  Successfully registered with KPTMS. \n You can login using \n Username:  "+user.getUsername()+"\n password: "+user.getPassword();
-		String mbnum=user.getMobilenumber();
-		userDao.saveuser(user);
-		logger.info("Sending message.......");
-		smsTemplate.sendSMS(msg,mbnum);
+		}*/
+		
+		/*String msg =user.getFirstName()+" "+user.getLastName()+",  Successfully registered with KPTMS. \n You can login using \n Username:  "+user.getMobileNo()+"\n password: "+user.getPassword();
+		String mbnum=user.getMobileNo();*/
+		userDao.saveUser(user);
+		/*logger.info("Sending message.......");
+		smsTemplate.sendSMS(msg,mbnum);*/
 	}
 
 	public List<User> getAllUsers()
@@ -73,7 +74,7 @@ public class UserService {
 			 
 			 for(User entry :usersListForMaster)
 			 {  
-				 if(entry.getKpOrgId().equals(objuserBean.getKpOrgId()))
+				 if(entry.getEmpId().equals(objuserBean.getEmpId()))
 				 {
 					 if(entry.getId()!=(objuserBean.getId()))
 					 usersListForAdmin.add(entry);
@@ -85,7 +86,7 @@ public class UserService {
 	}
 
 
-	public Map<Integer, String> getDepartments()
+	/*public Map<Integer, String> getDepartments()
 	{
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -93,7 +94,7 @@ public class UserService {
 		
 		Map<Integer, String> deptsMap = new LinkedHashMap<Integer, String>();
 		
-		List<Department> departmentList= userDao.getDepartmentslist();
+		//List<Department> departmentList= userDao.getDepartmentslist();
 		if(authorities.contains(new SimpleGrantedAuthority("ROLE_MASTERADMIN")))
 		{
 		for(Department bean: departmentList){
@@ -107,7 +108,7 @@ public class UserService {
 		{
 			for(Department bean: departmentList){
 				
-				if(bean.getKpOrgId().equals(objuserBean.getKpOrgId()))
+				if(bean.getKpOrgId().equals(objuserBean.getEmpId()))
 				{
 				deptsMap.put(bean.getId(), bean.getName());
 				}
@@ -118,7 +119,7 @@ public class UserService {
 		}
 		
 
-	}
+	}*/
 
 
 	public Map<Integer, String> getRoles()
@@ -126,15 +127,32 @@ public class UserService {
 		Map<Integer, String> rolesMap = new LinkedHashMap<Integer, String>();
 		try
 		{
-		List<Designation> rolesList= userDao.getRoles();
-		for(Designation bean: rolesList){
-			rolesMap.put(bean.getId(), bean.getName());
+		List<role> rolesList= userDao.getRoles();
+		for(role bean: rolesList){
+			rolesMap.put(bean.getId(), bean.getDesigname());
 		}
 
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
 		return rolesMap;
+
+
+	}
+	public Map<Integer, String> getShifts()
+	{
+		Map<Integer, String> shiftMap = new LinkedHashMap<Integer, String>();
+		try
+		{
+		List<shift> shiftsList= userDao.getShifts();
+		for(shift bean: shiftsList){
+			shiftMap.put(bean.getId(), bean.getShift());
+		}
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+		return shiftMap;
 
 
 	}
@@ -157,9 +175,9 @@ public class UserService {
 
 	}
 
-	public boolean deleteUser(Integer id,String enabled) {
+public boolean deleteUser(Integer id,String status) {
 
-		return userDao.deleteUser(id,enabled);
+		return userDao.deleteUser(id,status);
 
 	}
 
@@ -175,13 +193,13 @@ public class UserService {
 
 	}
 
-	public void updatePassword(User user) {
+	/*public void updatePassword(User user) {
 
 		userDao.updatePassword(user);
 
 	}
-
-	public Map<Integer, String> getUserName()
+*/
+	/*public Map<Integer, String> getUserName()
 	{
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -205,7 +223,7 @@ public class UserService {
 		else
 		{
 			for(User bean: rolesList){
-				if(bean.getKpOrgId().equals(objuserBean.getKpOrgId()))
+				if(bean.getEmpId().equals(objuserBean.getEmpId()))
 				{
 				if(bean.getId()!=(objuserBean.getId()))
 				{
@@ -243,7 +261,7 @@ public class UserService {
 		else
 		{
 			for(User bean: rolesList){
-				if(bean.getKpOrgId().equals(objuserBean.getKpOrgId()))
+				if(bean.getEmpId().equals(objuserBean.getEmpId()))
 				{
 				
 					userMapForMaster.put(bean.getId(), bean.getUsername());
@@ -256,7 +274,7 @@ public class UserService {
 
 	}
 
-
+*/
 	public void setLoginRecord(Integer id,String str) {
 
 		userDao.setLoginRecord(id,str);
@@ -264,10 +282,10 @@ public class UserService {
 
 	public boolean checkUserExist(String username) {
 
-		List<User> usersList= userDao.getUserNames();
+		List<User> usersList= userDao.getAllUsers();
 
 		for(User bean: usersList){
-			  if(username.equalsIgnoreCase(bean.getUsername()))
+			  if(username.equalsIgnoreCase(bean.getMobileNo()))
 			  {
 
 				  return true;
@@ -278,7 +296,7 @@ public class UserService {
 
 	public User getUserByObject(User user) {
 		// TODO Auto-generated method stub
-		return userDao.getUserByObject(user);
+	return userDao.getUserByObject(user);
 	}
 
 	public List<User> getInActiveList() {
@@ -286,10 +304,10 @@ public class UserService {
 		return userDao.getInActiveList();
 	}
 
-	public User getUserDesignationById(Integer id) {
+	/*public User getUserDesignationById(Integer id) {
 		User obj=userDao.getUserDesignationById(id);
 		return obj;
 	}
-
+*/
 
 }

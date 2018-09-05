@@ -3,13 +3,13 @@ package com.charvikent.issuetracking.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.issuetracking.dao.UserDao;
-import com.charvikent.issuetracking.model.Department;
 import com.charvikent.issuetracking.model.User;
-import com.charvikent.issuetracking.service.OrgService;
 import com.charvikent.issuetracking.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -40,25 +38,22 @@ public class EmployeeController {
 
 	@Autowired
 	HttpSession session;
-	@Autowired
-	OrgService OrgService;
+	
 
 
 
-	@RequestMapping("/employee")
-	public String homeUser(Model model,HttpServletRequest request) {
+	@RequestMapping(value = "/employee", method = RequestMethod.GET, headers = "Accept=application/json")
+	public String showEmployeePage(Model model,HttpServletRequest request) throws MessagingException
+	{
+		//mailTemplate.sendConfirmationEmail();
+		
+		
+		model.addAttribute("userForm", new User());
+		model.addAttribute("roles" ,userService.getRoles());
+		model.addAttribute("shifts" ,userService.getShifts());
 		List<User> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;
-		model.addAttribute("userForm", new User());
-		model.addAttribute("departments", userService.getDepartments());
-		model.addAttribute("roles", userService.getRoles());
-		model.addAttribute("userNames", userService.getUserName());
-
-		model.addAttribute("reportto",userService.getReportToUsers());
-		model.addAttribute("allUsers", userService.getAllUsers());
-		model.addAttribute("orgNames", OrgService.getOrgNames());
-
 
 		try {
 			listOrderBeans = userService.getAllUsers();
@@ -79,8 +74,9 @@ public class EmployeeController {
 
 		}
 
-
 		return "employee";
+		
+		
 	}
 
 	@RequestMapping(value = "/employee" ,method = RequestMethod.POST)
@@ -113,7 +109,7 @@ public class EmployeeController {
 				{
 
 
-					user.setEnabled("1");
+					//user.setStatus("1");
 
 					userService.saveUser(user);
 
@@ -155,8 +151,8 @@ public class EmployeeController {
 	}
 
 
-	@RequestMapping(value = "/deleteUser")
-	public @ResponseBody String deleteEmployee(User  objUser,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+@RequestMapping(value = "/deleteUser")
+	public @ResponseBody String deleteUser(User  objUser,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		List<User> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -164,7 +160,7 @@ public class EmployeeController {
 		boolean delete = false;
 		try{
 			if(objUser.getId() != 0){
- 				delete = userService.deleteUser(objUser.getId(),objUser.getStatus());
+ 				delete =userService.deleteUser(objUser.getId(),objUser.getStatus());
  				if(delete){
  					jsonObj.put("message", "deleted");
  				}else{
@@ -197,7 +193,7 @@ public class EmployeeController {
 	}
 
 
-	@RequestMapping("/changePassword")
+	/*@RequestMapping("/changePassword")
 	public String changePasswordHome(@ModelAttribute("changePassword") User user){
 
 		return "changePassword";
@@ -214,7 +210,7 @@ public class EmployeeController {
 		User users = userService.getUserById(objuserBean.getId());
 		if(users.getPassword().equals(user.getPassword())) {
 
-			users.setPassword(user.getCpassword());
+			users.setPassword(user.getPassword());
 			userService.updatePassword(users);
 			redir.addFlashAttribute("msg", "Password Updated Successfully");
 			redir.addFlashAttribute("cssMsg", "warning");
@@ -228,9 +224,9 @@ public class EmployeeController {
 
 
 	}
+*/
 
-
-	@RequestMapping("/editProfile")
+	/*@RequestMapping("/editProfile")
 	public String editProfileHome(@ModelAttribute("editProfile") User user,Model model){
 
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -246,17 +242,17 @@ public class EmployeeController {
 	public String editProfile(@ModelAttribute("editProfile") User user,RedirectAttributes redir,HttpServletRequest request){
 
 		User emp = userService.getUserById(user.getId());
-		emp.setFirstname(user.getFirstname());
-		emp.setLastname(user.getLastname());
-		emp.setMobilenumber(user.getMobilenumber());
-		emp.setEmail(user.getEmail());
+		emp.setFirstName(user.getFirstName());
+		emp.setLastName(user.getLastName());
+		emp.setMobileNo(user.getMobileNo());
+		emp.setEmailId(user.getEmailId());
 		userService.updateUser(emp);
 
 		redir.addFlashAttribute("msg", "You Details Updated Successfully");
 		redir.addFlashAttribute("cssMsg", "warning");
 
 			return "editProfile";
-}
+}*/
 
 
 	@RequestMapping("/getUserName")
@@ -269,7 +265,7 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/inActiveEmp")
-	public @ResponseBody String getAllActiveOrInactiveOrgnizations(Department  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+	public @ResponseBody String getAllActiveOrInactiveOrgnizations(User  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		List<User> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -303,10 +299,7 @@ public class EmployeeController {
 
 		}
 		return String.valueOf(jsonObj);
-	}
-
 	
-
-
-
+	}
+	
 }

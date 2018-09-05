@@ -1,4 +1,4 @@
-package com.charvikent.issuetracking.dao;
+/*package com.charvikent.issuetracking.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -113,12 +113,12 @@ public class ReportIssueDao {
 
 	}
 
-	/* @SuppressWarnings("unchecked")
+	 @SuppressWarnings("unchecked")
 public List<ReportIssue> getAllReportIssues()
  {
 	 return (List<ReportIssue>) em.createQuery("select reportIssue from ReportIssue reportIssue").getResultList();
  }
-	 */
+	 
  
 
 	public Set<ReportIssue> getIssuesAssignBy(String id) {
@@ -401,10 +401,10 @@ public List<ReportIssue> getAllReportIssues()
 
 	}
 
-	/**
+	*//**
 	 * @param 
 	 * @return
-	 */
+	 *//*
 	public ReportIssue getReportIssueById(Integer id) {
 
 		return em.find(ReportIssue.class, id);
@@ -479,11 +479,11 @@ public List<ReportIssue> getAllReportIssues()
 	    	 fieldname = fieldname+" Severity field changed &";
 	    	 change =change+ editissue1.getSeverity() +"-->"+semap.get(Integer.parseInt(issue.getSeverity()))+"&";
 	     }
-	    /* if(!editissue1.getPriority().equals(pmap.get(Integer.parseInt(issue.getPriority()))) )
+	     if(!editissue1.getPriority().equals(pmap.get(Integer.parseInt(issue.getPriority()))) )
 	     {
 	    	 fieldname = fieldname+" Priority field changed  &";
 	    	 change =change+ editissue1.getPriority() +"-->"+pmap.get(Integer.parseInt(issue.getPriority()))+"&";
-	     }*/
+	     }
 	     if(!editissue1.getAssignto().equals(umap.get(Integer.parseInt(issue.getAssignto())) ))
 	     {
 	    	 fieldname = fieldname+" Assignto field changed  &";
@@ -1121,7 +1121,7 @@ public List<ReportIssue> getAllReportIssues()
 	
 	
 	
-	/*public Set<ReportIssue> getAllTasks() {
+	public Set<ReportIssue> getAllTasks() {
 		Set<ReportIssue> listissue=new LinkedHashSet<ReportIssue>();
 		
 		String hql ="select  r.id , u.username, s.severity as sev, p.priority as pp,r.uploadfile,r.subject ,r.created_time,c.category as cc,ks.name,r.status ,r.taskno ,r.severity as sid, r.priority as pid,r.assignto , r.category as rcid,r.description ,r.taskdeadline,r.assignby,u1.username as asby ,r.kstatus" 
@@ -1182,7 +1182,7 @@ public List<ReportIssue> getAllReportIssues()
 	
 	
 	
-*/
+
 
 	
 	
@@ -1196,3 +1196,4 @@ public List<ReportIssue> getAllReportIssues()
 
 
 
+*/

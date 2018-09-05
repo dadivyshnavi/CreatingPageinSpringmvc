@@ -20,11 +20,10 @@ import com.charvikent.issuetracking.service.UserService;
 @Component
 public class CustomLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
 
-	/*
-	 * @Autowired private AuditService auditService;
-	 * 
-	 * 
-	 */
+	
+	// @Autowired private AuditService auditService;
+	
+	 
 	
 	@Autowired UserService userService;
 	

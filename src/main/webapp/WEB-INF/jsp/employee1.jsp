@@ -4,13 +4,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-<script type="text/javascript"
-	src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css">
-
 
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -33,7 +26,7 @@
 					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
 						<div class="table-responsive" id="tableId">
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-								<thead><tr><th>Employee ID</th><th>User Name</th><th>firstname</th><th>Last Name</th> <th>Shift</th><th>Role</th><th></th></tr></thead>
+								<thead><tr><th>Employee ID</th><th>User Name</th><th>firstname</th><th>Last Name</th> <th>Department</th><th>Designation</th><th></th></tr></thead>
 								<tbody></tbody>
 							</table>
 						</div>
@@ -51,45 +44,8 @@
 					
 					<form:form modelAttribute="userForm" action="employee" class="form-horizontal " method="Post">
 	                  <form:hidden path="id"/>
-					<%-- <div class="col-md-6"><br>
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Username<span class="impColor">*</span></label>
-									<div class="col-md-6">
-										<form:input path="userName" class="form-control validate" placeholder="Enter Username"/>
-									</div>
-								</div>
-								
-								</div> --%>
+					
 								<div class="col-md-6"><br>
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
-									<div class="col-md-6">
-										<form:input path="firstName" class="form-control validate onlyCharacters" placeholder="Enter First Name"/>
-									</div>
-								</div></div>
-								<div class="col-md-6"><br>
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Last Name<span class="impColor">*</span></label>
-						<div class="col-md-6">
-										<form:input path="lastName" class="form-control validate onlyCharacters" placeholder="Enter Last Name"/>
-									</div>
-								</div>
-								</div>
-								<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
-									<div class="col-md-6">
-										<form:input path="mobileNo" class="form-control validate numericOnly" placeholder="Enter Mobile Number" maxlength="10" />
-									</div>
-								</div></div>
-								<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</label>
-									<div class="col-md-6">
-										<form:input path="emailId" class="form-control" placeholder="Enter Email"/>
-									</div>
-								</div></div>
-								<%-- <div class="col-md-6"><br>
 								<div class="form-group" id="passwordDiv">
 									<label class="col-md-3 control-label no-padding-right">Password<span class="impColor">*</span></label>
 									<div class="col-md-6">
@@ -97,16 +53,42 @@
 									</div>
 								</div>
 								
-								</div> --%>
-								
-								
-								
+								</div>
+								<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="firstName" class="form-control validate onlyCharacters" placeholder="Enter First Name"/>
+									</div>
+								</div></div>
+								<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Last Name<span class="impColor">*</span></label>
+						<div class="col-md-6">
+										<form:input path="lastName" class="form-control validate onlyCharacters" placeholder="Enter Last Name"/>
+									</div>
+								</div>
+								</div>
 								
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Role<span class="impColor">*</span></label>
+									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:select path="roleId" class="form-control validate " >
+										<form:input path="mobileNo" class="form-control validate numericOnly" placeholder="Enter Mobile Number"/>
+									</div>
+								</div></div>
+								<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Email</label>
+									<div class="col-md-6">
+										<form:input path="emailId" class="form-control" placeholder="Enter Email"/>
+									</div>
+								</div></div>
+								<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Role</label>
+									<div class="col-md-6">
+										<form:select path="role" class="form-control validate " >
 											<form:option value="">-- Select Role --</form:option>
 											<form:options items="${roles}"/>
 										</form:select>
@@ -116,41 +98,21 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Shift<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:select path ="shiftId" class="form-control validate" selected="selected" onfocus="removeBorder(this.id)">
+										<form:select path ="shift" class="form-control validate" selected="selected" onfocus="removeBorder(this.id)">
 											<form:option value="">-- Select Shift --</form:option>
 								     		<form:options  items="${shifts}"/>
 										</form:select>
 									</div>
-								</div></div>  
-								<div class="col-md-6">
-								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Emergency No<span class="impColor">*</span></label>
-									<div class="col-md-6">
-										<form:input path="emergencyNo" class="form-control validate numericOnly" placeholder="Enter Mobile Number" maxlength="10" />
-									</div>
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Aadhar No<span class="impColor">*</span></label>
+									<label class="col-md-3 control-label no-padding-right">EmergencyNo<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="aadharNo" class="form-control validate numericOnly" placeholder="Enter Mobile Number" maxlength="16"/>
+										<form:input path="emergency" class="form-control validate numericOnly" placeholder="Enter Mobile Number"/>
 									</div>
 								</div></div>
-							<div class="col-md-6">
-							<div class="form-group">
-							<label for="focusedinput" class="col-md-3 control-label">Date Of Birth<span class="impColor">*</span></label>
-							<form:input type="text" path="dob" class="col-xs-10 col-sm-5 validate" />
-							</div>
-							</div>
-							<div class="col-md-6">
-							<div class="form-group">
-							<label for="focusedinput" class="col-md-3 control-label">Date of Joining<span class="impColor">*</span>
-							</label>
-							<form:input type="text" path="doj" class="col-xs-10 col-sm-5 validate" />
-							</div>
-							</div>
 								
-								
+								 
 						<div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
@@ -222,40 +184,14 @@
 <p data-toggle='modal' id="password_modal" data-target='#passwordModal'></p>
 </body>
 <script type="text/javascript">
-
-
-$('#dob').datetimepicker({
-
-	useCurrent : false,
-	format : 'DD-MMM-YYYY',
-	showTodayButton : true,
-	sideBySide : true,
-	
-	toolbarPlacement : 'top',
-	focusOnShow : false,
-
-});
-
-$('#doj').datetimepicker({
-
-	useCurrent : false,
-	format : 'DD-MMM-YYYY',
-	showTodayButton : true,
-	sideBySide : true,
-	
-	toolbarPlacement : 'top',
-	focusOnShow : false,
-
-});
-
-var listOrders1 = ${allOrders1};
+/* ar listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
 	displayTable(listOrders1);
 }
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Emp Id</th><th>First Name</th><th>Last Name</th><th>Mobile No</th><th>Email Id</th><th>Role</th><th>Shift</th><th>Aadhar Number</th><th>Emergency Number</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>User Name</th><th>Report To</th><th>First Name</th><th>Last Name</th><th>Department</th><th>Designation</th><th>Mobile Number</th><th style="text-align: center;">Options</th><th></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -269,15 +205,14 @@ function displayTable(listOrders) {
 		var edit = "<a class='edit editIt' onclick='editEmployee("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr class='"+ cls +"'>"
-			+ "<td title='"+orderObj.empId+"'>"+ orderObj.empId+ "</td>" 
-			+ "<td title='"+orderObj.firstName+"'>"+ orderObj.firstName + "</td>"
-			+ "<td title='"+orderObj.lastName+"'>"+ orderObj.lastName + "</td>"
-			+ "<td title='"+orderObj.mobileNo+"'>"+ orderObj.mobileNo + "</td>"
-			+ "<td title='"+orderObj.emailId+"'>"+ orderObj.emailId + "</td>"
-			+ "<td title='"+orderObj.role+"'>"+ orderObj.role + "</td>"
-			+ "<td title='"+orderObj.shift+"'>"+ orderObj.shift + "</td>"
-			+ "<td title='"+orderObj.aadharNo+"'>"+ orderObj.aadharNo + "</td>"
-			+ "<td title='"+orderObj.emergencyNo+"'>"+ orderObj.emergencyNo + "</td>"
+			 + "<td title='"+orderObj.id+"'>"+ orderObj.id + "</td>" 
+			+ "<td title='"+orderObj.username+"'>"+ orderObj.username + "</td>"
+			+ "<td title='"+orderObj.reportto+"'>"+ orderObj.reportName + "</td>"
+			+ "<td title='"+orderObj.firstname+"'>"+ orderObj.firstname + "</td>"
+			+ "<td title='"+orderObj.lastname+"'>"+ orderObj.lastname + "</td>"
+			+ "<td title='"+orderObj.departmentName+"'>"+ orderObj.departmentName + "</td>"
+			+ "<td title='"+orderObj.designationName+"'>"+ orderObj.designationName + "</td>"
+			+ "<td title='"+orderObj.mobilenumber+"'>"+ orderObj.mobilenumber + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "<td ><a style='cursor:pointer' onclick='getPasswordModal("+ orderObj.id +")'>Change Password</a></td>" 
 			+ "</tr>";
@@ -307,10 +242,10 @@ function changePasswordModal(){
 				formData, false, 'text', function(data) {
 			
 			$("#passwordModal").modal('toggle');
-			/* var jsonobj = $.parseJSON(data);
+			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
-			console.log(jsonobj.allOrders1); */
+			console.log(jsonobj.allOrders1); 
 			
 			
 			$.each(JSON.parse(data),function(key,value) {
@@ -343,27 +278,25 @@ function getPasswordModal(id)
 function editEmployee(id) {
 	
 	$("#id").val(serviceUnitArray[id].id);
-	
-	$("#firstName").val(serviceUnitArray[id].firstName);
-	$("#lastName").val(serviceUnitArray[id].lastName);
-	$("#mobileNo").val(serviceUnitArray[id].mobileNo);
-	$("#dob").val(serviceUnitArray[id].dob);
-	$("#doj").val(serviceUnitArray[id].doj);
-	$("#emailId").val(serviceUnitArray[id].emailId);
-	$("#emergencyNo").val(serviceUnitArray[id].emergencyNo);
-	$("#aadharNo").val(serviceUnitArray[id].aadharNo);
-	$("#roleId").val(serviceUnitArray[id].roleId);
-	$("#shiftId").val(serviceUnitArray[id].shiftId);
+	$("#username").val(serviceUnitArray[id].username);
+	$("#password").val(serviceUnitArray[id].password);
+	$("#firstname").val(serviceUnitArray[id].firstname);
+	$("#lastname").val(serviceUnitArray[id].lastname);
+	$("#mobilenumber").val(serviceUnitArray[id].mobilenumber);
+	$("#designation").val(serviceUnitArray[id].designation);
+	$("#department").val(serviceUnitArray[id].department);
+	$("#reportto").val(serviceUnitArray[id].reportto);
+	$("#email").val(serviceUnitArray[id].email);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
-	/* document.getElementById("username").readOnly  = true;
+	document.getElementById("username").readOnly  = true;
 	//document.querySelector("password").required = false;
     $("#passwordDiv").hide();
     var idArray = $.makeArray($('.validate').map(function() {
     	return this.id;
-    })); 
-    console.log(idArray);*/
-} 
+    }));
+    console.log(idArray);
+}
 
 function deleteEmployee(id,status){
 	var checkstr=null;
@@ -449,7 +382,6 @@ $('#username').blur(function() {
 	}
 	
 }
- */
 function inactiveData() {
 	var status="0";
 	if($('#inActive').is(":checked") == true){
@@ -468,7 +400,7 @@ function inactiveData() {
 			console.log(jsonobj.allOrders1);
 				});
 		
-}
+} */
 
  $("#pageName").text("Employee Master");
 $(".employee").addClass("active"); 
