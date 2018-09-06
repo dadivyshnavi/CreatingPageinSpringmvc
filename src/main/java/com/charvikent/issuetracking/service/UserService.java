@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 
 import com.charvikent.issuetracking.config.SendSMS;
 import com.charvikent.issuetracking.dao.UserDao;
+import com.charvikent.issuetracking.dao.passwordDao;
+import com.charvikent.issuetracking.model.PasswordDetails;
 import com.charvikent.issuetracking.model.User;
 import com.charvikent.issuetracking.model.role;
 import com.charvikent.issuetracking.model.shift;
@@ -33,7 +35,8 @@ public class UserService {
 
 	@Autowired
 	private UserDao userDao;
-
+	@Autowired
+	private passwordDao passworddao;
 	@Autowired
 	private SendSMS smsTemplate;
 
@@ -49,13 +52,15 @@ public class UserService {
 			
 		}*/
 		
-		/*String msg =user.getFirstName()+" "+user.getLastName()+",  Successfully registered with KPTMS. \n You can login using \n Username:  "+user.getMobileNo()+"\n password: "+user.getPassword();
-		String mbnum=user.getMobileNo();*/
+		String msg =user.getFirstName()+" "+user.getLastName()+",  Successfully registered with KPTMS. \n You can login using \n Username:  "+user.getMobileNo()+"\n password: "+user.getPassword();
+		String mbnum=user.getMobileNo();
 		userDao.saveUser(user);
-		/*logger.info("Sending message.......");
-		smsTemplate.sendSMS(msg,mbnum);*/
+		logger.info("Sending message.......");
+		smsTemplate.sendSMS(msg,mbnum);
+		
+		
 	}
-
+	
 	public List<User> getAllUsers()
 	{
     User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -280,19 +285,19 @@ public boolean deleteUser(Integer id,String status) {
 		userDao.setLoginRecord(id,str);
 	}
 
-	public boolean checkUserExist(String username) {
+	/*public boolean checkUserExist(String username) {
 
 		List<User> usersList= userDao.getAllUsers();
 
 		for(User bean: usersList){
-			  if(username.equalsIgnoreCase(bean.getMobileNo()))
+			  if(username.equalsIgnoreCase(bean.getMobileNo()));
 			  {
 
 				  return true;
 		       }
 	}
 		return false;
-	}
+	}*/
 
 	public User getUserByObject(User user) {
 		// TODO Auto-generated method stub

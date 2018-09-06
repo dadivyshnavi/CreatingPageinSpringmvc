@@ -217,16 +217,6 @@ public class User {
 
 
 
-	/*public String getEnabled() {
-		return enabled;
-	}
-
-
-
-	public void setEnabled(String enabled) {
-		this.enabled = enabled;
-	}
-*/
 
 
 	public Date getCreatedTime() {

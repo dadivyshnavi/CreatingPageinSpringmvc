@@ -199,14 +199,14 @@ public class UserDao {
 		em.flush();
 	}
 
-	/*public void updatePassword(User user) {
+	public void updatePassword(User user) {
 		
 		em.merge(user);
 
 		em.flush();
 
 
-	}*/
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<User> getUserNames()
@@ -234,14 +234,36 @@ public class UserDao {
 	
 	
 
+	/*@SuppressWarnings("unchecked")
+	public User findByUserName(String username)
+	{
+		User user= (User) em.createQuery("select user from User user where username=:Custname").setParameter("Custname", userName).getSingleResult();
+		System.out.println(user);
+		
+		
+		String hql ="From User where username= '"+username+"' ";
+		
+		Query query = em.createQuery(hql);
+		
+		
+		List<User> list =query.getResultList();
+		
+		       if(list.size() >0)
+		       {
+		    	   return list.get(0);
+		       }
+		       else
+		       return null;
+		
+	}*/
 	@SuppressWarnings("unchecked")
-	public User findByUserName(String userName)
+	public User findByUserName(String mobileno)
 	{
 		/*User user= (User) em.createQuery("select user from User user where username=:Custname").setParameter("Custname", userName).getSingleResult();
 		System.out.println(user);*/
 		
 		
-		String hql ="From User where username= '"+userName+"' ";
+		String hql ="From User where mobileNo= '"+mobileno+"' ";
 		
 		Query query = em.createQuery(hql);
 		
@@ -272,12 +294,13 @@ public class UserDao {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public User getUserByObject(User user) {
 
-		String hql ="from User where username =:n";
+		String hql ="from User where mobileNo='"+user.getMobileNo()+"'";
 
 		Query query =em.createQuery(hql);
-		query.setParameter("n", user.getMobileNo());
+		//query.setParameter("n", user.getMobileNo());
 
 		List<User> usersList =query.getResultList();
 		if(usersList.isEmpty())

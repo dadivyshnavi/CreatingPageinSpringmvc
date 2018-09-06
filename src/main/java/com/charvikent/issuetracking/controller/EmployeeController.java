@@ -2,6 +2,7 @@ package com.charvikent.issuetracking.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.charvikent.issuetracking.config.SendSMS;
 import com.charvikent.issuetracking.dao.UserDao;
+import com.charvikent.issuetracking.model.PasswordDetails;
 import com.charvikent.issuetracking.model.User;
 import com.charvikent.issuetracking.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,6 +41,9 @@ public class EmployeeController {
 
 	@Autowired
 	HttpSession session;
+
+
+	private String password;
 	
 
 
@@ -91,12 +97,11 @@ public class EmployeeController {
 		int id = 0;
 		try
 		{
-			User userBean=null;
-			if(user.getId()!=null)
-			{
-			  userBean= userService.getUserByObject(user);
+			//User userBean=null;
+			
+			 User userBean= userService.getUserByObject(user);
 
-			}
+			
 			int dummyId =0;
 
 			if(userBean != null){
@@ -110,7 +115,10 @@ public class EmployeeController {
 
 
 					//user.setStatus("1");
-
+					Random rnd = new Random();
+					int n = 100000 + rnd.nextInt(900000);
+					String strRandomNumber =String.valueOf(n);
+					user.setPassword(strRandomNumber);
 					userService.saveUser(user);
 
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
@@ -255,7 +263,7 @@ public class EmployeeController {
 }*/
 
 
-	@RequestMapping("/getUserName")
+	/*@RequestMapping("/getUserName")
 	public  @ResponseBody  Boolean getUserName(HttpServletRequest request, HttpSession session)
 	{
 		String username=request.getParameter("username");
@@ -263,7 +271,7 @@ public class EmployeeController {
 		username = username.replaceAll("\\s+","");
 		return userService.checkUserExist(username);
 	}
-
+*/
 	@RequestMapping(value = "/inActiveEmp")
 	public @ResponseBody String getAllActiveOrInactiveOrgnizations(User  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		List<User> listOrderBeans  = null;
@@ -301,5 +309,29 @@ public class EmployeeController {
 		return String.valueOf(jsonObj);
 	
 	}
+	/*@RequestMapping(value = "/getPwd", method = RequestMethod.POST)
+	public @ResponseBody  Boolean getPassword(Model model,HttpServletRequest request) throws IOException 
+	{
+		LOGGER.debug("Calling  getPwd at controller");
+		System.out.println("enter to getPwd");
+		
+		String custMobile=request.getParameter("mobile_no");
+		Random random = new Random();
+		 password = String.format("%06d", random.nextInt(1000000));
+		
+		SendSMS.sendSMS(password,custMobile);
+		PasswordDetails pwddetails=new PasswordDetails();
+		
+				 pwddetails.setMobileNo(custMobile);
+		 pwddetails.setPWDnumber( password);
+		
+		
+		
+		
+		
+		
+		return true;*/
+		
+	}
 	
-}
+
