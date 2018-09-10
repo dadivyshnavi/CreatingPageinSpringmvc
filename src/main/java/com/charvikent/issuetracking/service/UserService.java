@@ -19,6 +19,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.charvikent.issuetracking.config.MailTemplate;
 import com.charvikent.issuetracking.config.SendSMS;
 import com.charvikent.issuetracking.dao.UserDao;
 import com.charvikent.issuetracking.dao.passwordDao;
@@ -39,12 +40,12 @@ public class UserService {
 	private passwordDao passworddao;
 	@Autowired
 	private SendSMS smsTemplate;
+	@Autowired MailTemplate mailTemplate;
 
-
-    SendSMS smstemplate =new SendSMS();
+    //SendSMS smstemplate =new SendSMS();
 
 	public void saveUser(User user) throws IOException
-	{
+		{
 		/*if(user.getEmpId() ==null)
 		{
 			User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -307,6 +308,11 @@ public boolean deleteUser(Integer id,String status) {
 	public List<User> getInActiveList() {
 
 		return userDao.getInActiveList();
+	}
+
+	public User checkUserExistOrNotbyEmailId(String emailid) {
+		
+		return userDao.checkUserExistOrNotbyEmailId(emailid);
 	}
 
 	/*public User getUserDesignationById(Integer id) {

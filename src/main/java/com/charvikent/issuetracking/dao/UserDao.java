@@ -36,9 +36,11 @@ public class UserDao {
 @Autowired KptsUtil kptsUtil;
 
 	public void saveUser(User user) {
-	  String userid =kptsUtil.randNum();
+	  
+	   /** for random number generation of employeeId 
+	   * String userid =kptsUtil.randNum();*/
 	  user.setStatus("1");
-	  user.setEmpId(userid);
+	  //user.setEmpId(userid);
 		em.persist(user);
 
 	}
@@ -185,6 +187,7 @@ public class UserDao {
 */
 	public void updateUser(User user) {
 		User users=getUserById(user.getId());
+		users.setEmpId(user.getEmpId());
 		users.setFirstName(user.getFirstName());
 		users.setLastName(user.getLastName());
 		users.setEmailId(user.getEmailId());
@@ -237,7 +240,7 @@ public class UserDao {
 	/*@SuppressWarnings("unchecked")
 	public User findByUserName(String username)
 	{
-		User user= (User) em.createQuery("select user from User user where username=:Custname").setParameter("Custname", userName).getSingleResult();
+		User user= (User) em.createQuery("select user from User user where username=:Custname").setParameter("Custname", username).getSingleResult();
 		System.out.println(user);
 		
 		
@@ -259,7 +262,7 @@ public class UserDao {
 	@SuppressWarnings("unchecked")
 	public User findByUserName(String mobileno)
 	{
-		/*User user= (User) em.createQuery("select user from User user where username=:Custname").setParameter("Custname", userName).getSingleResult();
+		/*User user= (User) em.createQuery("select user from User user where username=:Custname").setParameter("Custname", mobileno).getSingleResult();
 		System.out.println(user);*/
 		
 		
@@ -287,10 +290,11 @@ public class UserDao {
 		//List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpdesignation d,kpmultiroles m  where u.designation=d.id and m.designationid=u.designation and u.username =:Custname").setParameter("Custname", Username).getResultList();
 		List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpmultiroles m  where  m.designationid=u.designation and u.username =:Custname").setParameter("Custname", Username).getResultList();
 
+		/*List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpmultiroles m  where  m.designationid=u.role_id and u.username =:Custname").setParameter("Custname", Username).getResultList();*/
 
 		System.out.println(list);
 		return list;
-
+		
 
 	}
 
@@ -317,10 +321,26 @@ public class UserDao {
 		 
 	      return  this.jdbcTemplate.query(hql, rowMapper);
 	}
-	
+
+	public User checkUserExistOrNotbyEmailId(String emailid) {
+		
+		String hql ="from User where emailId='"+emailid+"'";
+		
+		
+		List<User> custlist =	em.createQuery(hql).getResultList();
+		    
+		if(custlist.size()>0)
+		return custlist.get(0);
+		else
+		return null;
+			
+		}
+	}
 
 	
 
 	
-	 
-}
+
+	
+ 
+

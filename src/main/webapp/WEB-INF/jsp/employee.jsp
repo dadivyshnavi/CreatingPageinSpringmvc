@@ -62,6 +62,13 @@
 								</div> --%>
 								<div class="col-md-6"><br>
 								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Employee Id<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="empId" class="form-control validate numericOnly" placeholder="Enter First Name" maxlength="5"/>
+									</div>
+								</div></div>
+								<div class="col-md-6"><br>
+								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="firstName" class="form-control validate onlyCharacters" placeholder="Enter First Name"/>
@@ -77,14 +84,14 @@
 								</div>
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Mobile<span class="impColor">*</span></label>
+									<label class="col-md-3 control-label no-padding-right">Mobile No<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="mobileNo" class="form-control validate numericOnly" placeholder="Enter Mobile Number" maxlength="10" />
 									</div>
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Email<span class="impColor">*</label>
+									<label class="col-md-3 control-label no-padding-right">Email Id<span class="impColor">*</label>
 									<div class="col-md-6">
 										<form:input path="emailId" class="form-control" placeholder="Enter Email"/>
 									</div>
@@ -133,7 +140,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Aadhar No<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="aadharNo" class="form-control validate numericOnly" placeholder="Enter Mobile Number" maxlength="16"/>
+										<form:input path="aadharNo" class="form-control validate numericOnly" placeholder="Enter Mobile Number" maxlength="12"/>
 									</div>
 								</div></div>
 							<div class="col-md-6">
@@ -344,6 +351,7 @@ function editEmployee(id) {
 	
 	$("#id").val(serviceUnitArray[id].id);
 	
+	$("#empId").val(serviceUnitArray[id].empId);
 	$("#firstName").val(serviceUnitArray[id].firstName);
 	$("#lastName").val(serviceUnitArray[id].lastName);
 	$("#mobileNo").val(serviceUnitArray[id].mobileNo);

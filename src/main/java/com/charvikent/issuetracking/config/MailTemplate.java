@@ -2,6 +2,7 @@ package com.charvikent.issuetracking.config;
 
 import java.io.StringWriter;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.velocity.VelocityContext;
@@ -13,6 +14,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
+
+import com.charvikent.issuetracking.model.User;
 
 @Component
 public class MailTemplate {
@@ -55,8 +58,30 @@ public class MailTemplate {
 			e.printStackTrace();
 			System.out.println(e);
 		}  
+	}
+
+
+	public void resetPassword(User custbean2)throws MessagingException {
+		try {
+			String email =  custbean2.getEmailId();
+			String password=custbean2.getPassword();
+			MimeMessage message = javaMailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			VelocityContext velocityContext = new VelocityContext();
+			velocityContext.put("name",custbean2.getFirstName());
+			velocityContext.put("password", password);
+			StringWriter stringWriter = new StringWriter();
+			velocityEngine.mergeTemplate("passwordtemplate.vm",    "UTF-8", velocityContext, stringWriter);
+			helper.setText(stringWriter.toString(), true);
+			helper.setTo( email);
+			helper.setSubject("Your password sent successfully");
+			javaMailSender.send(message);	
+			} catch (MailException e) {
+				e.printStackTrace();
+				System.out.println(e);
+			}  
+		}
+
+		
 	}  
 
-	
-	
-}

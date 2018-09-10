@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.charvikent.issuetracking.config.MailTemplate;
 import com.charvikent.issuetracking.config.SendSMS;
 import com.charvikent.issuetracking.dao.UserDao;
 import com.charvikent.issuetracking.model.PasswordDetails;
@@ -46,7 +47,9 @@ public class EmployeeController {
 	private String password;
 	
 
-
+	@Autowired
+	private SendSMS smsTemplate;
+	@Autowired MailTemplate mailTemplate;
 
 	@RequestMapping(value = "/employee", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String showEmployeePage(Model model,HttpServletRequest request) throws MessagingException
@@ -114,7 +117,7 @@ public class EmployeeController {
 				{
 
 
-					//user.setStatus("1");
+					user.setStatus("1");
 					Random rnd = new Random();
 					int n = 100000 + rnd.nextInt(900000);
 					String strRandomNumber =String.valueOf(n);
@@ -330,7 +333,32 @@ public class EmployeeController {
 		
 		
 		
-		return true;*/
+		return true;
+}*/
+	
+	@RequestMapping(value = "/getresetpassword" ,method = RequestMethod.POST)
+	public @ResponseBody Boolean getResetUserPassword(Model model,HttpServletRequest request) throws IOException, MessagingException 
+				{
+				//LOGGER.debug("Calling getresetpassword at controller");
+					System.out.println("enter to getresetpassword");
+					String emailId=request.getParameter("emailId");
+					System.out.println(emailId);
+					/*Random rnd = new Random();
+					int n = 100000 + rnd.nextInt(900000);
+					String strRandomNumber =String.valueOf(n);
+					PasswordDetails  pd =new PasswordDetails();
+					pd.setPWDnumber(strRandomNumber);*/
+					User custbean2=userService.checkUserExistOrNotbyEmailId(emailId);
+					if(custbean2 != null)
+					{
+						//sendSMS.sendSMS(custbean2.getPassword(),emailid);
+						 mailTemplate.resetPassword(custbean2);
+						return true;	
+					}
+					else
+						return false;
+				} 
+
 		
 	}
 	

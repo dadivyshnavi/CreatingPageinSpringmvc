@@ -362,7 +362,7 @@ function getHeadersCounts(){
 	            <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/task" style="color:white;">Create Task</a></li>
 	   
 	            <li style=" margin-top:5px;" class="dropdown">
-	                <%-- <a href="#" class="dropdown-toggle username" data-toggle="dropdown" style="color: white;"><span class="hidden-xs" > <%= userDesignation.getDesignationName() %> <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a> --%>
+	               <%--  <a href="#" class="dropdown-toggle username" data-toggle="dropdown" style="color: white;"><span class="hidden-xs" > <%= userDesignation.getDesignationName() %> <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>  --%>
 	                <ul class="dropdown-menu userinfo arrow">
 	                    <li class="username">
 	                        <a href="#">
@@ -374,11 +374,11 @@ function getHeadersCounts(){
 	                        <ul class="dropdown-menu">
 	                            <li><a href="editProfile">Edit Profile <i class="pull-right fa fa-pencil" style="margin-left:85px;"></i></a></li>
 	                            <li><a href="changePassword">Change Password <i class="pull-right fa fa-cog"  style="margin-left:45px;"></i></a></li>
-	                         <%--    <c:url value="${peContext.request.contextPath}/logout" var="logoutUrl" /> --%>
+	                           <c:url value="${peContext.request.contextPath}/logout" var="logoutUrl" /> 
 	
-	                          <%--  <li><a href="<c:url value="${baseurl}/logOutKptms" />"> Sign Out</a></li> --%>
-	                            <li><a href="<c:url value="${baseurl}/logout" />"> Sign Out</a></li>
-	                         <%--   <li><a href="<c:url value="j_spring_security_logout" />" > Sign Out</a></li> --%>
+	                            <%-- <li><a href="<c:url value="${baseurl}/logOutKptms" />"> Sign Out</a></li> 
+	                            <li><a href="<c:url value="${baseurl}/logout" />"> Sign Out</a></li>  --%>
+	                           <li><a href="<c:url value="j_spring_security_logout" />" > Sign Out</a></li> 
 	                            
 	                         
 	                        </ul>
@@ -403,11 +403,10 @@ function getHeadersCounts(){
             <li class="dashBoard"><a href="${baseurl }/dashBoard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                 <security:authorize access="hasRole('ROLE_ADMIN')">
               	
-             	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users"></i> <span>Employees</span></a></li> 
+             	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users"></i> <span>Employees</span></a></li>
              	<li class="student"><a href="${baseurl }/student"><i class="fa fa-users"></i> <span>Students</span></a></li>
              	<li class="customer"><a href="${baseurl }/customer"><i class="fa fa-users"></i> <span>Customers</span></a></li>
               </security:authorize>
-             <li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users"></i> <span>Employees</span></a></li>    
              
 		</div>
     </nav>
