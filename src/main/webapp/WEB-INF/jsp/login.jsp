@@ -97,7 +97,7 @@
 		
 		 <div class="login-bottom"> 
 			<div class="col-sm-6">
-		<h6><a href="#" data-toggle="modal" data-target="#passwordModel" style="color:orange;" class="tag">Forgot password</a>
+		<h6><a href="#" data-toggle="modal" data-target="#passwordModel" onclick="openPasswordModal()" style="color:orange;" class="tag">Forgot password</a>
 		</h6>
 		</div> 
 		
@@ -230,6 +230,19 @@ console.log(e.responseText);
 				    
 });	
 } 
+function makeEmptyPasswordModal()
+{
+	
+	$('#emailId').val("");
+	$('#emailId').css('border-color', 'none');
+}
+function openPasswordModal()
+{
+	$(".cancel1").click();
+	makeEmptyPasswordModal();
+	$('#passwordModel').modal();
+	
+}
 
 
 </script> 
