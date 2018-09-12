@@ -402,8 +402,7 @@ function getHeadersCounts(){
             
             <li class="dashBoard"><a href="${baseurl }/dashBoard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
            <%--  <li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users"></i> <span>Employees</span></a></li> --%>
-                <security:authorize access="hasRole('ROLE_ADMIN')">
-              	
+                <security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MASTERADMIN')">
              	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users"></i> <span>Employees</span></a></li>
              	<%-- <li class="student"><a href="${baseurl }/student"><i class="fa fa-users"></i> <span>Students</span></a></li>
              	<li class="customer"><a href="${baseurl }/customer"><i class="fa fa-users"></i> <span>Customers</span></a></li> --%>

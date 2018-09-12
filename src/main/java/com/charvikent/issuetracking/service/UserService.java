@@ -25,7 +25,7 @@ import com.charvikent.issuetracking.dao.UserDao;
 import com.charvikent.issuetracking.dao.passwordDao;
 import com.charvikent.issuetracking.model.PasswordDetails;
 import com.charvikent.issuetracking.model.User;
-import com.charvikent.issuetracking.model.role;
+import com.charvikent.issuetracking.model.Role;
 import com.charvikent.issuetracking.model.shift;
 
 @Service
@@ -133,8 +133,8 @@ public class UserService {
 		Map<Integer, String> rolesMap = new LinkedHashMap<Integer, String>();
 		try
 		{
-		List<role> rolesList= userDao.getRoles();
-		for(role bean: rolesList){
+		List<Role> rolesList= userDao.getRoles();
+		for(Role bean: rolesList){
 			rolesMap.put(bean.getId(), bean.getDesigname());
 		}
 

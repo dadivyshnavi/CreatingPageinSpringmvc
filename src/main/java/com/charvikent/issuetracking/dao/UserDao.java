@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
 import com.charvikent.issuetracking.config.KptsUtil;
 import com.charvikent.issuetracking.model.User;
 import com.charvikent.issuetracking.model.UserLogs;
-import com.charvikent.issuetracking.model.role;
+import com.charvikent.issuetracking.model.Role;
 import com.charvikent.issuetracking.model.shift;
 
 @Repository
@@ -55,11 +55,11 @@ public class UserDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<role> getRoles()
+	public List<Role> getRoles()
 	{
 
 		String hql ="select r.id,r.designame from roles r";
-		RowMapper<role> rowMapper = new BeanPropertyRowMapper<role>(role.class);
+		RowMapper<Role> rowMapper = new BeanPropertyRowMapper<Role>(Role.class);
 		 
 	      return  this.jdbcTemplate.query(hql, rowMapper);
 
@@ -283,18 +283,30 @@ public class UserDao {
 		
 		
 	}
-	@SuppressWarnings("unchecked")
 	public List<String> findRoleByUserName(String Username)
 	{
+		
+		String hql ="select mr.desigrole from User as u,Role as r,MultiRoles as mr where mobile_no='"+Username+"' and u.roleId=r.id and r.id=mr.id ";
+		
+		//Session session=this.sessionFactory.getCurrentSession();
+		 
+		 Query query=em.createQuery(hql);
+		 List<String> results = query.getResultList();
+		return results;
+		
 		//List<String> list= em.createNativeQuery("SELECT d.name FROM  kpusers u,kpdesignation d,kpmultiroles m  where u.designation=d.id  and k.username=:Custname").setParameter("Custname", Username).getResultList();
 		//List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpdesignation d,kpmultiroles m  where u.designation=d.id and m.designationid=u.designation and u.username =:Custname").setParameter("Custname", Username).getResultList();
-		List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpmultiroles m  where  m.designationid=u.designation and u.username =:Custname").setParameter("Custname", Username).getResultList();
+		 // List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpmultiroles m  where  m.designationid=u.designation and u.username =:Custname").setParameter("Custname", Username).getResultList();
 
-		/*List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpmultiroles m  where  m.designationid=u.role_id and u.username =:Custname").setParameter("Custname", Username).getResultList();*/
+		//List<String> list= em.createNativeQuery("select m.desigrole from kpusers u,kpmultiroles m where  m.designationid=u.role_id and u.username =:Custname").setParameter("Custname", Username).getResultList();
 
+		  
+		  
+		  
+		/*  
 		System.out.println(list);
 		return list;
-		
+		*/
 
 	}
 
