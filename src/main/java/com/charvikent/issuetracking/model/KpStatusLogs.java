@@ -9,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-@Entity
-@Table(name="kpstatuslogs")
+/*@Entity
+@Table(name="kpstatuslogs")*/
 public class KpStatusLogs implements Comparable<KpStatusLogs>{
 	
 	@Id

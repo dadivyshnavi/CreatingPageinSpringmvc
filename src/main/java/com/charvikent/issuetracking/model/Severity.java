@@ -6,8 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-@Entity
-@Table(name = "kpseverity")
+/*@Entity
+@Table(name = "kpseverity")*/
 public class Severity {
 	
 	@Id

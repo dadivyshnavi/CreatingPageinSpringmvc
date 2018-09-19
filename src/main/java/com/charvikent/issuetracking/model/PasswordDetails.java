@@ -9,9 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-
+/*
 @Entity
-@Table(name = "pwdDetails")
+@Table(name = "pwdDetails")*/
 public class PasswordDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

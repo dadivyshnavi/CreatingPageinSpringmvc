@@ -8,8 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="course")
+/*@Entity
+@Table(name="course")*/
 public class Course {	
 	@Id
 	@Column(name="id")

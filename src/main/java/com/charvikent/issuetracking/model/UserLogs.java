@@ -12,7 +12,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="kpuserslogs")
+@Table(name="userslogs")
 public class UserLogs {
 	
 	@Id

@@ -10,7 +10,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-@Entity
+/*@Entity*/
 public class KpHistory implements Comparable<KpHistory>{ 
 	
 	

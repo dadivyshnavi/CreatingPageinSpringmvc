@@ -12,8 +12,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Entity
-@Table(name = "student")
+/*@Entity
+@Table(name = "student")*/
 public class student 
 {
 	

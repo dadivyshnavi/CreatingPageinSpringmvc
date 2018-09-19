@@ -18,8 +18,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Kumar Pumps Task Management System</title>
-    <link rel="shortcut icon" href="${baseurl }/img/klogo.png"/>
+    <title>Charvikent Employee Database Management System</title>
+    <link rel="shortcut icon" href="${baseurl }/img/charvikent.png"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -330,7 +330,7 @@ function getHeadersCounts(){
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner" style="background: #4f8edc;">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/klogo.png"  style ="width:auto;height:68px;" class="img-responsive"></a>
+            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/charvikent.png"  style ="width:auto;height:68px;" class="img-responsive"></a>
             <div class="clearfix"></div>
         </div>
 		<div class="masters">
@@ -401,11 +401,8 @@ function getHeadersCounts(){
             <ul class="nav navbar-nav">
             
             <li class="dashBoard"><a href="${baseurl }/dashBoard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-           <%--  <li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users"></i> <span>Employees</span></a></li> --%>
                 <security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MASTERADMIN')">
              	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users"></i> <span>Employees</span></a></li>
-             	<%-- <li class="student"><a href="${baseurl }/student"><i class="fa fa-users"></i> <span>Students</span></a></li>
-             	<li class="customer"><a href="${baseurl }/customer"><i class="fa fa-users"></i> <span>Customers</span></a></li> --%>
               </security:authorize>
              
 		</div>

@@ -13,8 +13,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Entity
-@Table(name = "customer")
+/*@Entity
+@Table(name = "customer")*/
 public class customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

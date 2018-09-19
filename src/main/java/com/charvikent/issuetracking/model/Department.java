@@ -22,8 +22,8 @@ import org.hibernate.annotations.UpdateTimestamp;
  * @author KLS
  *
  */
-@Entity
-@Table(name = "kpdepartment")
+/*@Entity
+@Table(name = "kpdepartment")*/
 public class Department {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -14,7 +14,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name = "kpusers")
+@Table(name = "employee")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,6 +34,11 @@ public class User {
 	
 	@Column
 	private String password;
+	@Transient
+	private String npassword;
+	@Transient
+	private String cpassword;
+
 	
 	private String status;
 	
@@ -267,6 +272,30 @@ public class User {
 
 
 
+	public String getNpassword() {
+		return npassword;
+	}
+
+
+
+	public void setNpassword(String npassword) {
+		this.npassword = npassword;
+	}
+
+
+
+	public String getCpassword() {
+		return cpassword;
+	}
+
+
+
+	public void setCpassword(String cpassword) {
+		this.cpassword = cpassword;
+	}
+
+
+
 	public User() {
 	}
 
@@ -291,6 +320,9 @@ public class User {
 	this.updatedTime = user.updatedTime;
 	this.role = user.role;
 	this.shift = user.shift;
+	this.npassword=user.npassword;
+	this.cpassword=user.cpassword;
+	
 	//this.enabled=user.enabled;
 		
 		
@@ -303,10 +335,14 @@ public class User {
 		return "User [id=" + id + ", empId=" + empId + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", mobileNo=" + mobileNo + ", emailId=" + emailId + ", dob=" + dob + ", doj=" + doj + ", emergencyNo="
 				+ emergencyNo + ", aadharNo=" + aadharNo + ", roleId=" + roleId + ", shiftId=" + shiftId + ", password="
-				+ password + ", status=" + status + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
-				+ ", role=" + role + ", shift=" + shift + "]";
+				+ password + ", npassword=" + npassword + ", cpassword=" + cpassword + ", status=" + status
+				+ ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", role=" + role + ", shift="
+				+ shift + "]";
 	}
 
+
+
+	
 
 
 

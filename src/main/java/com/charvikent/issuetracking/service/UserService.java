@@ -57,9 +57,7 @@ public class UserService {
 		String mbnum=user.getMobileNo();
 		userDao.saveUser(user);
 		logger.info("Sending message.......");
-		smsTemplate.sendSMS(msg,mbnum);
-		
-		
+		smsTemplate.sendSMS(msg,mbnum);	
 	}
 	
 	public List<User> getAllUsers()
@@ -199,12 +197,12 @@ public boolean deleteUser(Integer id,String status) {
 
 	}
 
-	/*public void updatePassword(User user) {
+	public void updatePassword(User user) {
 
 		userDao.updatePassword(user);
 
 	}
-*/
+
 	/*public Map<Integer, String> getUserName()
 	{
 		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -313,6 +311,16 @@ public boolean deleteUser(Integer id,String status) {
 	public User checkUserExistOrNotbyEmailId(String emailid) {
 		
 		return userDao.checkUserExistOrNotbyEmailId(emailid);
+	}
+
+	public User checkUserExistOrNotbyMobile(String mobileNo) {
+		// TODO Auto-generated method stub
+		return userDao.checkUserExistOrNotbyMobile(mobileNo);
+	}
+
+	public User checkUserExistOrNotbyMobileOnEdit(String mobileNo, String editFieldsId) {
+		// TODO Auto-generated method stub
+		return  userDao.checkUserExistOrNotbyMobileOnEdit(editFieldsId,mobileNo);
 	}
 
 	/*public User getUserDesignationById(Integer id) {

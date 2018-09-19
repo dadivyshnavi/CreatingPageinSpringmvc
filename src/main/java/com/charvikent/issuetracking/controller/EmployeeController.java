@@ -11,10 +11,12 @@ import javax.validation.Valid;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -204,38 +206,43 @@ public class EmployeeController {
 	}
 
 
-	/*@RequestMapping("/changePassword")
+	@RequestMapping("/changePassword")
 	public String changePasswordHome(@ModelAttribute("changePassword") User user){
 
 		return "changePassword";
 
 	}
 	@RequestMapping(value="/changePassword", method= RequestMethod.POST )
-	public String changePassword(@ModelAttribute("changePassword") User user,RedirectAttributes redir,HttpServletRequest request){
+	public  @ResponseBody String changePassword(@ModelAttribute("changePassword") User user,RedirectAttributes redir,HttpServletRequest request){
 
-		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		//String id=String.valueOf(objuserBean.getId());
 
 		//User objuserBean = (User) session.getAttribute("cacheUserBean");
 
-		User users = userService.getUserById(objuserBean.getId());
-		if(users.getPassword().equals(user.getPassword())) {
-
-			users.setPassword(user.getPassword());
-			userService.updatePassword(users);
-			redir.addFlashAttribute("msg", "Password Updated Successfully");
-			redir.addFlashAttribute("cssMsg", "warning");
-			return "redirect:changePassword";
-		}else {
-			request.setAttribute("msg", "You Entered Wrong Password");
-			request.setAttribute("cssMsg", "warning");
-			return "changePassword";
+		User users = userService.getUserById(user.getId());
+		/*if(!(users.getPassword().equals(user.getNpassword()))) 
+		{
+			if(users.getPassword().equals(user.getPassword())) {*/
+				users.setPassword(user.getNpassword());
+				userService.updatePassword(users);
+				
+				return "Password Updated successfully";
+			/*}
+			else 
+			{
+				request.setAttribute("msg", "You Entered Wrong Password");
+				request.setAttribute("cssMsg", "danger");
+				return "redirect:changePassword";
+			}
 		}
-
-
-
+		else 
+		{
+			redir.addFlashAttribute("msg", "Please don't use previous password");
+			redir.addFlashAttribute("cssMsg", "warning");
+			return "redirect:changePassword";	
+		}*/
 	}
-*/
 
 	/*@RequestMapping("/editProfile")
 	public String editProfileHome(@ModelAttribute("editProfile") User user,Model model){
@@ -359,7 +366,36 @@ public class EmployeeController {
 						return false;
 				} 
 
+	@RequestMapping(value = "/checkUserExst", method = RequestMethod.POST)
+	public @ResponseBody  Boolean checkCustomerExistence(@Validated @ModelAttribute  User user,Model model,HttpServletRequest request) throws IOException 
+	{
+		/*LOGGER.debug("Calling  checkCustExst at controller");*/
+		System.out.println("enter to checkUserExst");
 		
+		String mobileNo=request.getParameter("mobileNo");
+		
+		String editFieldsId=request.getParameter("editFields");
+		User custbean1 =null;
+		if(editFieldsId.equals("0"))
+		{
+		
+			custbean1 = userService.checkUserExistOrNotbyMobile(mobileNo);
+		}
+		else
+		{
+			custbean1 =userService.checkUserExistOrNotbyMobileOnEdit(mobileNo,editFieldsId);
+			
+		}
+		
+		if(custbean1 != null)
+		{
+			return true;
+		}
+		else
+		
+		return false;
+		
+	}		
 	}
 	
 

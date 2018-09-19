@@ -8,13 +8,13 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>KPTMS</title>
-    <link rel="shortcut icon" href="img/klogo.png"/>
+    <title>CharvikentEMP</title>
+    <link rel="shortcut icon" href="img/charvikent.png"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="assets/css/styles.css">
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 <!--     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'> -->
@@ -59,7 +59,7 @@
 
 <body class="focusedform">
 <div class="verticalcenter">
-<div><img src="assets/img/klogo.png" style="width:250px;" class="img-responsive"></div>
+<div><img src="assets/img/charvikent.png" style="width:250px;" class="img-responsive"></div>
 <!-- 	<h1 align="center">KHAIBAR GAS</h1> -->
 	<div class="panel panel-primary">
 		<form  action=login class="form-horizontal" method="POST"  style="margin-bottom: 0px !important;">

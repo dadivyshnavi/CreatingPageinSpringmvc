@@ -48,7 +48,7 @@ public class UserDao {
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers()
 	{
-		String hql ="select ku.id,ku.status,ku.emp_id,ku.first_name,ku.last_name,ku.email_id,ku.mobile_no,ku.aadhar_no,ku.emergency_no,ku.dob,ku.doj,ku.role_id,ku.shift_id,r.designame as role,s.shift from kpusers ku,roles r,shifts s where ku.role_id=r.id and ku.shift_id=s.id and ku.status='1'";
+		String hql ="select e.id,e.status,e.emp_id,e.first_name,e.last_name,e.email_id,e.mobile_no,e.aadhar_no,e.emergency_no,e.dob,e.doj,e.role_id,e.shift_id,r.designame as role,s.shift from employee e,roles r,shifts s where e.role_id=r.id and e.shift_id=s.id and e.status='1'";
 		RowMapper<User> rowMapper = new BeanPropertyRowMapper<User>(User.class);
 		 
 	      return  this.jdbcTemplate.query(hql, rowMapper);
@@ -116,75 +116,7 @@ public class UserDao {
 			return delete;
 		}
 
-/*	public void deleteUser(Integer id,String enabled) {
 
-		User user=getUserById(id);
-		User users= new User();
-
-		//users.setId(id);
-
-
-		users.setPassword(user.getPassword());
-		users.setDepartment(user.getDepartment());
-		users.setDesignation(user.getDesignation());
-		users.setEmail(user.getEmail());
-
-		if(enabled.equals("Active")) {
-			users.setEnabled("0");
-			//enabled="0";
-
-		}else {
-			users.setEnabled("1");
-			//enabled="1";
-		}
-		//users.setEnabled(user.getEnabled());
-		users.setFirstname(user.getFirstname());
-		users.setLastname(user.getLastname());
-		users.setMobilenumber(user.getMobilenumber());
-		users.setUsername(user.getUsername());
-		users.setReportto(user.getReportto());
-
-		em.merge(users);
-
-		em.flush();
-
-		String sql="update User u set u.enabled='"+enabled+"' where u.id='"+id+"' ";
-		users.setEnabled(user.getEnabled());
-		//String sql="update User u set u.enabled=? where u.id=?";
-
-		//Query query = em.createQuery(sql).setParameter("enabled",enabled ).setParameter("id", id);
-	Query qry = sessionFactory.;
-	qry.setParameter(0,enabled);
-	qry.setParameter(1, id);
-    int res = qry.executeUpdate();
-
-		//query.executeUpdate();
-		String hql = "UPDATE Buchung as b set " +
-		          "STORNO = :Storno," +
-		          "NAME = :Name " +
-		           ......
-		          "where ID = :BuchungID";
-
-		Query qr = session.createSQLQuery(hql);
-
-		qr.setParameter("Storno","sto_value");
-
-		qr.setParameter("Name","name_value");
-
-		...
-
-		qr.executeUpdate();
-
-		// int result = em.createQuery("UPDATE User u set u.enabled='\"+enabled+\"' where u.id='\"+id+\"' ").executeUpdate();
-
-	 //User result=
-
-		//em.flush();
-
-
-
-	}
-*/
 	public void updateUser(User user) {
 		User users=getUserById(user.getId());
 		users.setEmpId(user.getEmpId());
@@ -198,6 +130,7 @@ public class UserDao {
 		users.setDoj(user.getDoj());
 		users.setRoleId(user.getRoleId());
 		users.setShiftId(user.getShiftId());
+		users.setPassword(user.getPassword());
 		em.merge(users);
 		em.flush();
 	}
@@ -327,13 +260,14 @@ public class UserDao {
 
 	public List<User> getInActiveList()
 	{
-		String hql ="select ku.id,ku.status,ku.emp_id,ku.first_name,ku.last_name,ku.email_id,ku.mobile_no,ku.aadhar_no,ku.emergency_no,ku.dob,ku.doj,ku.role_id,ku.shift_id,r.designame as role,s.shift from kpusers ku,roles r,shifts s where ku.role_id=r.id and ku.shift_id=s.id and ku.status='0'";
+		String hql ="select e.id,e.status,e.emp_id,e.first_name,e.last_name,e.email_id,e.mobile_no,e.aadhar_no,e.emergency_no,e.dob,e.doj,e.role_id,e.shift_id,r.designame as role,s.shift from employee e,roles r,shifts s where e.role_id=r.id and e.shift_id=s.id and e.status='0'";
 		
 		RowMapper<User> rowMapper = new BeanPropertyRowMapper<User>(User.class);
 		 
 	      return  this.jdbcTemplate.query(hql, rowMapper);
 	}
 
+	@SuppressWarnings("unchecked")
 	public User checkUserExistOrNotbyEmailId(String emailid) {
 		
 		String hql ="from User where emailId='"+emailid+"'";
@@ -347,6 +281,31 @@ public class UserDao {
 		return null;
 			
 		}
+
+	@SuppressWarnings("unchecked")
+	public User checkUserExistOrNotbyMobile(String mobileNo) {
+		String hql ="from User where mobileNo='"+mobileNo+"'";
+		Query query =em.createQuery(hql);
+		List<User> usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
+	}
+
+	@SuppressWarnings("unchecked")
+	public User checkUserExistOrNotbyMobileOnEdit(String editFieldsId, String mobileNo) {
+		String hql ="from User where id <>'"+editFieldsId+"' and  mobileNo='"+mobileNo+"'";
+		Query query =em.createQuery(hql);
+		List<User> usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
+
+	}
+	
+	
 	}
 
 	

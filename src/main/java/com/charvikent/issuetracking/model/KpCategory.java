@@ -16,8 +16,8 @@ import org.hibernate.annotations.UpdateTimestamp;
  * @author Charvik101
  *
  */
-@Entity
-@Table(name = "kpproductcategory")
+/*@Entity
+@Table(name = "kpproductcategory")*/
 public class KpCategory {
 
 	@Id

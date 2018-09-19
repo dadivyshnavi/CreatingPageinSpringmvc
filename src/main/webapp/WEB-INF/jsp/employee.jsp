@@ -87,6 +87,7 @@
 									<label class="col-md-3 control-label no-padding-right">Mobile No<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="mobileNo" class="form-control validate numericOnly" placeholder="Enter Mobile Number" maxlength="10" />
+										<span id="errorMobileMsg" style="color:red;"></span>
 									</div>
 								</div></div>
 								<div class="col-md-6">
@@ -194,13 +195,13 @@
 						</div>
 					</div>
       <div class="modal-body">
-        <input type="hidden" id="userid" />
+        <input type="hidden" id="empId" />
 				<div class="col-md-12">
 				<p id="passwordErrormsg" style="color:red;"></p>
 					<div class="form-group" id="passwordDiv">
 						<label class="col-md-4 control-label no-padding-left">New Password<span class="impColor">*</span></label>
 						<div class="col-md-6">
-							<input type="password" id="npassword" class="form-control"	placeholder="Enter  New Password" />
+							<input type="password" id="npassword" class="form-control"	placeholder="Enter  New Password" maxlength="6"/>
 						</div>
 						<div class="col-md-2"></div>
 					</div>
@@ -210,7 +211,7 @@
 					<div class="form-group" id="passwordDiv">
 						<label class="col-md-4 control-label no-padding-left">Confirm Password<span class="impColor">*</span></label>
 						<div class="col-md-6">
-							<input type="password" id="cpassword" class="form-control"	placeholder="Re-Enter New Password" />
+							<input type="password" id="cpassword" class="form-control"	placeholder="Re-Enter New Password" maxlength="6" />
 						</div>
 						<div class="col-md-2"></div>
 					</div>
@@ -255,6 +256,7 @@ $('#doj').datetimepicker({
 
 });
 
+var editFields=0;
 var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
 	displayTable(listOrders1);
@@ -296,7 +298,8 @@ function displayTable(listOrders) {
 function changePasswordModal(){
 
 	
-	var id=$("#userid").val();
+    
+	var id=$("#empId").val();
 	var npassword=$("#npassword").val();
 	var cpassword=$("#cpassword").val();
 	
@@ -310,45 +313,44 @@ function changePasswordModal(){
 		formData.append('id', id);
 		formData.append('npassword', npassword);
 		
-		$.fn.makeMultipartRequest('POST', 'adminChangePassword', false,
+		$.fn.makeMultipartRequest('POST', 'changePassword', false,
 				formData, false, 'text', function(data) {
 			
 			$("#passwordModal").modal('toggle');
-			/* var jsonobj = $.parseJSON(data);
-			var alldata = jsonobj.allOrders1;
-			displayTable(alldata);
-			console.log(jsonobj.allOrders1); */
-			
-			
-			$.each(JSON.parse(data),function(key,value) {
-				console.log(value);
-				//alert(value);
+		 
 				$("#npassword").val('');
 	           $("#cpassword").val('');
+	           $("#msg1").text(data);
 				$(".msgcss1").css('visibility', 'visible');
-				$(".msgcss1").show();
-				$("#msg1").text(value);
+				
+				$(".msgcss1").show();				
 				$("#msg1").fadeOut(5000);
 				
-			});
+		
 			
 				});
 		
 	}else{
 		$("#passwordErrormsg").text("Password Doesn't match");
+		  setTimeout(function(){ $("#passwordErrormsg").text(""); }, 3000);
+		
+		$("#npassword").val('');
+        $("#cpassword").val('');
 	}
 		
 }
 var userData="";
 function getPasswordModal(id)
 {
-	userData=$('#userid').val(id);
+	userData=$('#empId').val(id);
+	makeEmptyPasswordModal()
 	$('#password_modal').trigger('click');
 }
 
 
 function editEmployee(id) {
-	
+	editFields = id;
+	//$("#passwordDiv").css("display","none");
 	$("#id").val(serviceUnitArray[id].id);
 	
 	$("#empId").val(serviceUnitArray[id].empId);
@@ -364,13 +366,13 @@ function editEmployee(id) {
 	$("#shiftId").val(serviceUnitArray[id].shiftId);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
-	/* document.getElementById("username").readOnly  = true;
+	 document.getElementById("username").readOnly  = true;
 	//document.querySelector("password").required = false;
     $("#passwordDiv").hide();
     var idArray = $.makeArray($('.validate').map(function() {
     	return this.id;
     })); 
-    console.log(idArray);*/
+    console.log(idArray);    
 } 
 
 function deleteEmployee(id,status){
@@ -473,10 +475,63 @@ function inactiveData() {
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
-			console.log(jsonobj.allOrders1);
+			toolTips();
+			/* console.log(jsonobj.allOrders1); */
 				});
 		
 }
+ 
+ $('#mobileNo').focusout(function(){
+	 var mobileNo=$('#mobileNo').val();
+
+	 	$.ajax({
+	 				type : "POST",
+	 				url : "checkUserExst",
+	 				data :"mobileNo="+mobileNo+"&editFields="+editFields,
+	 				dataType : "text",
+	 				beforeSend : function() {
+	 		             $.blockUI({ message: 'Please wait' });
+	 		          }, 
+	 				success : function(data) {
+	 					if(data ==='true')
+	 						{
+	 						//alert(data);
+	 	 					$('#mobileNo').css('border-color', 'red');
+	 						$('#errorMobileMsg').text( "* Mobile Number already exists") ;
+	 						setTimeout(function() { $("#errorMobileMsg").text(''); }, 3000);
+	 						 $('#submit1').prop('disabled', true);
+	 						 
+	 	 					subValidation =false;
+	 	 					
+	 	 					event.preventDefault();
+	 						}
+	 					 else
+	 						{
+	 						$('#mobileNo').css('border-color', 'none');
+	 						 $('#submit1').prop('disabled', false);
+	 						 subValidation =true;
+	 						 
+	 						} 
+	 					
+	 				},
+	 				complete: function () {
+	 		            
+	 		            $.unblockUI();
+	 		       },
+	 				error :  function(e){$.unblockUI();console.log(e);}
+	 				
+	 			});
+	 	
+	 		 
+	 	  }); 
+ function makeEmptyPasswordModal()
+ {
+ 	
+ 	$('#npassword').val("");
+ 	$('#npassword').css('border-color', 'none');
+ 	$('#cpassword').val("");
+ 	$('#cpassword').css('border-color', 'none');
+ }
 
  $("#pageName").text("Employee Master");
 $(".employee").addClass("active"); 
