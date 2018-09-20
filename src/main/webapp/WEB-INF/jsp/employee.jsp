@@ -47,7 +47,7 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h4>Add Employee</h4>
-					</div>
+					</div><br>
 					
 					<form:form modelAttribute="userForm" action="employee" class="form-horizontal " method="Post">
 	                  <form:hidden path="id"/>
@@ -60,21 +60,21 @@
 								</div>
 								
 								</div> --%>
-								<div class="col-md-6"><br>
+								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Employee Id<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="empId" class="form-control validate numericOnly" placeholder="Enter First Name" maxlength="5"/>
 									</div>
 								</div></div>
-								<div class="col-md-6"><br>
+								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">First Name<span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="firstName" class="form-control validate onlyCharacters" placeholder="Enter First Name"/>
 									</div>
 								</div></div>
-								<div class="col-md-6"><br>
+								<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Last Name<span class="impColor">*</span></label>
 						<div class="col-md-6">
@@ -147,15 +147,17 @@
 							<div class="col-md-6">
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-3 control-label">Date Of Birth<span class="impColor">*</span></label>
-							<form:input type="text" path="dob" class="col-xs-10 col-sm-5 validate" />
-							</div>
+							<div class="col-md-6">
+							<form:input type="text" path="dob" class="form-control  validate" />
+							</div></div>
 							</div>
 							<div class="col-md-6">
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-3 control-label">Date of Joining<span class="impColor">*</span>
 							</label>
-							<form:input type="text" path="doj" class="col-xs-10 col-sm-5 validate" />
-							</div>
+							<div class="col-md-6">
+							<form:input type="text" path="doj" class="form-control validate" />
+							</div></div>
 							</div>
 								
 								
