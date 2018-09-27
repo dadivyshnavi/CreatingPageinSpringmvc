@@ -15,7 +15,8 @@ public class EmployeeAction
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer  id;	
-	@CreationTimestamp private Date actionTime;
+	@CreationTimestamp 
+	private Date actionTime;
 	private String empId;
 	private String actionId;
 	private String shiftId;

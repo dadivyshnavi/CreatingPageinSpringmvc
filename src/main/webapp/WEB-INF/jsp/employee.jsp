@@ -352,7 +352,6 @@ function getPasswordModal(id)
 
 function editEmployee(id) {
 	editFields = id;
-	//$("#passwordDiv").css("display","none");
 	$("#id").val(serviceUnitArray[id].id);
 	
 	$("#empId").val(serviceUnitArray[id].empId);

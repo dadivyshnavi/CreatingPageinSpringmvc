@@ -322,6 +322,21 @@ public boolean deleteUser(Integer id,String status) {
 		// TODO Auto-generated method stub
 		return  userDao.checkUserExistOrNotbyMobileOnEdit(editFieldsId,mobileNo);
 	}
+	
+	
+	
+	
+	
+	public User getCurrentUser() {
+		
+		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		return objuserBean;
+		
+	}
+	
+	
+	
 
 	/*public User getUserDesignationById(Integer id) {
 		User obj=userDao.getUserDesignationById(id);

@@ -306,6 +306,22 @@ public class UserDao {
 	}
 	
 	
+	public User checkUserShiftByHours(String actionTime) {
+		
+		String hql="select TIMESTAMPDIFF(hour, now(), action_time) from employeetracking where action_id='1' and emp_id='11111' order by action_time limit 1";
+		
+		
+		return null;
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
 	}
 
 	

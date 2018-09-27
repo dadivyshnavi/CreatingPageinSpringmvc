@@ -1,6 +1,9 @@
 package com.charvikent.issuetracking.controller;
 
 import java.io.IOException;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -11,7 +14,6 @@ import javax.validation.Valid;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -25,8 +27,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.charvikent.issuetracking.config.MailTemplate;
 import com.charvikent.issuetracking.config.SendSMS;
+import com.charvikent.issuetracking.dao.EmployeeActionDao;
 import com.charvikent.issuetracking.dao.UserDao;
-import com.charvikent.issuetracking.model.PasswordDetails;
+import com.charvikent.issuetracking.model.EmployeeAction;
 import com.charvikent.issuetracking.model.User;
 import com.charvikent.issuetracking.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,6 +40,8 @@ public class EmployeeController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	EmployeeActionDao employeeActionDao;
 
 
 	@Autowired
@@ -395,7 +400,80 @@ public class EmployeeController {
 		
 		return false;
 		
-	}		
+	}	
+	
+	
+	
+	@RequestMapping(value = "/checkinout" ,method = RequestMethod.POST)
+	public @ResponseBody String saveCheckInAndOutAction(HttpServletRequest request) throws IOException, MessagingException 
+				{
+		
+		          String actionId = request.getParameter("actionid");
+		          
+		         User currentUser = userService.getCurrentUser();
+		        String currentShiftId =getCurrentShiftId();
+		         
+		         EmployeeAction empAction = new EmployeeAction();
+		         
+		         empAction.setActionId(actionId);
+		         empAction.setEmpId(currentUser.getEmpId());
+		         empAction.setShiftId(currentShiftId);
+				    if(actionId.equals("1")) 
+				   {	 
+				         try {
+							employeeActionDao.saveEmployeeAction(empAction);
+						} catch (Exception e) {
+							e.printStackTrace();
+							return "error";	
+						}
+				         return "Checked in Successfully";
+				    }    
+				    try {
+						employeeActionDao.saveEmployeeAction(empAction);
+					} catch (Exception e) {
+						e.printStackTrace();
+						return "error";	
+					}
+				   return "Checked out Successfully";	
+				
+				}
+				
+	
+	private String getCurrentShiftId() {
+		
+		String shiftid ="";
+			/*LocalTime ldt = java.time.LocalTime.now();
+
+		    ldt = ldt.truncatedTo(ChronoUnit.HOURS);
+		    System.out.println(ldt);
+		    */
+		    Calendar now = Calendar.getInstance();
+		    System.out.println(now.get(Calendar.HOUR_OF_DAY) + ":" + now.get(Calendar.MINUTE));
+		    
+		    int hour =now.get(Calendar.HOUR_OF_DAY);
+		    
+		    
+		    if(hour >= 7  &&  hour <=9)
+		    {
+		    	System.out.println("A");
+		    	shiftid ="1";
+		    }
+		    else if(hour >= 9 && 2 <= hour)
+		    {
+		    	System.out.println("C");
+		    	shiftid ="3";
+		    }
+		    else 
+		    {
+		    	System.out.println("B");
+		    	shiftid ="2";
+		    }
+		return  shiftid;
 	}
+ 
+		
+} 
+	
+
 	
 
