@@ -43,7 +43,7 @@ $.ajax({
        }, 
 		success : function(data) {
 			alert(data)
-			 /*  if(actionid==1)
+			  /*  if(actionid==1)
 				{
 				$('#Checkin').prop('disabled', false);
 				$('#Checkout').prop('disabled', true);
@@ -52,7 +52,7 @@ $.ajax({
 				{
 				$('#Checkin').prop('disabled', true);
 				$('#Checkout').prop('disabled', false);
-				}   */
+				}    */
 			
 		},
 		complete: function () {
@@ -63,8 +63,32 @@ $.ajax({
 		
 	});
 
+/* $('#Checkout').focusout(function(){
+	 var actionTime=$('#Checkout').val();
 
-
+	 	$.ajax({
+	 				type : "POST",
+	 				url : "workingtime",
+	 				data :"Checkout="+Checkout,
+	 				dataType : "text",
+	 				beforeSend : function() {
+	 		             $.blockUI({ message: 'Please wait' });
+	 		          }, 
+	 				success : function(data) {
+	 					alert(data)
+	 					
+	 				},
+	 				complete: function () {
+	 		            
+	 		            $.unblockUI();
+	 		       },
+	 				error :  function(e){$.unblockUI();console.log(e);}
+	 				
+	 			});
+	 	
+	 		 
+	 	  }); 
+ */
 
 
 

@@ -82,7 +82,7 @@
 				<div class="col-sm-12">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input type="text" id="username" name= "username" class="form-control validate"  placeholder="Username"/>
+						<input type="text" id="username" name= "username" class="form-control validate"  placeholder="Username" maxlength="10"/>
 					</div>
 				</div>
 			</div>
@@ -90,7 +90,7 @@
 				<div class="col-sm-12">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-						<input type="password" id="password" name="password" class="form-control validate"  placeholder="Password"/>
+						<input type="password" id="password" name="password" class="form-control validate"  placeholder="Password" maxlength="6"/>
 					</div>
 				</div>
 			</div>

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 import com.charvikent.issuetracking.config.KptsUtil;
 import com.charvikent.issuetracking.model.User;
 import com.charvikent.issuetracking.model.UserLogs;
+import com.charvikent.issuetracking.model.EmployeeAction;
 import com.charvikent.issuetracking.model.Role;
 import com.charvikent.issuetracking.model.shift;
 
@@ -306,20 +307,7 @@ public class UserDao {
 	}
 	
 	
-	public User checkUserShiftByHours(String actionTime) {
-		
-		String hql="select TIMESTAMPDIFF(hour, now(), action_time) from employeetracking where action_id='1' and emp_id='11111' order by action_time limit 1";
-		
-		
-		return null;
-		
-		
-		
-		
-		
-		
-		
-	}
+	
 	
 	
 	}

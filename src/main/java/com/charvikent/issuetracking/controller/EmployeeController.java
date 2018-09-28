@@ -49,11 +49,11 @@ public class EmployeeController {
 
 	@Autowired
 	HttpSession session;
-
-
+	
+	
 	private String password;
 	
-
+	
 	@Autowired
 	private SendSMS smsTemplate;
 	@Autowired MailTemplate mailTemplate;
@@ -408,6 +408,8 @@ public class EmployeeController {
 	public @ResponseBody String saveCheckInAndOutAction(HttpServletRequest request) throws IOException, MessagingException 
 				{
 		
+		String msg="";
+		
 		          String actionId = request.getParameter("actionid");
 		          
 		         User currentUser = userService.getCurrentUser();
@@ -418,24 +420,37 @@ public class EmployeeController {
 		         empAction.setActionId(actionId);
 		         empAction.setEmpId(currentUser.getEmpId());
 		         empAction.setShiftId(currentShiftId);
-				    if(actionId.equals("1")) 
-				   {	 
-				         try {
-							employeeActionDao.saveEmployeeAction(empAction);
-						} catch (Exception e) {
-							e.printStackTrace();
-							return "error";	
-						}
-				         return "Checked in Successfully";
-				    }    
-				    try {
-						employeeActionDao.saveEmployeeAction(empAction);
-					} catch (Exception e) {
-						e.printStackTrace();
-						return "error";	
-					}
-				   return "Checked out Successfully";	
-				
+		         
+		         Object actionTime=employeeActionDao.getTimeDiffereneOnCheckOut(empAction);
+		         
+		         System.out.println(actionTime);
+		         
+		        int checkinaction=Integer.parseInt((String) actionTime);
+		         
+		         
+		         if(actionId.equals("1"))
+		        	 
+		         {
+		        	 employeeActionDao.saveEmployeeAction(empAction);
+		        	 msg ="checkin successfully";
+		         }
+		         else
+		         {
+		        	 if(checkinaction >8)
+		        	 {
+		        		 employeeActionDao.saveEmployeeAction(empAction);
+		        		 msg ="checkout successfully";
+		        	 }
+		        	 else
+		        		 msg ="8 hours not completed";
+		        	 
+		         }
+		         
+		         return msg;
+		         
+		         
+		         
+				 
 				}
 				
 	
@@ -458,7 +473,7 @@ public class EmployeeController {
 		    	System.out.println("A");
 		    	shiftid ="1";
 		    }
-		    else if(hour >= 9 && 2 <= hour)
+		    else if(hour >= 9 && hour <= 14)
 		    {
 		    	System.out.println("C");
 		    	shiftid ="3";
@@ -471,8 +486,29 @@ public class EmployeeController {
 		return  shiftid;
 	}
  
+	/*@RequestMapping(value = "/workingtime" ,method = RequestMethod.POST)
+	public @ResponseBody String checkShiftTimeInHours(EmployeeAction employeeAction,HttpServletRequest request) throws IOException, MessagingException 
+	{
+		//String actionTime = request.getParameter("actiontime");
+        
+		Object actionTime=employeeActionDao.getTimeDiffereneOnCheckOut(employeeAction);
 		
-} 
+		System.out.println(actionTime);
+		
+		
+		
+		
+		
+		
+		
+		return null;
+		
+	}*/
+		
+		
+	}
+	
+
 	
 
 	

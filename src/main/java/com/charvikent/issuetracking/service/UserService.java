@@ -23,6 +23,7 @@ import com.charvikent.issuetracking.config.MailTemplate;
 import com.charvikent.issuetracking.config.SendSMS;
 import com.charvikent.issuetracking.dao.UserDao;
 import com.charvikent.issuetracking.dao.passwordDao;
+import com.charvikent.issuetracking.model.EmployeeAction;
 import com.charvikent.issuetracking.model.PasswordDetails;
 import com.charvikent.issuetracking.model.User;
 import com.charvikent.issuetracking.model.Role;
@@ -90,41 +91,7 @@ public class UserService {
 	}
 
 
-	/*public Map<Integer, String> getDepartments()
-	{
-		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
-		
-		Map<Integer, String> deptsMap = new LinkedHashMap<Integer, String>();
-		
-		//List<Department> departmentList= userDao.getDepartmentslist();
-		if(authorities.contains(new SimpleGrantedAuthority("ROLE_MASTERADMIN")))
-		{
-		for(Department bean: departmentList){
-			deptsMap.put(bean.getId(), bean.getName());
-		}
-
 	
-		return deptsMap;
-		}
-		else
-		{
-			for(Department bean: departmentList){
-				
-				if(bean.getKpOrgId().equals(objuserBean.getEmpId()))
-				{
-				deptsMap.put(bean.getId(), bean.getName());
-				}
-			}
-			
-			return deptsMap;
-			
-		}
-		
-
-	}*/
-
 
 	public Map<Integer, String> getRoles()
 	{
@@ -203,82 +170,7 @@ public boolean deleteUser(Integer id,String status) {
 
 	}
 
-	/*public Map<Integer, String> getUserName()
-	{
-		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
-		
-		Map<Integer, String>userMapForMaster = new LinkedHashMap<Integer, String>();
-		
-		List<User> rolesList= userDao.getUserNames();
-			if(authorities.contains(new SimpleGrantedAuthority("ROLE_MASTERADMIN")))
-			{
-		for(User bean: rolesList){
-			if(bean.getId()!=(objuserBean.getId()))
-			{
-				userMapForMaster.put(bean.getId(), bean.getUsername());
-			}
-		
-
-	} 
-		return userMapForMaster;
-		}
-		else
-		{
-			for(User bean: rolesList){
-				if(bean.getEmpId().equals(objuserBean.getEmpId()))
-				{
-				if(bean.getId()!=(objuserBean.getId()))
-				{
-					userMapForMaster.put(bean.getId(), bean.getUsername());
-				}
-				}
-			}
-			
-		
-			return userMapForMaster;
-		}
-
-	}
 	
-
-
-	public Map<Integer, String> getReportToUsers()
-	{
-		User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Collection<? extends GrantedAuthority> authorities =authentication.getAuthorities();
-		
-		Map<Integer, String>userMapForMaster = new LinkedHashMap<Integer, String>();
-		
-		List<User> rolesList= userDao.getUserNames();
-			if(authorities.contains(new SimpleGrantedAuthority("ROLE_MASTERADMIN")))
-			{
-		for(User bean: rolesList){
-				userMapForMaster.put(bean.getId(), bean.getUsername());
-		
-
-	} 
-		return userMapForMaster;
-		}
-		else
-		{
-			for(User bean: rolesList){
-				if(bean.getEmpId().equals(objuserBean.getEmpId()))
-				{
-				
-					userMapForMaster.put(bean.getId(), bean.getUsername());
-				}
-			}
-			
-		
-			return userMapForMaster;
-		}
-
-	}
-
-*/
 	public void setLoginRecord(Integer id,String str) {
 
 		userDao.setLoginRecord(id,str);
@@ -299,7 +191,6 @@ public boolean deleteUser(Integer id,String status) {
 	}*/
 
 	public User getUserByObject(User user) {
-		// TODO Auto-generated method stub
 	return userDao.getUserByObject(user);
 	}
 
@@ -314,12 +205,10 @@ public boolean deleteUser(Integer id,String status) {
 	}
 
 	public User checkUserExistOrNotbyMobile(String mobileNo) {
-		// TODO Auto-generated method stub
 		return userDao.checkUserExistOrNotbyMobile(mobileNo);
 	}
 
 	public User checkUserExistOrNotbyMobileOnEdit(String mobileNo, String editFieldsId) {
-		// TODO Auto-generated method stub
 		return  userDao.checkUserExistOrNotbyMobileOnEdit(editFieldsId,mobileNo);
 	}
 	
@@ -334,14 +223,12 @@ public boolean deleteUser(Integer id,String status) {
 		return objuserBean;
 		
 	}
+
+	
 	
 	
 	
 
-	/*public User getUserDesignationById(Integer id) {
-		User obj=userDao.getUserDesignationById(id);
-		return obj;
-	}
-*/
+	
 
 }
