@@ -410,7 +410,7 @@ public class EmployeeController {
 		
 		String msg="";
 		
-		          String actionId = request.getParameter("actionid");
+		         String actionId = request.getParameter("actionid");
 		          
 		         User currentUser = userService.getCurrentUser();
 		        String currentShiftId =getCurrentShiftId();
@@ -420,13 +420,7 @@ public class EmployeeController {
 		         empAction.setActionId(actionId);
 		         empAction.setEmpId(currentUser.getEmpId());
 		         empAction.setShiftId(currentShiftId);
-		         
-		         Object actionTime=employeeActionDao.getTimeDiffereneOnCheckOut(empAction);
-		         
-		         System.out.println(actionTime);
-		         
-		        int checkinaction=Integer.parseInt((String) actionTime);
-		         
+		      
 		         
 		         if(actionId.equals("1"))
 		        	 
@@ -436,22 +430,25 @@ public class EmployeeController {
 		         }
 		         else
 		         {
-		        	 if(checkinaction >8)
+		        	 int actionTime=employeeActionDao.getTimeDiffereneOnCheckOut(empAction);
+		        	 System.out.println(actionTime);
+		        	 int checkinaction=(Integer) actionTime;
+		        	 
+		        	 if(checkinaction > 8)
 		        	 {
+		        		
 		        		 employeeActionDao.saveEmployeeAction(empAction);
 		        		 msg ="checkout successfully";
 		        	 }
 		        	 else
+		        	 {
 		        		 msg ="8 hours not completed";
 		        	 
+		        	 }
 		         }
-		         
 		         return msg;
 		         
-		         
-		         
-				 
-				}
+		         }
 				
 	
 	private String getCurrentShiftId() {
@@ -468,7 +465,7 @@ public class EmployeeController {
 		    int hour =now.get(Calendar.HOUR_OF_DAY);
 		    
 		    
-		    if(hour >= 7  &&  hour <=9)
+		    if(hour >= 7  &&  hour < 9)
 		    {
 		    	System.out.println("A");
 		    	shiftid ="1";
@@ -486,25 +483,7 @@ public class EmployeeController {
 		return  shiftid;
 	}
  
-	/*@RequestMapping(value = "/workingtime" ,method = RequestMethod.POST)
-	public @ResponseBody String checkShiftTimeInHours(EmployeeAction employeeAction,HttpServletRequest request) throws IOException, MessagingException 
-	{
-		//String actionTime = request.getParameter("actiontime");
-        
-		Object actionTime=employeeActionDao.getTimeDiffereneOnCheckOut(employeeAction);
-		
-		System.out.println(actionTime);
-		
-		
-		
-		
-		
-		
-		
-		return null;
-		
-	}*/
-		
+
 		
 	}
 	
