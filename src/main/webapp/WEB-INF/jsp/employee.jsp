@@ -473,7 +473,7 @@ function inactiveData() {
 		var formData = new FormData();
 		formData.append('status', status);
 		
-		$.fn.makeMultipartRequest('POST', 'inActiveEmp', false,
+		$.fn.makeMultipartRequest('POST', 'inActiveUser', false,
 				formData, false, 'text', function(data) {
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;

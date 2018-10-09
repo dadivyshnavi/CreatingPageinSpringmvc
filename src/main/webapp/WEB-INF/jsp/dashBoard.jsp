@@ -63,34 +63,6 @@ $.ajax({
 		
 	});
 
-/* $('#Checkout').focusout(function(){
-	 var actionTime=$('#Checkout').val();
-
-	 	$.ajax({
-	 				type : "POST",
-	 				url : "workingtime",
-	 				data :"Checkout="+Checkout,
-	 				dataType : "text",
-	 				beforeSend : function() {
-	 		             $.blockUI({ message: 'Please wait' });
-	 		          }, 
-	 				success : function(data) {
-	 					alert(data)
-	 					
-	 				},
-	 				complete: function () {
-	 		            
-	 		            $.unblockUI();
-	 		       },
-	 				error :  function(e){$.unblockUI();console.log(e);}
-	 				
-	 			});
-	 	
-	 		 
-	 	  }); 
- */
-
-
 
 }
 </script>

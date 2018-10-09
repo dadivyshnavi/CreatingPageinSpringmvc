@@ -11,6 +11,7 @@ import java.util.TreeSet;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -26,7 +27,7 @@ import com.charvikent.issuetracking.model.Role;
 import com.charvikent.issuetracking.model.shift;
 
 @Repository
-
+@Transactional
 public class UserDao {
 
 	@PersistenceContext
@@ -306,7 +307,20 @@ public class UserDao {
 
 	}
 	
-	
+	public void deactiveEmployee(String status,Integer id) 
+	{
+		String sql="update employee set status='"+status+"'where id='"+id+"'";
+		jdbcTemplate.execute(sql);
+		
+	}
+
+	public int getPassword(User user) {
+
+		String sql =" update employee set password ='"+user.getPassword()+"' where id='"+user.getId()+"' order by updated_time desc";	
+		int  result = jdbcTemplate.update(sql);
+		return result; 
+		
+	}
 	
 	
 	
