@@ -322,9 +322,28 @@ public class UserDao {
 		
 	}
 	
-	
-	
+	@SuppressWarnings("unchecked")
+	public User getUserDesignationById(Integer id) 
+	{
+		String hql ="select  e.mobile_no, r.designame from roles r,employee e where e.role_id=r.id and e.id=:id ";
+		User users =new User();
+		try{
+			List<Object[]> rows = em.createNativeQuery(hql).setParameter("id", id).getResultList();	
+		for (Object[] row : rows) {
+			users.setMobileNo((String) row[0]);
+			users.setRole((String) row[1]);		
+		}
 	}
+	catch (Exception e) 
+	{
+		e.printStackTrace();
+	}
+	return  users;
+	}
+}
+
+	
+	
 
 	
 

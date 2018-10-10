@@ -225,7 +225,11 @@ public boolean deleteUser(Integer id,String status) {
 	}
 
 	
-	
+	public User getUserDesignationById(Integer id) 
+	{
+		User obj=userDao.getUserDesignationById(id);
+		return obj;
+	}
 	
 	
 

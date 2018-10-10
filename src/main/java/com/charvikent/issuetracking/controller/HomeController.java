@@ -77,11 +77,11 @@ public class HomeController {
 		return "login";
 	}
 	
-	@RequestMapping("/dashBoard")
+/*	@RequestMapping("/dashBoard")
 	public String showDashboardPage(Model model) {
 		System.out.println("hello world");
 		return "dashBoard";
-	}
+	}*/
 	
 	
 	

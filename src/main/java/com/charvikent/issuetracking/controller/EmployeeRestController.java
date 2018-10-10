@@ -37,7 +37,7 @@ public class EmployeeRestController {
 	@Autowired
 	MailTemplate mailTemplate;
 	
-	@RequestMapping("/dashBoard")
+	@RequestMapping("/Customer")
 	public String showDashboardPage(Model model,HttpServletRequest request) throws JsonProcessingException
 	{
 		LOGGER.debug("Calling dashBoard at controller");

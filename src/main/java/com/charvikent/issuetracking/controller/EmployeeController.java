@@ -298,18 +298,25 @@ public class EmployeeController {
 		{
 			employeeActionDao.saveEmployeeAction(empAction);
 			msg = "checkin successfully";
-		} else {
+		} 
+		else {
+			
 			int actionTime = employeeActionDao.getTimeDiffereneOnCheckOut(empAction);
 			System.out.println(actionTime);
+			
 			int checkinaction = (Integer) actionTime;
 
-			if (checkinaction <= 8) {
+			if (checkinaction >8)
+			{
 
 				employeeActionDao.saveEmployeeAction(empAction);
 				msg = "checkout successfully";
-			} else {
-				msg = "8 hours not completed!!";
+			} 
+			else 
+			{
+				msg = "8 hours not completed";
 
+			     
 			}
 		}
 
