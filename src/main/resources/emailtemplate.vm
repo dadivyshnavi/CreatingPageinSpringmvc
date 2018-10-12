@@ -8,5 +8,5 @@
    you can login using ${mobilenumber} or ${email}
    and password :${password}
   </div>  
-  </body>  ou did not request any registration, ignore this message and nothing will happen.
+  </body>  you did not request any registration, ignore this message and nothing will happen.
   </html> 

@@ -16,6 +16,9 @@ public class DashBoardDao
 {
 	@PersistenceContext private EntityManager em;
 	@Autowired UserDao userDao;
+	/**
+	 * @return
+	 */
 	public Object getLastloginTime() 
 	{
 	User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();

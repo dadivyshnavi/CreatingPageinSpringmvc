@@ -8,13 +8,13 @@ import javax.mail.internet.MimeMessage;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
 
+import com.charvikent.issuetracking.model.RequestLeave;
 import com.charvikent.issuetracking.model.User;
 
 @Component
@@ -81,7 +81,26 @@ public class MailTemplate {
 				System.out.println(e);
 			}  
 		}
-
+	public void requestForLeave(RequestLeave rl)throws MessagingException {
+		try {
+			String email =  rl.getEmailId();
+			MimeMessage message = javaMailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			VelocityContext velocityContext = new VelocityContext();
+			velocityContext.put("from",rl.getFromDate());
+			velocityContext.put("to",rl.getToDate());
+			velocityContext.put("description",rl.getDescription());
+			StringWriter stringWriter = new StringWriter();
+			velocityEngine.mergeTemplate("requestforleave.vm",    "UTF-8", velocityContext, stringWriter);
+			helper.setText(stringWriter.toString(), true);
+			helper.setTo( email);
+			helper.setSubject("Your request sent successfully");
+			javaMailSender.send(message);	
+			} catch (MailException e) {
+				e.printStackTrace();
+				System.out.println(e);
+			}  
+		}
 		
 	}  
 

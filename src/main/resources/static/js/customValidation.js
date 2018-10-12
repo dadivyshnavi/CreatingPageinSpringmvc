@@ -94,24 +94,23 @@ function checkEmail(str) {
 
 $(".emailOnly").on(	"keypress",	function(e) {
 
-					// console.log(event.which);
-					var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-					// var expr =/[A-Z0-9a-z@]/;
-					var key = String.fromCharCode(event.which);
-					/*
-					 * if($(".emailOnly").match(expr)) { console.log("Email");
-					 * return true; }
-					 */
-					if (e.test(expr)) {
-						console.log("Email");
-						return true;
-					}
-					// keychar = String.fromCharCode(keynum);
-					// regEx = /[A-Z0-9a-z@]/;
-					// return regEx.test(keychar);
-					return false;
-				});
-
+	// console.log(event.which);
+	var expr = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+	// var expr =/[A-Z0-9a-z@]/;
+	var key = String.fromCharCode(event.which);
+	/*
+	 * if($(".emailOnly").match(expr)) { console.log("Email");
+	 * return true; }
+	 */
+	if (e.test(expr)) {
+		console.log("Email");
+		return true;
+	}
+	// keychar = String.fromCharCode(keynum);
+	// regEx = /[A-Z0-9a-z@]/;
+	// return regEx.test(keychar);
+	return false;
+});
 $('.nospecialCharacter').bind('keypress', function validate(e) {
 	var regex = new RegExp("[a-zA-Z0-9]");
 	var key = e.keyCode || e.which;

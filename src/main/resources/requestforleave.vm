@@ -1,0 +1,21 @@
+<html>  
+  <body>  
+  <h3>Hi Sir,</h3> 
+  <div>
+  <b>from : <b>${from} - <b>To :<b> ${to}
+ <div>
+ <b>description</b> ${description}
+ </div>
+ 
+<div>
+Thanking you sir
+</div>
+<div>
+Thanks&Regards
+</div>
+<div>
+D Vyshnavi
+</div>
+   
+  </body>  you did not request any registration, ignore this message and nothing will happen.
+  </html> 

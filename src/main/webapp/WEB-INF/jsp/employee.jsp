@@ -96,7 +96,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Email Id<span class="impColor">*</label>
 									<div class="col-md-6">
-										<form:input path="emailId" class="form-control" placeholder="Enter Email"/>
+										<form:input path="emailId" class="form-control " placeholder="Enter Email"/>
 									</div>
 								</div></div>
 								<%-- <div class="col-md-6"><br>
@@ -150,7 +150,7 @@
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-3 control-label">Date Of Birth<span class="impColor">*</span></label>
 							<div class="col-md-6">
-							<form:input type="text" path="dob" class="form-control  validate" />
+							<form:input type="text" path="dob" class="form-control validate" />
 							</div></div>
 							</div>
 							<div class="col-md-6">

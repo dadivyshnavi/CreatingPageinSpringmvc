@@ -28,8 +28,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.charvikent.issuetracking.config.MailTemplate;
 import com.charvikent.issuetracking.config.SendSMS;
 import com.charvikent.issuetracking.dao.EmployeeActionDao;
+import com.charvikent.issuetracking.dao.RequestLeaveDao;
 import com.charvikent.issuetracking.dao.UserDao;
 import com.charvikent.issuetracking.model.EmployeeAction;
+import com.charvikent.issuetracking.model.RequestLeave;
 import com.charvikent.issuetracking.model.User;
 import com.charvikent.issuetracking.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,7 +56,15 @@ public class EmployeeController {
 	private SendSMS smsTemplate;
 	@Autowired
 	MailTemplate mailTemplate;
-
+@Autowired RequestLeaveDao requestleaveDao;
+	/**
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws MessagingException
+	 * This method is used to show the Employee page when we request the employee url
+	 * we can see registered employees list 
+	 */
 	@RequestMapping(value = "/employee", method = RequestMethod.GET, headers = "Accept=application/json")
 	public String showEmployeePage(Model model, HttpServletRequest request) throws MessagingException {
 		// mailTemplate.sendConfirmationEmail();
@@ -89,9 +99,16 @@ public class EmployeeController {
 
 	}
 
+	/**
+	 * @param user
+	 * @param bindingresults
+	 * @param redir
+	 * @return
+	 * @throws IOException
+	 * This method is used to create,save and update the employee details (with duplicate checking) in database
+	 */
 	@RequestMapping(value = "/employee", method = RequestMethod.POST)
-	public String saveAdmin(@Valid @ModelAttribute User user, BindingResult bindingresults, RedirectAttributes redir)
-			throws IOException {
+	public String saveAdmin(@Valid @ModelAttribute User user, BindingResult bindingresults, RedirectAttributes redir) throws IOException {
 
 		if (bindingresults.hasErrors()) {
 			System.out.println("has some errors");
@@ -152,6 +169,15 @@ public class EmployeeController {
 		return "redirect:employee";
 	}
 
+	/**
+	 * @param objUser
+	 * @param model
+	 * @param request
+	 * @param session
+	 * @param objBindingResult
+	 * This method is used to delete employee details from database
+	 * @return
+	 */
 	@RequestMapping(value = "/deleteUser")
 	public @ResponseBody String deleteUser(User objUser, ModelMap model, HttpServletRequest request,
 			HttpSession session, BindingResult objBindingResult) {
@@ -201,6 +227,13 @@ public class EmployeeController {
 
 	}
 
+	/**
+	 * @param user
+	 * @param redir
+	 * @param request
+	 * this method is used to change the password from old password to new password for selected employee by ID
+	 * @return
+	 */
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
 	public @ResponseBody String changePassword(@ModelAttribute("changePassword") User user, RedirectAttributes redir,
 			HttpServletRequest request) {
@@ -229,10 +262,17 @@ public class EmployeeController {
 		 */
 	}
 
+	/**
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 * @throws MessagingException
+	 *this method is used to get the forgot password to  registered email 
+	 */
 	@RequestMapping(value = "/getresetpassword", method = RequestMethod.POST)
 	public @ResponseBody Boolean getResetUserPassword(Model model, HttpServletRequest request)
 			throws IOException, MessagingException {
-		// LOGGER.debug("Calling getresetpassword at controller");
 		System.out.println("enter to getresetpassword");
 		String emailId = request.getParameter("emailId");
 		System.out.println(emailId);
@@ -250,6 +290,15 @@ public class EmployeeController {
 			return false;
 	}
 
+	/**
+	 * this method is used to check the employee is exist or not by mobile number
+	 * @param user
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws IOException
+	
+	 */
 	@RequestMapping(value = "/checkUserExst", method = RequestMethod.POST)
 	public @ResponseBody Boolean checkCustomerExistence(@Validated @ModelAttribute User user, Model model,
 			HttpServletRequest request) throws IOException {
@@ -276,6 +325,13 @@ public class EmployeeController {
 
 	}
 
+	/**
+	 * this method is used to save the Employee Action in database by checkin and checkout
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 * @throws MessagingException
+	 */
 	@RequestMapping(value = "/checkinout", method = RequestMethod.POST)
 	public @ResponseBody String saveCheckInAndOutAction(HttpServletRequest request)
 			throws IOException, MessagingException {
@@ -350,6 +406,15 @@ public class EmployeeController {
 		return shiftid;
 	}
 
+	/**
+	 * this method is used to the  inActive Employees list
+	 * @param objdept
+	 * @param model
+	 * @param request
+	 * @param session
+	 * @param objBindingResult
+	 * @return
+	 */
 	@RequestMapping(value = "/inActiveUser")
 	public @ResponseBody String getAllActiveOrInactiveUser(User  objdept,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		//LOGGER.debug("Calling inActiveEmp at controller");
@@ -387,4 +452,33 @@ public class EmployeeController {
 	}
 
 	
+	/**
+	 * this method is used to sending email for requestForLeave 
+	 * @param model
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 * @throws MessagingException
+	 */
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value = "/getRequestforleave", method = RequestMethod.POST)
+	public @ResponseBody Boolean getRequestforleave(@ModelAttribute("requestLeave") RequestLeave rl,HttpServletRequest request)
+			throws IOException, MessagingException {
+		System.out.println("enter to getRequestforleave");
+		User currentUser = userService.getCurrentUser();
+		rl.setEmpId(currentUser.getEmpId());
+		String emailId = request.getParameter("emailId");
+		String fromDate = request.getParameter("fromDate");
+		String toDate = request.getParameter("toDate");
+		String description = request.getParameter("description");
+		requestleaveDao.saveRequestLeave(rl);
+		System.out.println(rl);
+		RequestLeave requestleave = requestleaveDao.checkUserExistOrNotbyEmailId(emailId);
+		if (rl != null) {
+		mailTemplate.requestForLeave(rl);
+			return true;
+		}  else
+			return false;
+	}
 }
