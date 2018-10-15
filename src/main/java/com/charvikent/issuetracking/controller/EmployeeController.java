@@ -463,8 +463,10 @@ public class EmployeeController {
 	
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/getRequestforleave", method = RequestMethod.POST)
-	public @ResponseBody Boolean getRequestforleave(@ModelAttribute("requestLeave") RequestLeave rl,HttpServletRequest request)
+	public  String getRequestforleave(@ModelAttribute("requestLeave") RequestLeave rl,HttpServletRequest request,RedirectAttributes redir)
 			throws IOException, MessagingException {
+		
+		
 		System.out.println("enter to getRequestforleave");
 		User currentUser = userService.getCurrentUser();
 		rl.setEmpId(currentUser.getEmpId());
@@ -477,8 +479,12 @@ public class EmployeeController {
 		RequestLeave requestleave = requestleaveDao.checkUserExistOrNotbyEmailId(emailId);
 		if (rl != null) {
 		mailTemplate.requestForLeave(rl);
-			return true;
+		
+		redir.addFlashAttribute("msg", "Request Send Succesfully");
+		redir.addFlashAttribute("cssMsg", "success");
+			return "redirect:dashBoard";
 		}  else
-			return false;
+			return "";
+		
 	}
 }

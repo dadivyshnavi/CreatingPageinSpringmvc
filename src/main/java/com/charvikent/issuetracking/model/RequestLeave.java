@@ -1,11 +1,15 @@
 package com.charvikent.issuetracking.model;
 
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 
 @Entity
@@ -20,6 +24,16 @@ public class RequestLeave {
 	private String fromDate;
 	private String toDate;
 	private String description;
+	
+	@CreationTimestamp
+	private Date createdTime;
+	
+	public Date getCreatedTime() {
+		return createdTime;
+	}
+	public void setCreatedTime(Date createdTime) {
+		this.createdTime = createdTime;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -61,8 +75,9 @@ public class RequestLeave {
 	@Override
 	public String toString() {
 		return "RequestLeave [id=" + id + ", empId=" + empId + ", emailId=" + emailId + ", fromDate=" + fromDate
-				+ ", toDate=" + toDate + ", description=" + description + "]";
+				+ ", toDate=" + toDate + ", description=" + description + ", createdTime=" + createdTime + "]";
 	}
+	
 	
 	
 	
