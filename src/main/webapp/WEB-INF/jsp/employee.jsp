@@ -536,6 +536,6 @@ function inactiveData() {
  	$('#cpassword').css('border-color', 'none');
  }
 
- $("#pageName").text("Employee Master");
+$("#pageName").text("Employee Master");
 $(".employee").addClass("active"); 
 </script>

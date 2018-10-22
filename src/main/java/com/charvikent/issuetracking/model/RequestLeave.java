@@ -12,6 +12,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 
+/**
+ * @author Vyshnavi
+ *In the RequestLeave class , We can create every field with setters&getters and override toString() fot EmployeeAction bean
+ */
 @Entity
 @Table(name="RequestLeave")
 public class RequestLeave {
@@ -23,6 +27,7 @@ public class RequestLeave {
 	private String emailId;
 	private String fromDate;
 	private String toDate;
+	private String subject;
 	private String description;
 	
 	@CreationTimestamp
@@ -72,13 +77,19 @@ public class RequestLeave {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 	@Override
 	public String toString() {
 		return "RequestLeave [id=" + id + ", empId=" + empId + ", emailId=" + emailId + ", fromDate=" + fromDate
-				+ ", toDate=" + toDate + ", description=" + description + ", createdTime=" + createdTime + "]";
+				+ ", toDate=" + toDate + ", subject=" + subject + ", description=" + description + ", createdTime="
+				+ createdTime + "]";
 	}
-	
-	
 	
 	
 }

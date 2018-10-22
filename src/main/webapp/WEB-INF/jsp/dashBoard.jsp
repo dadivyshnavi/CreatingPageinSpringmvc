@@ -33,7 +33,7 @@
 				      			<div class="btn-toolbar text-center">
 					      			<input type="button" value="Checkin"  id="Checkin" onclick="checkInAndOut(1)"  class="btn-primary btn">
 					      			<input type="button" value="Checkout" id="Checkout" onclick="checkInAndOut(2)" class="btn-primary btn"/>
-					      			<input type="button" data-toggle="modal" data-target="#requestModel" onclick="openRequestModel()" value="Request For Leave" class="btn-primary btn"/>
+					      			<input type="button"  onclick="openRequestModal()" value="Request For Leave" class="btn-primary btn"/>
 					      			<!-- <input type="button" value="Leave Approved" class="btn-primary btn"/>
 					      			<input type="button" value="Leaves Rejected" class="btn-primary btn"/> -->
 		
@@ -63,28 +63,35 @@
 </div><div class="clearfix"></div> 
 <span class="hasError" id="cemailError" style="font-size: 13px;"></span>
 </div>
-							<div class="col-md-6">
+							<div class="col-md-5">
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-3 control-label">From Date<span class="impColor">*</span></label>
-							<div class="col-md-6">
+							<div class="col-md-7">
 							<form:input type="text" path="fromDate" class="form-control validate" />
 							</div></div>
 							</div>
 
-							<div class="col-md-6">
+							<div class="col-md-5">
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-3 control-label">To Date<span class="impColor">*</span></label>
-							<div class="col-md-6">
+							<div class="col-md-7">
 							<form:input type="text" path="toDate" class="form-control validate" />
 							</div></div>
 							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Subject<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="subject" class="form-control validate onlyCharacters" placeholder="Enter Subject"/>
+									</div>
+								</div></div>
 
-										<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+										<div class="col-lg12 col-md-12 col-sm-12 col-xs-12">
 											<div class="form-group">
-											    <label  class="col-sm-4 control-label">Description<span style="color: red;">*</span></label>
+											    <label  class="col-sm-5 control-label">Description<span style="color: red;">*</span></label>
 											    <div class="col-lg-8">
 											    <form:hidden path="id"  />
-													<form:textarea path="description" class="form-control validate onlyCharacters" size="30" maxlength="100"></form:textarea>
+													<form:textarea path="description" class="form-control validate onlyCharacters" size="100" maxlength="100"></form:textarea>
 													<span class="discription_error" id="name_error"></span>
 												</div>
 											</div>
@@ -230,6 +237,8 @@ function makeEmptyRequestModal()
 	$('#fromDate').css('border-color', 'none');
 	$('#toDate').val("");
 	$('#toDate').css('border-color', 'none');
+	$('#subject').val("");
+	$('#subject').css('border-color', 'none');
 	$('#description').val("");
 	$('#description').css('border-color', 'none');
 	

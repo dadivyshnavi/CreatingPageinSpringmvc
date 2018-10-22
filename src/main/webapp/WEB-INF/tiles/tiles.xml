@@ -31,6 +31,9 @@
      <definition name="employee" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/employee.jsp" />
 	</definition>
+	 <definition name="notification" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/notification.jsp" />
+	</definition>
 	
 	<definition name="editProfile" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/jsp/editProfile.jsp" />

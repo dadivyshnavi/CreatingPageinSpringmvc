@@ -362,7 +362,7 @@ public class EmployeeController {
 			
 			int checkinaction = (Integer) actionTime;
 
-			if (checkinaction >8)
+			if (checkinaction >9)
 			{
 
 				employeeActionDao.saveEmployeeAction(empAction);
@@ -370,7 +370,7 @@ public class EmployeeController {
 			} 
 			else 
 			{
-				msg = "8 hours not completed";
+				msg = "9 hours not completed";
 
 			     
 			}
@@ -473,6 +473,7 @@ public class EmployeeController {
 		String emailId = request.getParameter("emailId");
 		String fromDate = request.getParameter("fromDate");
 		String toDate = request.getParameter("toDate");
+		String subject=request.getParameter("subject");
 		String description = request.getParameter("description");
 		requestleaveDao.saveRequestLeave(rl);
 		System.out.println(rl);
@@ -487,4 +488,5 @@ public class EmployeeController {
 			return "";
 		
 	}
+	
 }

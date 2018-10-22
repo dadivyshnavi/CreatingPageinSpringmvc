@@ -249,10 +249,9 @@ color: inherit !important;
 			 toolTips();
 			 
 			 
-			
-			  /* var formData = new FormData();
+			var formData = new FormData();
 		    
-			$.fn.makeMultipartRequest('POST', 'getCount', false,
+			$.fn.makeMultipartRequest('POST', 'getEmailNotifications', false,
 					formData, false, 'text', function(data){
 				var jsonobj = $.parseJSON(data);
 				$("#unseentasks").text(jsonobj.unseentasks);
@@ -262,7 +261,7 @@ color: inherit !important;
 //		 		var alldata = jsonobj.allOrders1;
 //		 		console.log(jsonobj.allOrders1);
 //		 		displayTable(alldata);
-			});   */
+			});   
 		}); 
 		
 </script>
@@ -292,23 +291,62 @@ function toolTips(){
 }
 
 
-function getHeadersCounts(){
+ function getHeadersCounts(){
 	
 	 var formData = new FormData();
 	    
-		$.fn.makeMultipartRequest('POST', 'getCount', false,
+		$.fn.makeMultipartRequest('POST', 'getEmailNotifications', false,
 				formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
 			$("#unseentasks").text(jsonobj.unseentasks);
 			$("#reopentaskscount").text(jsonobj.reopentaskscount);
-			
+			var assigned_notifications =data;
+			displayMailNotifications(jsonobj.MailNotifications);
 		});  
 
 		
 }
+function getMailNotifications(){
+	
+	 var formData = new FormData();
+	    
+		$.fn.makeMultipartRequest('POST', 'getEmailNotifications', false,
+				formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+			//alert(jsonobj);
+			var assigned_notifications =data;
+			displayMailNotifications(jsonobj.MailNotifications);
+			
+		});  
 
+}
+function displayMailNotifications(listOrders) {
+// 	alert(listOrders);
+	$('#ack').html('');
+	var tableHead = '<table id="ack" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr style="background:#166eaf; color:#FFFFFF;"><th style="text-align:center;">EmpId</th>/*<th style="text-align:center;">Username</th> */ <th style="text-align:center;">Subject</th></thead><tbody></tbody></table>';
+ 	$('#ack').html(tableHead);
+	serviceUnitArray = {};
+	$.each(listOrders,function(i, orderObj) {
+		var comment =null;
+		if(orderObj.add_comment == "" ||orderObj.add_comment =="null"||typeof orderObj.add_comment === "undefined")
+			{
+			comment="----";
+			}else{
+				comment =orderObj.add_comment;
+			
+		}
+	serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.EmpId+"'>"+ orderObj.EmpId + "</td>"
+			+ "<td title='"+orderObj.subject+"'>"+ orderObj.subject + "</td>"
+			//+ "<td title='"+comment+"'>"+ comment + "</td>"		
+			+ "</tr>";
+		$(tblRow).appendTo("#ack table tbody");
+	});
+} 
 
-
+ 
 
 
 </script>
@@ -347,23 +385,98 @@ function getHeadersCounts(){
 
     <i class="fa fa-list-alt"></i><!-- <span class="badge">5</span> -->
     </div>
-     
+      <div id="ack" class="dropdown-content">
+      <a style="padding: 10px 16px;" href="#">
+      
+      	<table class="table1">
+        	<thead>
+
+            	 <tr class="tr1">               
+                	<th class="th1">EmpId</th>
+                	<th class="th1">Subject</th>
+                	<!-- <th>Change</th> -->
+                </tr> 
+            </thead>
+            <tbody>
+             <tr class="tr1">
+                	<td class="td1"></td>
+                    <td class="td1"></td>
+                   
+                </tr>
+               
+            	<tr class="tr1">
+                	<td class="td1"></td>
+                    <td class="td1"></td>
+                   
+                </tr>
+               
+            	
+            </tbody>
+        </table>
+        
+      </a>
+    </div>
   </div> 
 </div>
-                </li> 
+  </li> 
             <li style="float:left;">
             <div style="box-shadow:none; margin-right:10px;" class="navbar">
   <div style="border-left:none;" class="dropdown">
-    <diV style="color:#FFFFFF; background:#4f8edc; font-size:25px; margin-top:10px;" class="dropbtn"">
+    <diV style="color:#FFFFFF; background:#4f8edc; font-size:20px; margin-top:12px;" class="dropbtn"">
 
 
       <i class="fa fa-bell-o"></i><!-- <span class="badge">5</span> -->
     </div>
     
+    <div class="dropdown-content">
+      <a style="padding: 10px 16px;" href="#">
+      
+      	<table class="table1">
+        	<thead>
+            	<tr class="tr1" style="
+    background: #006699;
+    color: #FFF;
+">
+                	<th class="th1">EmpId</th>
+                	<th class="th1">Subject</th>
+                	<!-- <th class="th1">Change</th> -->
+                </tr>
+            </thead>
+            <tbody>
+            
+            	<tr class="tr1">
+                	<td class="td1"></td>
+                    <td class="td1"></td>
+                 <!--   <td class="td1">gfgg45643534&Assignedaa</td> -->
+                </tr>
+                
+                
+                
+            	
+            </tbody>
+        </table>
+      
+      </a>
+    </div>
+      
   </div> 
 </div>
                 </li>
-	            <%--  <li style="float:left;margin-right:35px"><a href="${baseurl}/task" style="color:white;">Create Task</a></li>  --%>
+	             
+                
+           <!--  <li style="float:left;">
+            <div style="box-shadow:none; margin-right:10px;" class="navbar">
+  <div style="border-left:none;" class="dropdown">
+    <diV style="color:#FFFFFF; background:#4f8edc; font-size:25px; margin-top:10px;" class="dropbtn"">
+
+
+      <i class="fa fa-bell-o"></i><span class="badge">5</span>
+    </div>
+    
+  </div> 
+</div>
+                </li> -->
+	            <%--  <li style="float:left;margin-right:35px"><a href="${baseurl}/task" style="color:white;">Create Task</a></li>  --%> 
 	            <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/task" style="color:white;">Create Task</a></li>
 	   
 	            <li style=" margin-top:5px;" class="dropdown">
@@ -408,6 +521,7 @@ function getHeadersCounts(){
             <li class="dashBoard"><a href="${baseurl }/dashBoard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                 <security:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_MASTERADMIN')">
              	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users"></i> <span>Employees</span></a></li>
+             	<li class="notification"><a href="${baseurl }/notification"><i class="fa fa-envelope"></i> <span>Email Notifications</span></a></li>
               </security:authorize>
              
 		</div>

@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
+/**
+ * @author Vyshnavi
+ * In the role class we can create fields with getters&setters,override toString()
+ */
 @Entity
 @Table(name = "roles")
 public class Role {

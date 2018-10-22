@@ -89,6 +89,7 @@ public class MailTemplate {
 			VelocityContext velocityContext = new VelocityContext();
 			velocityContext.put("from",rl.getFromDate());
 			velocityContext.put("to",rl.getToDate());
+			velocityContext.put("subject",rl.getSubject());
 			velocityContext.put("description",rl.getDescription());
 			StringWriter stringWriter = new StringWriter();
 			velocityEngine.mergeTemplate("requestforleave.vm",    "UTF-8", velocityContext, stringWriter);

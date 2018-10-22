@@ -37,7 +37,7 @@ public class RequestLeaveDao {
 		String hql ="from RequestLeave where emailId='"+emailid+"'";
 		
 		
-		List<RequestLeave> custlist =	em.createQuery(hql).getResultList();
+		List<RequestLeave> custlist =em.createQuery(hql).getResultList();
 		    
 		if(custlist.size()>0)
 		return custlist.get(0);

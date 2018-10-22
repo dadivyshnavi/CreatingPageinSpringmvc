@@ -37,6 +37,10 @@ public class UserDao {
 
 @Autowired KptsUtil kptsUtil;
 
+	/**
+	 * @param user
+	 * This method is used to save user details in database. 
+	 */
 	public void saveUser(User user) {
 	  
 	   /** for random number generation of employeeId 
@@ -47,6 +51,10 @@ public class UserDao {
 
 	}
 
+	/**
+	 * @return
+	 * This method is used to display all user details 
+	 */
 	@SuppressWarnings("unchecked")
 	public List<User> getAllUsers()
 	{
@@ -56,6 +64,10 @@ public class UserDao {
 	      return  this.jdbcTemplate.query(hql, rowMapper);
 	}
 
+	/**
+	 * @return
+	 * This method is used to get roles from database
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Role> getRoles()
 	{
@@ -66,6 +78,10 @@ public class UserDao {
 	      return  this.jdbcTemplate.query(hql, rowMapper);
 
 	}
+	/**
+	 * @return
+	 * this method is used to get shift from database 
+	 */
 	@SuppressWarnings("unchecked")
 	public List<shift> getShifts()
 	{
@@ -78,6 +94,12 @@ public class UserDao {
 	}
 
 
+	/**
+	 * @param username
+	 * @param lpassword
+	 * @return
+	 * This method is used to check the user authentication by user name and password 
+	 */
 	public User findWithName(String username,String lpassword) {
 		User userbean =null;
 		try {
@@ -96,10 +118,21 @@ public class UserDao {
 	}
 
 
+	/**
+	 * @param id
+	 * @return
+	 * this method is used to get user by ID
+	 */
 	public User getUserById(Integer id) {
 
 		return em.find(User.class, id);
 	}
+	/**
+	 * @param id
+	 * @param status
+	 * @return
+	 * This method id used to delete the user from list
+	 */
 	public boolean deleteUser(Integer id, String status) {
 			
 			Boolean delete=false;
@@ -119,6 +152,10 @@ public class UserDao {
 		}
 
 
+	/**
+	 * @param user
+	 * This method is used to update the user details 
+	 */
 	public void updateUser(User user) {
 		User users=getUserById(user.getId());
 		users.setEmpId(user.getEmpId());

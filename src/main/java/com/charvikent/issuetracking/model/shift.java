@@ -12,6 +12,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+/**
+ * @author Vyshnavi
+ *In the shift class,here we create every field with setters&getters and override toString()
+ */
 @Entity
 @Table(name = "shifts")
 public class shift {

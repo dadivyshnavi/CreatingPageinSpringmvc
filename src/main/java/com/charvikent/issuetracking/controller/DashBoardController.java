@@ -1,14 +1,21 @@
 package com.charvikent.issuetracking.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.charvikent.issuetracking.dao.DashBoardDao;
 import com.charvikent.issuetracking.model.RequestLeave;
@@ -16,6 +23,7 @@ import com.charvikent.issuetracking.model.User;
 import com.charvikent.issuetracking.service.DashBoardService;
 import com.charvikent.issuetracking.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class DashBoardController {
@@ -32,8 +40,69 @@ public class DashBoardController {
 		 session.setAttribute("userDesignationSession", userDesignation);
 		return "dashBoard";
 	}
-	
+	@RequestMapping(value = "/getEmailNotifications")
+	public @ResponseBody String getAssignedNotifications(RequestLeave  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) throws JsonProcessingException
+	{
+		//LOGGER.debug("Calling  getAssignedNotifications at controller");
+		JSONObject jsonObj = new JSONObject();
+		List<RequestLeave> list=dashBoardDao.showMailsNotification();
+		ObjectMapper objectMapper = new ObjectMapper();
+		String sJson = objectMapper.writeValueAsString(list);
+		Integer unseentasks =0;
+		try{
+			
+			jsonObj.put("MailNotifications",list);
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+	System.out.println(e);
+			return String.valueOf(jsonObj);
+			
+		}
+		return String.valueOf(jsonObj);
 	}
+	
+
+}
+	
+	
+	
+	
+	/*@RequestMapping(value = "/getCount")
+	public @ResponseBody String getCount(AbheeTask  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult)
+	{
+		LOGGER.debug("Calling  getCount at controller");
+		JSONObject jsonObj = new JSONObject();
+		Integer unseentasks =0;
+		try{
+			
+			// session.setAttribute("acknotification", kpHistoryService.getHeaderNotificationsforack());
+			 
+			// session.setAttribute("notifications", kpHistoryService.getHeaderNotifications());
+					
+			//unseentasks = taskService.getUnseenTaskCount();
+			//jsonObj.put("unseentasks",unseentasks);
+			
+			
+			
+			System.out.println("enter from header");
+			
+			
+			jsonObj.put("paymentPending",dashBoardDao.getTasksCountBystatus().get("Payment Pending"));
+			//jsonObj.put("AllServiceRequests",dashBoardDao.getAllCountBystatus().get("allServiceCounts"));
+			
+			System.out.println("hi"+dashBoardDao.getAllCountBystatus());
+		    //System.out.println("hihi"+dashBoardDao.getTasksCountBystatus());
+			
+		}catch(Exception e){
+			e.printStackTrace();
+	System.out.println(e);
+			return String.valueOf(jsonObj);
+			
+		}
+		return String.valueOf(jsonObj);
+	}*/
 	
 
 /*package com.charvikent.issuetracking.controller;

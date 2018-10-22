@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
+/**
+ * @author Vyshnavi
+ *Create fields with setters and getters,override toString for EmployeeAction bean
+ */
 @Entity
 @Table(name="EmployeeAction")
 public class EmployeeAction 

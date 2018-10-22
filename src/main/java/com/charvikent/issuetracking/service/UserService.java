@@ -21,10 +21,12 @@ import org.springframework.stereotype.Service;
 
 import com.charvikent.issuetracking.config.MailTemplate;
 import com.charvikent.issuetracking.config.SendSMS;
+import com.charvikent.issuetracking.dao.DashBoardDao;
 import com.charvikent.issuetracking.dao.UserDao;
 import com.charvikent.issuetracking.dao.passwordDao;
 import com.charvikent.issuetracking.model.EmployeeAction;
 import com.charvikent.issuetracking.model.PasswordDetails;
+import com.charvikent.issuetracking.model.RequestLeave;
 import com.charvikent.issuetracking.model.User;
 import com.charvikent.issuetracking.model.Role;
 import com.charvikent.issuetracking.model.shift;
@@ -42,7 +44,7 @@ public class UserService {
 	@Autowired
 	private SendSMS smsTemplate;
 	@Autowired MailTemplate mailTemplate;
-
+	@Autowired DashBoardDao dashBoardDao;
     //SendSMS smstemplate =new SendSMS();
 
 	public void saveUser(User user) throws IOException
@@ -232,7 +234,8 @@ public boolean deleteUser(Integer id,String status) {
 	}
 	
 	
+/*public List<Map<String, Object>> getMailsStatus(){
+	return dashBoardDao.showMailsNotification();
 
-	
-
+}*/
 }

@@ -13,6 +13,10 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+/**
+ * @author Vyshnavi
+ *In the User class,We create fields with setters and getters,override toString() for User bean
+ */
 @Entity
 @Table(name = "employee")
 public class User {
@@ -296,6 +300,9 @@ public class User {
 
 
 
+	/**
+	 * Constructor created for user bean
+	 */
 	public User() {
 	}
 
