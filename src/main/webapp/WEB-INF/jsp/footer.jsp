@@ -54,8 +54,26 @@
 	
 <script type="text/javascript">
 var isClick = 'Yes';
-
-
+var test = <%= session.getAttribute( "mailNotifications" ) %>;
+if(test != null){
+var msgIncrement = 0;
+$("#notificationTableHeader tbody").empty();
+$.each(test,function(i, orderObj) { 
+	if(orderObj.status == 1){
+		msgIncrement++;
+	var notification = "<tr>"
+		+ "<td title='"+orderObj.empId+"'><b>"+ orderObj.empId+ "</b></td>" 
+		+ "<td title='"+orderObj.subject+"'><b>"+ orderObj.subject + "</b></td>"
+		+"<a class='view viewIt' href='notification?" 
+		+ "</tr>";
+	
+	//$(notification).appendTo("#notificationTableHeader table tbody");
+	
+	 $("#notificationTableHeader tbody").append(notification);
+	}
+});
+}
+	 $("#noOfMessages").text(msgIncrement);
 
 </script>
 </body>

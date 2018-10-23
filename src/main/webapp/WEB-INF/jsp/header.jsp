@@ -128,7 +128,18 @@ span.has-error,span.hasError
 
 .default-class::-webkit-input-placeholder {color: #e73d4a !important;}
 .default-class::-moz-placeholder {color: #e73d4a !important;}
-
+.badge {
+    padding: 5px 8px;
+    font-size: 13px;
+    font-family: 'Source Sans Pro', 'Segoe UI', 'Droid Sans', Tahoma, Arial, sans-serif;
+}
+header .nav .badge {
+    top: 4px;
+    left: 15px;
+    position: absolute;
+   /*  background-color: #e6e7e8;
+    color: #000; */
+}
 .msgcss
 {
 /* 	width: 50% !important; */
@@ -195,14 +206,15 @@ color: inherit !important;
 }
 
 .dropdown-content {
+padding:8px;
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-   	width: 300px;
+   	width: auto;
     z-index: 1;
 	margin-left:-35px;
 	right:0;
-	height:200px;
+	height:auto;
 	overflow-y:auto;
 }
 
@@ -425,38 +437,24 @@ function displayMailNotifications(listOrders) {
     <diV style="color:#FFFFFF; background:#4f8edc; font-size:20px; margin-top:12px;" class="dropbtn"">
 
 
-      <i class="fa fa-bell-o"></i><!-- <span class="badge">5</span> -->
+      <i class="fa fa-bell-o"><span class="badge badge-light" id="noOfMessages"></span></i><!-- <span class="badge">5</span> -->
     </div>
     
     <div class="dropdown-content">
-      <a style="padding: 10px 16px;" href="#">
+     <a style="padding: 10px 16px;" href="notification"> 
       
-      	<table class="table1">
+      	<table class="table1" id="notificationTableHeader">
         	<thead>
-            	<tr class="tr1" style="
-    background: #006699;
-    color: #FFF;
-">
+            	<tr class="tr1" style="background: #006699;color: #FFF;">
                 	<th class="th1">EmpId</th>
                 	<th class="th1">Subject</th>
                 	<!-- <th class="th1">Change</th> -->
                 </tr>
             </thead>
-            <tbody>
-            
-            	<tr class="tr1">
-                	<td class="td1"></td>
-                    <td class="td1"></td>
-                 <!--   <td class="td1">gfgg45643534&Assignedaa</td> -->
-                </tr>
-                
-                
-                
-            	
-            </tbody>
+            <tbody></tbody>
         </table>
       
-      </a>
+      </a> 
     </div>
       
   </div> 

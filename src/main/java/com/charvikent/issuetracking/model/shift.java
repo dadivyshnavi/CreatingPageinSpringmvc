@@ -26,12 +26,7 @@ public class shift {
 	
 	@Column
 	private String Status;
-	@CreationTimestamp
-	protected Date createdTime ;
-
-	@UpdateTimestamp
-	protected Date updatedTime ;
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -56,29 +51,11 @@ public class shift {
 		Status = status;
 	}
 
-	public Date getCreatedTime() {
-		return createdTime;
-	}
-
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
-	}
-
-	public Date getUpdatedTime() {
-		return updatedTime;
-	}
-
-	public void setUpdatedTime(Date updatedTime) {
-		this.updatedTime = updatedTime;
-	}
-
 	@Override
 	public String toString() {
-		return "shift [id=" + id + ", shift=" + shift + ", Status=" + Status + ", createdTime=" + createdTime
-				+ ", updatedTime=" + updatedTime + "]";
+		return "shift [id=" + id + ", shift=" + shift + ", Status=" + Status + "]";
 	}
-	
-	
+
 	
 	
 	

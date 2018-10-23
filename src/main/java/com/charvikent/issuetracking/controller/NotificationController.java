@@ -1,6 +1,5 @@
 package com.charvikent.issuetracking.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.charvikent.issuetracking.dao.NotificationDao;
 import com.charvikent.issuetracking.model.RequestLeave;
-import com.charvikent.issuetracking.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -26,8 +24,6 @@ public class NotificationController {
 	public String showNotificationPage(@ModelAttribute("requestForm")  RequestLeave req,Model model,HttpServletRequest request) throws MessagingException {
 		// mailTemplate.sendConfirmationEmail();
 
-		/*model.addAttribute("roles", userService.getRoles());
-		model.addAttribute("shifts", userService.getShifts());*/
 		List<RequestLeave> listOrderBeans = null;
 		ObjectMapper objectMapper = null;
 		String sJson = null;

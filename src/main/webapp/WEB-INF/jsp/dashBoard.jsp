@@ -16,7 +16,28 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css">
 
-
+<style>
+.form-control {
+    height: 34px;
+    padding: 5px 9px;
+    -webkit-box-shadow: inset 0 1px 0px rgba(0, 0, 0, 0.015) !important;
+    box-shadow: inset 0 1px 0px rgba(0, 0, 0, 0.015) !important;
+    margin-bottom: 5px;
+}
+.modal-header .close {
+    margin-top: -2px;
+    color: #fff;
+    opacity: 1;
+}
+.modal-header{
+background:#006699;
+}
+.modal-title {
+    margin: 0;
+    line-height: 1.428571429;
+    color: #fff;
+}
+</style>
 
 
 
@@ -47,55 +68,51 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">&times;</button>
-      <h1 class="modal-title">Request for Leave Assistance</h1>
+      <h3 class="modal-title">Request for Leave Assistance</h3>
     </div> 
 <div class="modal-body">
       <form:form action="getRequestforleave" commandName="requestLeave"  method="post" class="login-form">
 
 <div id="firstForm2">
 
-<div class="form-group">
+<div class="form-group" style="margin-bottom:5px !important;">
+<label class="col-md-4 control-label" for="emailId">Registered EmailId :</label>
 <div class="col-md-5">
-<label for="emailId">Registered EmailId :</label>
-</div>
-<div class="col-md-7">
 <form:input	type="text" name="emailId" path="emailId" onkeydown="removeBorder(this.id)" class="form-control validate emailOnly" placeholder="Registered EmailId"/>
 </div><div class="clearfix"></div> 
 <span class="hasError" id="cemailError" style="font-size: 13px;"></span>
 </div>
-							<div class="col-md-5">
+							
 							<div class="form-group">
-							<label for="focusedinput" class="col-md-3 control-label">From Date<span class="impColor">*</span></label>
-							<div class="col-md-7">
+							<label for="focusedinput" class="col-md-4 control-label">From Date<span class="impColor">*</span></label>
+							<div class="col-md-5">
 							<form:input type="text" path="fromDate" class="form-control validate" />
 							</div></div>
-							</div>
-
-							<div class="col-md-5">
+							
+<div class="clearfix"></div> 
+							
 							<div class="form-group">
-							<label for="focusedinput" class="col-md-3 control-label">To Date<span class="impColor">*</span></label>
-							<div class="col-md-7">
+							<label for="focusedinput" class="col-md-4 control-label">To Date<span class="impColor">*</span></label>
+							<div class="col-md-5">
 							<form:input type="text" path="toDate" class="form-control validate" />
 							</div></div>
-							</div>
-							<div class="col-md-6">
+							<div class="clearfix"></div> 
+							
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Subject<span class="impColor">*</span></label>
-									<div class="col-md-6">
+									<label class="col-md-4 control-label no-padding-right">Subject<span class="impColor">*</span></label>
+									<div class="col-md-5">
 										<form:input path="subject" class="form-control validate onlyCharacters" placeholder="Enter Subject"/>
 									</div>
-								</div></div>
+								</div><div class="clearfix"></div> 
 
-										<div class="col-lg12 col-md-12 col-sm-12 col-xs-12">
 											<div class="form-group">
-											    <label  class="col-sm-5 control-label">Description<span style="color: red;">*</span></label>
-											    <div class="col-lg-8">
+											    <label  class="col-sm-4 control-label">Description<span style="color: red;">*</span></label>
+											    <div class="col-lg-5">
 											    <form:hidden path="id"  />
 													<form:textarea path="description" class="form-control validate onlyCharacters" size="100" maxlength="100"></form:textarea>
 													<span class="discription_error" id="name_error"></span>
 												</div>
 											</div>
-										</div>
 
 				
 </div>

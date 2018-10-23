@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 
@@ -33,6 +34,16 @@ public class RequestLeave {
 	@CreationTimestamp
 	private Date createdTime;
 	
+	
+	private int status;
+	
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public Date getCreatedTime() {
 		return createdTime;
 	}
@@ -88,7 +99,7 @@ public class RequestLeave {
 	public String toString() {
 		return "RequestLeave [id=" + id + ", empId=" + empId + ", emailId=" + emailId + ", fromDate=" + fromDate
 				+ ", toDate=" + toDate + ", subject=" + subject + ", description=" + description + ", createdTime="
-				+ createdTime + "]";
+				+ createdTime + ", status=" + status + "]";
 	}
 	
 	

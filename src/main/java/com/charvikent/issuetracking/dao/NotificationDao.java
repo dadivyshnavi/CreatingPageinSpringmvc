@@ -21,7 +21,7 @@ public class NotificationDao {
 	
 	public List<RequestLeave> getAllMails()
 	{
-		String hql ="select id,emp_id,email_id,subject,description from request_leave";
+		String hql ="select * from request_leave order by created_time desc ";
 		System.out.println(hql);
 		RowMapper<RequestLeave> rowMapper = new BeanPropertyRowMapper<RequestLeave>(RequestLeave.class);
 		 

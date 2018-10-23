@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.charvikent.issuetracking.dao.DashBoardDao;
+import com.charvikent.issuetracking.dao.NotificationDao;
 import com.charvikent.issuetracking.model.RequestLeave;
 import com.charvikent.issuetracking.model.User;
 import com.charvikent.issuetracking.service.DashBoardService;
@@ -31,6 +32,7 @@ public class DashBoardController {
 	@Autowired DashBoardService dashBoardService;
 	@Autowired private UserService userService;
 	@Autowired DashBoardDao dashBoardDao;
+	@Autowired NotificationDao notificationDao;
 	@RequestMapping("/dashBoard")
 	public String showDashBoardPage(@ModelAttribute("requestLeave") RequestLeave requestLeave ,Model model,HttpServletRequest request,HttpSession session) throws JsonProcessingException
 	{
@@ -46,6 +48,13 @@ public class DashBoardController {
 		//LOGGER.debug("Calling  getAssignedNotifications at controller");
 		JSONObject jsonObj = new JSONObject();
 		List<RequestLeave> list=dashBoardDao.showMailsNotification();
+		List<RequestLeave> listOrderBeans = notificationDao.getAllMails();
+		if(listOrderBeans!=null)
+		{
+		ObjectMapper objectMapper = new ObjectMapper();
+		String mailsJson =objectMapper.writeValueAsString(listOrderBeans);
+		session.setAttribute("mailNotifications", mailsJson);
+		}
 		ObjectMapper objectMapper = new ObjectMapper();
 		String sJson = objectMapper.writeValueAsString(list);
 		Integer unseentasks =0;

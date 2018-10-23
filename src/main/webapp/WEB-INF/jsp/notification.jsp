@@ -59,22 +59,49 @@
   			+ '<thead><tr><th>Emp Id</th><th>EmailId</th><th>Subject</th><th>Description</th><tbody></tbody></table>';
   	$('#tableId').html(tableHead);
   	serviceUnitArray = {};
+  			var msgIncrement = 0;
   	 $.each(listOrders,function(i, orderObj)  { 
   			 
-  		/* if(orderObj.status == "1"){
-  			var deleterow = "<a class='deactivate' onclick='deleteEmployee("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>";
-  			var cls="activecss";
+  			//$('#notificationTableHeader').html('');
+  		 if(orderObj.status == "1"){
+  			/* var deleterow = "<a class='deactivate' onclick='deleteEmployee("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>";
+  			var cls="activecss"; */
+  			
+  			var unread = "<tr>"
+  	  			+ "<td title='"+orderObj.empId+"'><b>"+ orderObj.empId+ "</b></td>" 
+  	  			+ "<td title='"+orderObj.emailId+"'><b>"+ orderObj.emailId + "</b></td>"
+  	  			+ "<td title='"+orderObj.subject+"'><b>"+ orderObj.subject + "</b></td>"
+  	  			+ "<td title='"+orderObj.description+"'><b>"+ orderObj.description + "</b></td>"
+  	  			+ "</tr>";
+  			$(unread).appendTo("#tableId table tbody");
+  			
+  			
+  			//For Notification 
+  			msgIncrement++;
+  			
+  			var notification = "<tr>"
+  	  			+ "<td title='"+orderObj.empId+"'><b>"+ orderObj.empId+ "</b></td>" 
+  	  			+ "<td title='"+orderObj.subject+"'><b>"+ orderObj.subject + "</b></td>"
+  	  			+ "</tr>";
+  			
+  			//$(notification).appendTo("#notificationTableHeader table tbody");
+  			
+  			 $("#notificationTableHeader tbody").append(notification);
+  			 $("#noOfMessages").text(msgIncrement);
+  			
+  			
+  			
   		}else{  
-  			var deleterow = "<a class='activate' onclick='deleteEmployee("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>";
-  			var cls="inactivecss";
-  		}   */
+  			/* var deleterow = "<a class='activate' onclick='deleteEmployee("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>";
+  			var cls="inactivecss"; */
+  		   
   		 var edit = "<a class='edit editIt' onclick='editNotification("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>" 
   		serviceUnitArray[orderObj.id] = orderObj;
   		var tblRow = "<tr>"
   			+ "<td title='"+orderObj.empId+"'>"+ orderObj.empId+ "</td>" 
-  			+ "<td title='"+orderObj.firstName+"'>"+ orderObj.emailId + "</td>"
-  			+ "<td title='"+orderObj.lastName+"'>"+ orderObj.subject + "</td>"
-  			+ "<td title='"+orderObj.mobileNo+"'>"+ orderObj.description + "</td>"
+  			+ "<td title='"+orderObj.emailId+"'>"+ orderObj.emailId + "</td>"
+  			+ "<td title='"+orderObj.subject+"'>"+ orderObj.subject + "</td>"
+  			+ "<td title='"+orderObj.description+"'>"+ orderObj.description + "</td>"
   			/* + "<td title='"+orderObj.emailId+"'>"+ orderObj.emailId + "</td>"
   			+ "<td title='"+orderObj.role+"'>"+ orderObj.role + "</td>"
   			+ "<td title='"+orderObj.shift+"'>"+ orderObj.shift + "</td>"
@@ -84,6 +111,7 @@
   			+ "<td ><a style='cursor:pointer' onclick='getPasswordModal("+ orderObj.id +")'>Change Password</a></td> */
   			+ "</tr>";
   		$(tblRow).appendTo("#tableId table tbody");
+  		}
   	 });
   	if(isClick=='Yes') $('.datatables').dataTable();
   	

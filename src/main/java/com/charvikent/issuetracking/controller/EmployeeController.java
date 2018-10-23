@@ -470,11 +470,12 @@ public class EmployeeController {
 		System.out.println("enter to getRequestforleave");
 		User currentUser = userService.getCurrentUser();
 		rl.setEmpId(currentUser.getEmpId());
-		String emailId = request.getParameter("emailId");
-		String fromDate = request.getParameter("fromDate");
+		rl.setStatus(1);
+	  String emailId = request.getParameter("emailId");
+	/*String fromDate = request.getParameter("fromDate");
 		String toDate = request.getParameter("toDate");
 		String subject=request.getParameter("subject");
-		String description = request.getParameter("description");
+		String description = request.getParameter("description");*/
 		requestleaveDao.saveRequestLeave(rl);
 		System.out.println(rl);
 		RequestLeave requestleave = requestleaveDao.checkUserExistOrNotbyEmailId(emailId);
