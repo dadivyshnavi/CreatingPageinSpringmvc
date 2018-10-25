@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.charvikent.issuetracking.dao.DashBoardDao;
@@ -42,6 +43,8 @@ public class DashBoardController {
 		 session.setAttribute("userDesignationSession", userDesignation);
 		return "dashBoard";
 	}
+	
+	  /*This is for display dynamic notifications in bell icon*/ 
 	@RequestMapping(value = "/getEmailNotifications")
 	public @ResponseBody String getAssignedNotifications(RequestLeave  objorg,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) throws JsonProcessingException
 	{
@@ -72,9 +75,20 @@ public class DashBoardController {
 		return String.valueOf(jsonObj);
 	}
 	
-
-}
+	 /*This is for display dynamic notifications in bell icon*/ 
 	
+	@RequestMapping(value = "/viewMailNotifications")
+	public String viewMailDetails(@RequestParam(value = "id", required = true) String empId,@RequestParam(value = "rowid", required = true) String rowId,@RequestParam(value = "id", required = true) String status,
+			Model model,HttpSession session) 
+	
+	{		
+			List<Map<String, Object>> viewNotificationBean = notificationDao.getMailDetailsById(empId,rowId);
+			model.addAttribute("test2",viewNotificationBean);
+			notificationDao.readMailNotifiations(status,rowId);
+			return "viewMailNotifications";
+
+	}	
+}
 	
 	
 	

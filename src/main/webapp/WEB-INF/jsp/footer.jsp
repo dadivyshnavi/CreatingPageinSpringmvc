@@ -50,7 +50,7 @@
 <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
 <script type='text/javascript' src="${baseurl }/js/select2.min.js" ></script>
 
-
+<!-- This is for display dynamic notifications in bell icon -->
 	
 <script type="text/javascript">
 var isClick = 'Yes';
@@ -76,5 +76,6 @@ $.each(test,function(i, orderObj) {
 	 $("#noOfMessages").text(msgIncrement);
 
 </script>
+<!-- This is for display dynamic notifications in bell icon -->
 </body>
 </html>

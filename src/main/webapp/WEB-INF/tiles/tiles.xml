@@ -51,6 +51,9 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/customer.jsp" />
 	</definition>
 	 
+	  <definition name="viewMailNotifications" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/jsp/viewMailNotifications.jsp" />
+	</definition>
 	
 		
 

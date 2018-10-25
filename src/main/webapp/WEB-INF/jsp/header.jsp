@@ -318,6 +318,7 @@ function toolTips(){
 
 		
 }
+						 <!-- This is for display dynamic notifications in bell icon -->
 function getMailNotifications(){
 	
 	 var formData = new FormData();
@@ -359,7 +360,7 @@ function displayMailNotifications(listOrders) {
 } 
 
  
-
+				<!-- This is for display dynamic notifications in bell icon -->
 
 </script>
 </head>
@@ -394,7 +395,8 @@ function displayMailNotifications(listOrders) {
   <div style="border-left:none; margin-right:10px;" class="dropdown">
     <diV style="color:#FFFFFF; background:#4f8edc; font-size:25px; margin-top:10px; margin-right:10px;" class="dropbtn"">    
 
-
+				<!-- This is for display dynamic notifications in bell icon -->
+   
     <i class="fa fa-list-alt"></i><!-- <span class="badge">5</span> -->
     </div>
       <div id="ack" class="dropdown-content">
@@ -461,7 +463,9 @@ function displayMailNotifications(listOrders) {
 </div>
                 </li>
 	             
-                
+ 					<!-- This is for display dynamic notifications in bell icon -->    
+           
+           
            <!--  <li style="float:left;">
             <div style="box-shadow:none; margin-right:10px;" class="navbar">
   <div style="border-left:none;" class="dropdown">

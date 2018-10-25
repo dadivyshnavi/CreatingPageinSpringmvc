@@ -1,6 +1,7 @@
 package com.charvikent.issuetracking.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,4 +28,24 @@ public class NotificationDao {
 		 
 	      return  this.jdbcTemplate.query(hql, rowMapper);
 	}
+	public List<Map<String, Object>> getMailDetailsById(String empId,String rowid)
+	{
+		String hql="select * from request_leave where emp_id="+empId+" and status = 1 and id="+rowid+"";
+		
+		List<Map<String, Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+		System.out.println(retlist);
+		return retlist;
+		
+	}
+	
+	public void readMailNotifiations(String status,String rowid)
+	{
+		String hql="update request_leave set status='0' where status='1'and id="+rowid+"";
+		jdbcTemplate.execute(hql);
+	}
+	
+	
+	
 }
+
+

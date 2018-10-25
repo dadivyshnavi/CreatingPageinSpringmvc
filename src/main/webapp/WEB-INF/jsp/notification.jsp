@@ -31,7 +31,7 @@
 					
 					<div class="panel-body collapse in">
 					<span id="PasswordSuccessmsg"></span>
-					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
+					<!-- <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> -->
 						<div class="table-responsive" id="tableId">
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 								<thead><tr><th>Employee ID</th><th>Email</th><th>Subject</th> <th>Description</th></thead>
@@ -66,9 +66,9 @@
   		 if(orderObj.status == "1"){
   			/* var deleterow = "<a class='deactivate' onclick='deleteEmployee("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>";
   			var cls="activecss"; */
-  			
+  			var view1 ="<a class='view viewIt' href='viewMailNotifications?id="+ orderObj.empId+ "&rowid="+orderObj.id+">"+ orderObj.empId + "</a>"
   			var unread = "<tr>"
-  	  			+ "<td title='"+orderObj.empId+"'><b>"+ orderObj.empId+ "</b></td>" 
+  	  			+ "<td title='"+orderObj.empId+"'><a href=viewMailNotifications?id='"+ orderObj.empId+ "'&rowid='"+orderObj.id+"'>"+ orderObj.empId + "</a></td>"
   	  			+ "<td title='"+orderObj.emailId+"'><b>"+ orderObj.emailId + "</b></td>"
   	  			+ "<td title='"+orderObj.subject+"'><b>"+ orderObj.subject + "</b></td>"
   	  			+ "<td title='"+orderObj.description+"'><b>"+ orderObj.description + "</b></td>"
@@ -77,7 +77,7 @@
   			
   			
   			//For Notification 
-  			msgIncrement++;
+  			/* msgIncrement++;
   			
   			var notification = "<tr>"
   	  			+ "<td title='"+orderObj.empId+"'><b>"+ orderObj.empId+ "</b></td>" 
@@ -88,7 +88,7 @@
   			
   			 $("#notificationTableHeader tbody").append(notification);
   			 $("#noOfMessages").text(msgIncrement);
-  			
+  			 */
   			
   			
   		}else{  
