@@ -109,7 +109,7 @@ background:#006699;
 											    <label  class="col-sm-4 control-label">Description<span style="color: red;">*</span></label>
 											    <div class="col-lg-5">
 											    <form:hidden path="id"  />
-													<form:textarea path="description" class="form-control validate onlyCharacters" size="100" maxlength="100"></form:textarea>
+													<form:textarea path="description" class="form-control validate onlyCharacters" size="100" maxlength="1000"></form:textarea>
 													<span class="discription_error" id="name_error"></span>
 												</div>
 											</div>

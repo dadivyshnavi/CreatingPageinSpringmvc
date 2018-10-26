@@ -96,9 +96,10 @@
   			var cls="inactivecss"; */
   		   
   		 var edit = "<a class='edit editIt' onclick='editNotification("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>" 
+  		var view1 ="<a class='view viewIt' href='viewMailNotifications?id="+ orderObj.empId+ "&rowid="+orderObj.id+">"+ orderObj.empId + "</a>"
   		serviceUnitArray[orderObj.id] = orderObj;
   		var tblRow = "<tr>"
-  			+ "<td title='"+orderObj.empId+"'>"+ orderObj.empId+ "</td>" 
+  			+ "<td title='"+orderObj.empId+"'><a href=viewMailNotifications?id='"+ orderObj.empId+ "'&rowid='"+orderObj.id+"'>"+ orderObj.empId + "</a></td>" 
   			+ "<td title='"+orderObj.emailId+"'>"+ orderObj.emailId + "</td>"
   			+ "<td title='"+orderObj.subject+"'>"+ orderObj.subject + "</td>"
   			+ "<td title='"+orderObj.description+"'>"+ orderObj.description + "</td>"

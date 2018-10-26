@@ -25,26 +25,29 @@ public class NotificationDao {
 		String hql ="select * from request_leave order by created_time desc ";
 		System.out.println(hql);
 		RowMapper<RequestLeave> rowMapper = new BeanPropertyRowMapper<RequestLeave>(RequestLeave.class);
-		 
-	      return  this.jdbcTemplate.query(hql, rowMapper);
+	     return  this.jdbcTemplate.query(hql, rowMapper);
 	}
-	public List<Map<String, Object>> getMailDetailsById(String empId,String rowid)
+	public List<Map<String, Object>> getUnreadMailDetailsById(String empId,String rowid)
 	{
 		String hql="select * from request_leave where emp_id="+empId+" and status = 1 and id="+rowid+"";
-		
 		List<Map<String, Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
 		System.out.println(retlist);
-		return retlist;
-		
+		return retlist;	
 	}
 	
-	public void readMailNotifiations(String status,String rowid)
+	public void updateMailStatusNotifiations(String status,String rowid)
 	{
 		String hql="update request_leave set status='0' where status='1'and id="+rowid+"";
 		jdbcTemplate.execute(hql);
 	}
 	
-	
+	public List<Map<String, Object>> getReadMailDetailsById(String empId,String rowid)
+	{
+		String hql="select * from request_leave where emp_id="+empId+" and status = '0' and id="+rowid+"";
+		List<Map<String, Object>>  retlist = jdbcTemplate.queryForList(hql,new Object[]{});
+		System.out.println(retlist);
+		return retlist;	
+	}
 	
 }
 

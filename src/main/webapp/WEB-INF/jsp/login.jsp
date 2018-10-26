@@ -59,7 +59,7 @@
 
 <body class="focusedform">
 <div class="verticalcenter">
-<div><img src="assets/img/charvikent.png" style="width:250px;" class="img-responsive"></div>
+<div align="center"><img src="assets/img/charvikent.png" style="width:250px;" class="img-responsive"></div>
 <!-- 	<h1 align="center">KHAIBAR GAS</h1> -->
 	<div class="panel panel-primary">
 		<form  action=login class="form-horizontal" method="POST"  style="margin-bottom: 0px !important;">

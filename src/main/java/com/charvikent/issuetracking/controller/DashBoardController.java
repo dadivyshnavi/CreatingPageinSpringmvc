@@ -82,9 +82,11 @@ public class DashBoardController {
 			Model model,HttpSession session) 
 	
 	{		
-			List<Map<String, Object>> viewNotificationBean = notificationDao.getMailDetailsById(empId,rowId);
-			model.addAttribute("test2",viewNotificationBean);
-			notificationDao.readMailNotifiations(status,rowId);
+			List<Map<String, Object>> viewUnreadNotificationBean = notificationDao.getUnreadMailDetailsById(empId,rowId);
+			model.addAttribute("test2",viewUnreadNotificationBean);
+			notificationDao.updateMailStatusNotifiations(status,rowId);
+			List<Map<String, Object>> viewReadNotificationBean = notificationDao.getReadMailDetailsById(empId, rowId);
+			model.addAttribute("test2",viewReadNotificationBean);
 			return "viewMailNotifications";
 
 	}	

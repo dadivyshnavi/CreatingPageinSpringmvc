@@ -64,7 +64,7 @@ $.each(test,function(i, orderObj) {
 	var notification = "<tr>"
 		+ "<td title='"+orderObj.empId+"'><b>"+ orderObj.empId+ "</b></td>" 
 		+ "<td title='"+orderObj.subject+"'><b>"+ orderObj.subject + "</b></td>"
-		+"<a class='view viewIt' href='notification?" 
+		+"<a class='view viewIt' href='notification?"
 		+ "</tr>";
 	
 	//$(notification).appendTo("#notificationTableHeader table tbody");
