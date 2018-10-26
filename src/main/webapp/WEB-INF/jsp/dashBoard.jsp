@@ -83,7 +83,7 @@ background:#006699;
 <div id="firstForm2">
 
 <div class="form-group" style="margin-bottom:5px !important;">
-<label class="col-md-4 control-label" for="emailId">Registered EmailId :</label>
+<label class="col-md-4 control-label" for="emailId">Send To :</label>
 <div class="col-md-5">
 <form:input	type="text" name="emailId" path="emailId" onkeydown="removeBorder(this.id)" class="form-control validate emailOnly" placeholder="Registered EmailId"/>
 </div><div class="clearfix"></div> 

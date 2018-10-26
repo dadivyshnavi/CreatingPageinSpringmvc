@@ -97,7 +97,7 @@
 		
 		 <div class="login-bottom"> 
 			<div class="col-sm-6">
-		<h6><a href="#" data-toggle="modal" data-target="#passwordModel" onclick="openPasswordModal()" style="color:orange;" class="tag">Forgot password</a>
+		<h6><a href="#" data-toggle="modal" data-target="#passwordModel" onclick="openPasswordModal()" style="color:orange;" class="tag">Forgot password?</a>
 		</h6>
 		</div> 
 		
@@ -128,7 +128,7 @@
 
 <div class="form-group">
 <div class="col-md-5">
-<label for="emailId">Registered EmailId :</label>
+<label for="emailId">Enter Registered MailId :</label>
 </div>
 <div class="col-md-7">
 <input	type="text" name="emailId" id="emailId" onkeydown="removeBorder(this.id)" class="form-control validate2 emailOnly" placeholder="Registered EmailId"/>
