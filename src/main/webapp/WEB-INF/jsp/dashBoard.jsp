@@ -16,6 +16,13 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css">
 
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<!-- load jQuery UI CSS theme -->
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+ 
+
 <style>
 .form-control {
     height: 34px;
@@ -268,9 +275,14 @@ function openRequestModal()
 	
 }
 </script>
-<script type="text/javascript">
-$('#fromDate').datetimepicker({
 
+<script type="text/javascript">
+/* For display calender from today */
+var date = new Date();
+var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+/* For display calender from today */
+$('#fromDate').datetimepicker({
+	minDate: today,    /*  For display calender from today */
 	useCurrent : false,
 	format : 'DD-MMM-YYYY',
 	showTodayButton : true,
@@ -278,11 +290,16 @@ $('#fromDate').datetimepicker({
 	
 	toolbarPlacement : 'top',
 	focusOnShow : false,
+	
 
 });
-
+/* For display calender from today */
+var date = new Date();
+var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+/* For display calender from today */
 $('#toDate').datetimepicker({
-
+	
+	minDate: today,
 	useCurrent : false,
 	format : 'DD-MMM-YYYY',
 	showTodayButton : true,
@@ -290,7 +307,7 @@ $('#toDate').datetimepicker({
 	
 	toolbarPlacement : 'top',
 	focusOnShow : false,
-
+	
 });
 
 </script>
