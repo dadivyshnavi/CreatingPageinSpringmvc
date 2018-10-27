@@ -352,9 +352,22 @@ public class EmployeeController {
 		if (actionId.equals("1"))
 
 		{
+			int actionTime = employeeActionDao.getTimeDiffereneOnCheckOut(empAction);
+			System.out.println(actionTime);
+			
+			int checkinaction = (Integer) actionTime;
+			if(checkinaction<9) {
+				msg="9 hours not completed to checkin!";
+				
+			/*employeeActionDao.saveEmployeeAction(empAction);
+			msg = "checkin successfully";*/
+		} 
+		
+		else {
 			employeeActionDao.saveEmployeeAction(empAction);
 			msg = "checkin successfully";
-		} 
+		}
+		}
 		else {
 			
 			int actionTime = employeeActionDao.getTimeDiffereneOnCheckOut(empAction);
@@ -370,7 +383,7 @@ public class EmployeeController {
 			} 
 			else 
 			{
-				msg = "9 hours not completed";
+				msg = "9 hours not completed to checkout!";
 
 			     
 			}
