@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.charvikent.issuetracking.model.RequestLeave;
+import com.charvikent.issuetracking.model.User;
 @Repository
 @Transactional
 public class NotificationDao {
@@ -48,6 +49,7 @@ public class NotificationDao {
 		System.out.println(retlist);
 		return retlist;	
 	}
+	
 	
 }
 

@@ -44,6 +44,12 @@ background:#006699;
     line-height: 1.428571429;
     color: #fff;
 }
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    padding-bottom: 8px;
+}
 </style>
 
 
@@ -92,20 +98,27 @@ background:#006699;
 							
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-4 control-label">From Date<span class="impColor">*</span></label>
-							<div class="col-md-5">
+							<div class="col-md-5"><div class="input-group">
 							<form:input type="text" path="fromDate" class="form-control validate" />
-							</div></div>
+							<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+							<i class="fa fa-calendar" aria-hidden="true"></i>
+							
+</span>
+							</div></div></div>
 							
 <div class="clearfix"></div> 
 							
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-4 control-label">To Date<span class="impColor">*</span></label>
-							<div class="col-md-5">
+							<div class="col-md-5"><div class="input-group">
 							<form:input type="text" path="toDate" class="form-control validate" />
-							</div></div>
+							<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i>
+							</span>
+							</div></div></div>
 							<div class="clearfix"></div> 
 							
-								<div class="form-group">
+							<div class="form-group">
 									<label class="col-md-4 control-label no-padding-right">Subject<span class="impColor">*</span></label>
 									<div class="col-md-5">
 										<form:input path="subject" class="form-control validate onlyCharacters" placeholder="Enter Subject"/>

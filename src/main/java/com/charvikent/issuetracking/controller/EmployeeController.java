@@ -484,11 +484,13 @@ public class EmployeeController {
 		User currentUser = userService.getCurrentUser();
 		rl.setEmpId(currentUser.getEmpId());
 		rl.setStatus(1);
+		/*rl.setEnable("1");*/
 	  String emailId = request.getParameter("emailId");
 	/*String fromDate = request.getParameter("fromDate");
 		String toDate = request.getParameter("toDate");
 		String subject=request.getParameter("subject");
 		String description = request.getParameter("description");*/
+	  	
 		requestleaveDao.saveRequestLeave(rl);
 		System.out.println(rl);
 		RequestLeave requestleave = requestleaveDao.checkUserExistOrNotbyEmailId(emailId);

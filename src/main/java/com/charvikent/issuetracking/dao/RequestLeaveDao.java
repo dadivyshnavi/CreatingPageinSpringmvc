@@ -26,7 +26,7 @@ public class RequestLeaveDao {
 	  
 	   /** for random number generation of employeeId 
 	   * String userid =kptsUtil.randNum();*/
-	  //user.setStatus("1");
+		//requestLeave.setEnable("1");
 	  //user.setEmpId(userid);
 		em.persist(requestLeave);
 

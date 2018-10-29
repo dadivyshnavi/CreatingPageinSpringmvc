@@ -2,6 +2,8 @@
 <%
 	String baseurl =  request.getScheme() + "://" + request.getServerName() +      ":" +   request.getServerPort() +  request.getContextPath();
 	session.setAttribute("baseurl", baseurl);
+	
+	String session_notification = (String)session.getAttribute("mailNotifications");
 %>
 
 <!-- Footer Starts Here -->
@@ -54,7 +56,14 @@
 	
 <script type="text/javascript">
 var isClick = 'Yes';
-var test = <%= session.getAttribute( "mailNotifications" ) %>;
+
+	
+	
+ var test = <%= session_notification %>;
+<%--  <%= session.getAttribute( "mailNotifications" ) %>; --%>
+	
+
+
 if(test != null){
 var msgIncrement = 0;
 $("#notificationTableHeader tbody").empty();
@@ -74,7 +83,6 @@ $.each(test,function(i, orderObj) {
 });
 }
 	 $("#noOfMessages").text(msgIncrement);
-
 </script>
 <!-- This is for display dynamic notifications in bell icon -->
 </body>

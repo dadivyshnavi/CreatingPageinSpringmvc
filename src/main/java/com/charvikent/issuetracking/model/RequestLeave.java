@@ -38,6 +38,8 @@ public class RequestLeave {
 	private int status;
 	
 	
+	
+	
 	public int getStatus() {
 		return status;
 	}
@@ -101,6 +103,8 @@ public class RequestLeave {
 				+ ", toDate=" + toDate + ", subject=" + subject + ", description=" + description + ", createdTime="
 				+ createdTime + ", status=" + status + "]";
 	}
+	
+	
 	
 	
 }

@@ -41,6 +41,13 @@ public class DashBoardController {
 		 User objuserBean = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		 User userDesignation= userService.getUserDesignationById(objuserBean.getId());
 		 session.setAttribute("userDesignationSession", userDesignation);
+		 List<RequestLeave> listOrderBeans = notificationDao.getAllMails();
+		 if(listOrderBeans!=null)
+			{
+			 ObjectMapper objectMapper = new ObjectMapper();
+			 String mailsJson =objectMapper.writeValueAsString(listOrderBeans);
+			 session.setAttribute("mailNotifications", mailsJson);
+			}
 		return "dashBoard";
 	}
 	

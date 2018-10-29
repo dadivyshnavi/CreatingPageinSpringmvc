@@ -31,7 +31,7 @@
 					
 					<div class="panel-body collapse in">
 					<span id="PasswordSuccessmsg"></span>
-					<!-- <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> -->
+					 <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> 
 						<div class="table-responsive" id="tableId">
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 								<thead><tr><th>Employee ID</th><th>Email</th><th>Subject</th> <th>Description</th></thead>
@@ -42,8 +42,7 @@
 				</div>
 			</div>
 		</div> 
-<%-- <form:form modelAttribute="requestForm" action="notification" class="form-horizontal " method="Post">
-	                  <form:hidden path="id"/></form:form> --%>
+
 </div>
 
 </body>
@@ -64,7 +63,7 @@
   			 
   			//$('#notificationTableHeader').html('');
   		 if(orderObj.status == "1"){
-  			/* var deleterow = "<a class='deactivate' onclick='deleteEmployee("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>";
+  			/* var deleterow = "<a class='deactivate' onclick='deleteMails("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>";
   			var cls="activecss"; */
   			var view1 ="<a class='view viewIt' href='viewMailNotifications?id="+ orderObj.empId+ "&rowid="+orderObj.id+">"+ orderObj.empId + "</a>"
   			var unread = "<tr>"
@@ -92,10 +91,10 @@
   			
   			
   		}else{  
-  			/* var deleterow = "<a class='activate' onclick='deleteEmployee("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>";
+  			/* var deleterow = "<a class='activate' onclick='deleteMails("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>";
   			var cls="inactivecss"; */
   		   
-  		 var edit = "<a class='edit editIt' onclick='editNotification("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>" 
+  		var edit = "<a class='edit editIt' onclick='editNotification("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>" 
   		var view1 ="<a class='view viewIt' href='viewMailNotifications?id="+ orderObj.empId+ "&rowid="+orderObj.id+">"+ orderObj.empId + "</a>"
   		serviceUnitArray[orderObj.id] = orderObj;
   		var tblRow = "<tr>"
@@ -117,6 +116,8 @@
   	if(isClick=='Yes') $('.datatables').dataTable();
   	
   }
+  
+  
 </script>
 <script type="text/javascript">
 $("#pageName").text("Primary Notifications");
