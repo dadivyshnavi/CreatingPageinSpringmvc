@@ -128,7 +128,7 @@
 
 <div class="form-group">
 <div class="col-md-5">
-<label for="emailId">Enter Registered MailId :</label>
+<label for="emailId">Enter Registered Mail-id :</label>
 </div>
 <div class="col-md-7">
 <input	type="text" name="emailId" id="emailId" onkeydown="removeBorder(this.id)" class="form-control validate2 emailOnly" placeholder="Registered EmailId"/>

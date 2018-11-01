@@ -66,7 +66,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Employee Id<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="empId" class="form-control validate numericOnly" placeholder="Enter First Name" maxlength="5"/>
+										<form:input path="empId" class="form-control validate numericOnly" placeholder="Enter EmpId" maxlength="5"/>
 									</div>
 								</div></div>
 								<div class="col-md-6">
@@ -94,9 +94,10 @@
 								</div></div>
 								<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-md-3 control-label no-padding-right">Email Id<span class="impColor">*</label>
+									<label class="col-md-3 control-label no-padding-right">Email Id<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="emailId" class="form-control " placeholder="Enter Email"/>
+										<form:input path="emailId" class="form-control validate" placeholder="Enter Email"/>
+										<span id="errorEmailidMsg" style="color:red;"></span>
 									</div>
 								</div></div>
 								<%-- <div class="col-md-6"><br>
@@ -116,7 +117,7 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Role<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:select path="roleId" class="form-control validate " >
+										<form:select path="roleId" class="form-control validate" selected="selected" onfocus="removeBorder(this.id)" >
 											<form:option value="">-- Select Role --</form:option>
 											<form:options items="${roles}"/>
 										</form:select>
@@ -143,14 +144,17 @@
 								<div class="form-group">
 									<label class="col-md-3 control-label no-padding-right">Aadhar No<span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="aadharNo" class="form-control validate numericOnly" placeholder="Enter Mobile Number" maxlength="12"/>
+										<form:input path="aadharNo" class="form-control validate numericOnly" placeholder="Enter Aadhar Number" maxlength="12"/>
+										<span id="errorAadharMsg" style="color:red;"></span>
 									</div>
 								</div></div>
 							<div class="col-md-6">
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-3 control-label">Date Of Birth<span class="impColor">*</span></label>
 							<div class="col-md-6">
-							<form:input type="text" path="dob" class="form-control validate" />
+							<form:input type="text" path="dob" class="form-control validate" selected="selected" onfocus="removeBorder(this.id)" />
+							<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+							
 							</div></div>
 							</div>
 							<div class="col-md-6">
@@ -158,7 +162,9 @@
 							<label for="focusedinput" class="col-md-3 control-label">Date of Joining<span class="impColor">*</span>
 							</label>
 							<div class="col-md-6">
-							<form:input type="text" path="doj" class="form-control validate" />
+							<form:input type="text" path="doj" class="form-control validate" selected="selected" onfocus="removeBorder(this.id)" />
+							<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+							
 							</div></div>
 							</div>
 								
@@ -484,6 +490,7 @@ function inactiveData() {
 		
 }
  
+ 
  $('#mobileNo').focusout(function(){
 	 var mobileNo=$('#mobileNo').val();
 
@@ -527,6 +534,94 @@ function inactiveData() {
 	 	
 	 		 
 	 	  }); 
+ $('#emailId').focusout(function(){
+	 var emailId=$('#emailId').val();
+
+	 	$.ajax({
+	 				type : "POST",
+	 				url : "checkEmailExst",
+	 				data :"emailId="+emailId+"&editFields="+editFields,
+	 				dataType : "text",
+	 				beforeSend : function() {
+	 		             $.blockUI({ message: 'Please wait' });
+	 		          }, 
+	 				success : function(data) {
+	 					if(data ==='true')
+	 						{
+	 						//alert(data);
+	 	 					$('#emailId').css('border-color', 'red');
+	 						$('#errorEmailidMsg').text( "* Email-id already exists") ;
+	 						setTimeout(function() { $("#errorEmailidMsg").text(''); }, 3000);
+	 						 $('#submit1').prop('disabled', true);
+	 						 
+	 	 					subValidation =false;
+	 	 					
+	 	 					event.preventDefault();
+	 						}
+	 					 else
+	 						{
+	 						$('#emailId').css('border-color', 'none');
+	 						 $('#submit1').prop('disabled', false);
+	 						 subValidation =true;
+	 						 
+	 						} 
+	 					
+	 				},
+	 				complete: function () {
+	 		            
+	 		            $.unblockUI();
+	 		       },
+	 				error :  function(e){$.unblockUI();console.log(e);}
+	 				
+	 			});
+	 	
+	 		 
+	 	  }); 
+ $('#aadharNo').focusout(function(){
+	 var aadharNo=$('#aadharNo').val();
+
+	 	$.ajax({
+	 				type : "POST",
+	 				url : "checkAadharExst",
+	 				data :"aadharNo="+aadharNo+"&editFields="+editFields,
+	 				dataType : "text",
+	 				beforeSend : function() {
+	 		             $.blockUI({ message: 'Please wait' });
+	 		          }, 
+	 				success : function(data) {
+	 					if(data ==='true')
+	 						{
+	 						//alert(data);
+	 	 					$('#aadharNo').css('border-color', 'red');
+	 						$('#errorAadharMsg').text( "* Aadhar number already exists") ;
+	 						setTimeout(function() { $("#errorEmailidMsg").text(''); }, 3000);
+	 						 $('#submit1').prop('disabled', true);
+	 						 
+	 	 					subValidation =false;
+	 	 					
+	 	 					event.preventDefault();
+	 						}
+	 					 else
+	 						{
+	 						$('#aadharNo').css('border-color', 'none');
+	 						 $('#submit1').prop('disabled', false);
+	 						 subValidation =true;
+	 						 
+	 						} 
+	 					
+	 				},
+	 				complete: function () {
+	 		            
+	 		            $.unblockUI();
+	 		       },
+	 				error :  function(e){$.unblockUI();console.log(e);}
+	 				
+	 			});
+	 	
+	 		 
+	 	  }); 
+ 
+ 
  function makeEmptyPasswordModal()
  {
  	

@@ -56,7 +56,7 @@ public class UserService {
 			
 		}*/
 		
-		String msg =user.getFirstName()+" "+user.getLastName()+",  Successfully registered with KPTMS. \n You can login using \n Username:  "+user.getMobileNo()+"\n password: "+user.getPassword();
+		String msg =user.getFirstName()+" "+user.getLastName()+",  Successfully registered with CharvikentEmployee. \n You can login using \n Username:  "+user.getMobileNo()+"\n password: "+user.getPassword();
 		String mbnum=user.getMobileNo();
 		userDao.saveUser(user);
 		logger.info("Sending message.......");
@@ -213,7 +213,16 @@ public boolean deleteUser(Integer id,String status) {
 	public User checkUserExistOrNotbyMobileOnEdit(String mobileNo, String editFieldsId) {
 		return  userDao.checkUserExistOrNotbyMobileOnEdit(editFieldsId,mobileNo);
 	}
-	
+	public User checkUserExistOrNotbyEmailOnEdit(String emailId, String editFieldsId) {
+		return  userDao.checkUserExistOrNotbyEmailOnEdit(editFieldsId,emailId);
+	}
+	public User checkUserExistOrNotbyAadhar(String aadharNo) {
+		return userDao.checkUserExistOrNotbyAadhar(aadharNo);
+	}
+
+	public User checkUserExistOrNotbyAadharOnEdit(String aadharNo, String editFieldsId) {
+		return  userDao.checkUserExistOrNotbyAadharOnEdit(editFieldsId,aadharNo);
+	}
 	
 	
 	

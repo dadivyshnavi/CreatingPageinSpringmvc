@@ -343,6 +343,17 @@ public class UserDao {
 		return usersList.get(0);
 
 	}
+	@SuppressWarnings("unchecked")
+	public User checkUserExistOrNotbyEmailOnEdit(String editFieldsId, String emailid) {
+		String hql ="from User where id <>'"+editFieldsId+"' and  emailId='"+emailid+"'";
+		Query query =em.createQuery(hql);
+		List<User> usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
+
+	}
 	
 	public void deactiveEmployee(String status,Integer id) 
 	{
@@ -376,7 +387,39 @@ public class UserDao {
 		e.printStackTrace();
 	}
 	return  users;
+
 	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	public User checkUserExistOrNotbyAadhar(String aadharNo) {
+		String hql ="from User where aadharNo='"+aadharNo+"'";
+		Query query =em.createQuery(hql);
+		List<User> usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
+	}
+
+	@SuppressWarnings("unchecked")
+	public User checkUserExistOrNotbyAadharOnEdit(String editFieldsId, String aadharNo) {
+		String hql ="from User where id <>'"+editFieldsId+"' and  aadharNo='"+aadharNo+"'";
+		Query query =em.createQuery(hql);
+		List<User> usersList =query.getResultList();
+		if(usersList.isEmpty())
+               return null;
+               else
+		return usersList.get(0);
+
+	}
+	
+	
+	
+	
+	
+	
 }
 
 	

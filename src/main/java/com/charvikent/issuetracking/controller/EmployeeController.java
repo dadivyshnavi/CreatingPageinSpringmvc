@@ -306,12 +306,12 @@ public class EmployeeController {
 		System.out.println("enter to checkUserExst");
 
 		String mobileNo = request.getParameter("mobileNo");
-
 		String editFieldsId = request.getParameter("editFields");
 		User custbean1 = null;
 		if (editFieldsId.equals("0")) {
 
 			custbean1 = userService.checkUserExistOrNotbyMobile(mobileNo);
+			
 		} else {
 			custbean1 = userService.checkUserExistOrNotbyMobileOnEdit(mobileNo, editFieldsId);
 
@@ -324,7 +324,56 @@ public class EmployeeController {
 			return false;
 
 	}
+	@RequestMapping(value = "/checkEmailExst", method = RequestMethod.POST)
+	public @ResponseBody Boolean checkUserExistence(@Validated @ModelAttribute User user, Model model,
+			HttpServletRequest request) throws IOException {
+		/* LOGGER.debug("Calling  checkCustExst at controller"); */
+		System.out.println("enter to checkEmailExst");
 
+		String emailId = request.getParameter("emailId");
+		String editFieldsId = request.getParameter("editFields");
+		User custbean1 = null;
+		if (editFieldsId.equals("0")) {
+
+			custbean1 = userService.checkUserExistOrNotbyEmailId(emailId);
+			
+		} else {
+			custbean1 = userService.checkUserExistOrNotbyEmailOnEdit(emailId, editFieldsId);
+
+		}
+
+		if (custbean1 != null) {
+			return true;
+		} else
+
+			return false;
+
+	}
+	@RequestMapping(value = "/checkAadharExst", method = RequestMethod.POST)
+	public @ResponseBody Boolean checkAadharExistence(@Validated @ModelAttribute User user, Model model,
+			HttpServletRequest request) throws IOException {
+		/* LOGGER.debug("Calling  checkCustExst at controller"); */
+		System.out.println("enter to checkAadharExst");
+
+		String aadharNo = request.getParameter("aadharNo");
+		String editFieldsId = request.getParameter("editFields");
+		User custbean1 = null;
+		if (editFieldsId.equals("0")) {
+
+			custbean1 = userService.checkUserExistOrNotbyAadhar(aadharNo);
+			
+		} else {
+			custbean1 = userService.checkUserExistOrNotbyAadharOnEdit(aadharNo, editFieldsId);
+
+		}
+
+		if (custbean1 != null) {
+			return true;
+		} else
+
+			return false;
+
+	}
 	/**
 	 * this method is used to save the Employee Action in database by checkin and checkout
 	 * @param request

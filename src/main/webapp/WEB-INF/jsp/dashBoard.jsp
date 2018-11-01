@@ -11,15 +11,21 @@
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --> 
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-<script type="text/javascript"
+<!-- <script type="text/javascript"
 	src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css">
+	href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css"> -->
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <!-- load jQuery UI CSS theme -->
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+
+
+<script  src="https://code.jquery.com/jquery-2.2.4.js"  ></script>
+<script  src="https://code.jquery.com/ui/1.11.4/jquery-ui.js">  </script>
+<link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
  
 
@@ -60,7 +66,7 @@ background:#006699;
 <title>Insert title here</title>
 </head>
 <body>
-<p>Hello World</p>
+<p><b>Welcome to Charvikent Employee Portal</b></p>
 <div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
@@ -99,12 +105,13 @@ background:#006699;
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-4 control-label">From Date<span class="impColor">*</span></label>
 							<div class="col-md-5"><div class="input-group">
-							<form:input type="text" path="fromDate" class="form-control validate" />
+							<form:input type="text" path="fromDate" class="form-control validate" placeholder="Enter FromDate" selected="selected" onfocus="removeBorder(this.id)" />
+							
 							<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar"></span>
-							<i class="fa fa-calendar" aria-hidden="true"></i>
+							<i class="fa fa-calendar" aria-hidden="true"></i></span>
 							
-</span>
+
 							</div></div></div>
 							
 <div class="clearfix"></div> 
@@ -112,7 +119,7 @@ background:#006699;
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-4 control-label">To Date<span class="impColor">*</span></label>
 							<div class="col-md-5"><div class="input-group">
-							<form:input type="text" path="toDate" class="form-control validate" />
+							<form:input type="text" path="toDate" class="form-control validate" placeholder="Enter ToDate" selected="selected" onfocus="removeBorder(this.id)" />
 							<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i>
 							</span>
 							</div></div></div>
@@ -121,7 +128,7 @@ background:#006699;
 							<div class="form-group">
 									<label class="col-md-4 control-label no-padding-right">Subject<span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="subject" class="form-control validate onlyCharacters" placeholder="Enter Subject"/>
+										<form:input path="subject" class="form-control validate" placeholder="Enter Subject"/>
 									</div>
 								</div><div class="clearfix"></div> 
 
@@ -290,38 +297,66 @@ function openRequestModal()
 </script>
 
 <script type="text/javascript">
-/* For display calender from today */
-var date = new Date();
+/* /* For display calender from today */
+/* var date = new Date();
 var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 /* For display calender from today */
-$('#fromDate').datetimepicker({
+/* $('#fromDate').datetimepicker({
 	minDate: today,    /*  For display calender from today */
-	useCurrent : false,
+	/* useCurrent : false,
 	format : 'DD-MMM-YYYY',
 	showTodayButton : true,
 	sideBySide : true,
 	
 	toolbarPlacement : 'top',
-	focusOnShow : false,
+	focusOnShow : false, 
 	
 
-});
+});  */
 /* For display calender from today */
-var date = new Date();
-var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+/* var date = new Date();
+var today = new Date(date.getFullYear(), date.getMonth(), date.getDate()); */
 /* For display calender from today */
-$('#toDate').datetimepicker({
+/* $('#toDate').datetimepicker({
 	
 	minDate: today,
 	useCurrent : false,
 	format : 'DD-MMM-YYYY',
 	showTodayButton : true,
 	sideBySide : true,
-	
 	toolbarPlacement : 'top',
 	focusOnShow : false,
 	
-});
+}); 
+ */
+ var minDate = new Date();
+ $("#fromDate").datepicker({
+         showAnim:'drop',
+         numberOfMonth:1,
+         minDate:minDate ,
+         dateFormat:'dd/mm/yy',
+         onClose:function(selectedDate){
+
+         $("#toDate").datepicker("option","minDate",selectedDate)
+         }
+
+
+
+ });
+
+ $("#toDate").datepicker({
+         showAnim:'drop',
+         numberOfMonth:1,
+         minDate:minDate ,
+         dateFormat:'dd/mm/yy',
+         onClose:function(selectedDate){
+
+         $("#fromDate").datepicker("option","minDate",selectedDate)
+         }
+
+
+
+ });
 
 </script>
 </body>
