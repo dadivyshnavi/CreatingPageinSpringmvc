@@ -84,6 +84,7 @@ $.each(test,function(i, orderObj) {
 }
 	 $("#noOfMessages").text(msgIncrement);
 </script>
+
+<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
 <!-- This is for display dynamic notifications in bell icon -->
-</body>
 </html>

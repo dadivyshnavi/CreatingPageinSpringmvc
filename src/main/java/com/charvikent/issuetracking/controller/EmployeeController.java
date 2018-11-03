@@ -386,12 +386,12 @@ public class EmployeeController {
 			throws IOException, MessagingException {
 
 		String msg = "";
-
+		
 		String actionId = request.getParameter("actionid");
 
 		User currentUser = userService.getCurrentUser();
 		String currentShiftId = getCurrentShiftId();
-
+		//User user=new User();
 		EmployeeAction empAction = new EmployeeAction();
 
 		empAction.setActionId(actionId);
@@ -401,23 +401,31 @@ public class EmployeeController {
 		if (actionId.equals("1"))
 
 		{
-			int actionTime = employeeActionDao.getTimeDiffereneOnCheckOut(empAction);
+			
+			/*if(empAction.getEmpId()==null) {*/
+			/*int actionTime = employeeActionDao.getTimeDiffereneOnCheckIn(empAction);
 			System.out.println(actionTime);
 			
 			int checkinaction = (Integer) actionTime;
-			if(checkinaction<9) {
-				msg="9 hours not completed to checkin!";
+			if(checkinaction==0) {*/
+				//msg="9 hours not completed to checkin!";
 				
-			/*employeeActionDao.saveEmployeeAction(empAction);
-			msg = "checkin successfully";*/
-		} 
-		
-		else {
 			employeeActionDao.saveEmployeeAction(empAction);
 			msg = "checkin successfully";
+		/*	}
+		 else {
+			 msg="alredy exist";
+			
+		}*/
 		}
-		}
-		else {
+		/*else {
+			msg="9 hours not completed to checkin!";*/
+			/*employeeActionDao.saveEmployeeAction(empAction);
+			msg = "checkin successfully";*/
+		/*}*/
+		
+		
+		else  {
 			
 			int actionTime = employeeActionDao.getTimeDiffereneOnCheckOut(empAction);
 			System.out.println(actionTime);

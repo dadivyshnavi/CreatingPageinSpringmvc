@@ -151,20 +151,20 @@
 							<div class="col-md-6">
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-3 control-label">Date Of Birth<span class="impColor">*</span></label>
-							<div class="col-md-6">
+							<div class="col-md-6"><div class="input-group">
 							<form:input type="text" path="dob" class="form-control validate" selected="selected" onfocus="removeBorder(this.id)" />
 							<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-							
+							</div>
 							</div></div>
 							</div>
 							<div class="col-md-6">
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-3 control-label">Date of Joining<span class="impColor">*</span>
 							</label>
-							<div class="col-md-6">
+							<div class="col-md-6"><div class="input-group">
 							<form:input type="text" path="doj" class="form-control validate" selected="selected" onfocus="removeBorder(this.id)" />
 							<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-							
+							</div>
 							</div></div>
 							</div>
 								

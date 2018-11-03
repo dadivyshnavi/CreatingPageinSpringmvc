@@ -49,6 +49,20 @@ public class EmployeeActionDao {
 		return count;
 			
 		}
-	
+	public int getTimeDiffereneOnCheckIn(EmployeeAction employeeaction) {
+		
+		  String hql="select TIMESTAMPDIFF(hour,  action_time, now()) as diff from employee_action where action_id='1' and emp_id='"+employeeaction.getEmpId()+"' order by action_time ";
+		
+		
+		 
+		 //List<Map<String, Object>> diffTime = jdbcTemplate.queryForList(hql);
+		 
+		 
+		 int count = jdbcTemplate.queryForObject(hql, Integer.class);
+             
+		 
+		return count;
+			
+		}
 	
 }

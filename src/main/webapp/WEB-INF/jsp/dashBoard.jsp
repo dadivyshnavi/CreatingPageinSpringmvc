@@ -8,14 +8,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
+
+
+<script  src="https://code.jquery.com/jquery-2.2.4.js"  ></script>
+<script  src="https://code.jquery.com/ui/1.11.4/jquery-ui.js">  </script>
+<link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+
+
+ 
+ 
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --> 
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
 <!-- <script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+	 <script type="text/javascript"
 	src="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js"></script>
 <link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css"> -->
-
+	href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css"> 
+ -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <!-- load jQuery UI CSS theme -->
@@ -23,9 +33,8 @@
 
 
 
-<script  src="https://code.jquery.com/jquery-2.2.4.js"  ></script>
-<script  src="https://code.jquery.com/ui/1.11.4/jquery-ui.js">  </script>
-<link href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+
+
 
  
 
@@ -56,6 +65,13 @@ background:#006699;
     border-collapse: separate;
     padding-bottom: 8px;
 }
+#ui-datepicker-div
+{
+z-index: 999999 !important;
+}
+.btns {
+padding-right:8px;
+}
 </style>
 
 
@@ -71,9 +87,9 @@ background:#006699;
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
-					      			<input type="button" value="Checkin"  id="Checkin" onclick="checkInAndOut(1)"  class="btn-primary btn">
-					      			<input type="button" value="Checkout" id="Checkout" onclick="checkInAndOut(2)" class="btn-primary btn"/>
-					      			<input type="button"  onclick="openRequestModal()" value="Request For Leave" class="btn-primary btn"/>
+					      			<input type="button" value="Checkin"  id="Checkin" onclick="checkInAndOut(1)"  class="btn-primary btn btns">
+					      			<input type="button" value="Checkout" id="Checkout" onclick="checkInAndOut(2)" class="btn-primary btn btns"/>
+					      			<input type="button"  onclick="openRequestModal()" value="Request For Leave" class="btn-primary btn btns"/>
 					      			<!-- <input type="button" value="Leave Approved" class="btn-primary btn"/>
 					      			<input type="button" value="Leaves Rejected" class="btn-primary btn"/> -->
 		
@@ -95,20 +111,20 @@ background:#006699;
 <div id="firstForm2">
 
 <div class="form-group" style="margin-bottom:5px !important;">
-<label class="col-md-4 control-label" for="emailId">Send To :</label>
+<label class="col-md-4 control-label" for="emailId">Send To <span class="impColor">*</span></label>
 <div class="col-md-5">
 <form:input	type="text" name="emailId" path="emailId" onkeydown="removeBorder(this.id)" class="form-control validate emailOnly" placeholder="Registered EmailId"/>
 </div><div class="clearfix"></div> 
 <span class="hasError" id="cemailError" style="font-size: 13px;"></span>
 </div>
 							
-							<div class="form-group">
+							<div class="form-group" >
 							<label for="focusedinput" class="col-md-4 control-label">From Date<span class="impColor">*</span></label>
 							<div class="col-md-5"><div class="input-group">
-							<form:input type="text" path="fromDate" class="form-control validate" placeholder="Enter FromDate" selected="selected" onfocus="removeBorder(this.id)" />
+							<form:input type="text" path="fromDate"  class="form-control validate"  placeholder="Enter FromDate" selected="selected" onfocus="removeBorder(this.id)" />
 							
 							<span class="input-group-addon">
-							<span class="glyphicon glyphicon-calendar"></span>
+							<span class="glyphicon glyphicon-calendar" ></span>
 							<i class="fa fa-calendar" aria-hidden="true"></i></span>
 							
 
@@ -120,10 +136,12 @@ background:#006699;
 							<label for="focusedinput" class="col-md-4 control-label">To Date<span class="impColor">*</span></label>
 							<div class="col-md-5"><div class="input-group">
 							<form:input type="text" path="toDate" class="form-control validate" placeholder="Enter ToDate" selected="selected" onfocus="removeBorder(this.id)" />
-							<span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i>
-							</span>
+							<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar" ></span>
+							<i class="fa fa-calendar" aria-hidden="true"></i></span>
 							</div></div></div>
-							<div class="clearfix"></div> 
+							
+<div class="clearfix"></div> 
 							
 							<div class="form-group">
 									<label class="col-md-4 control-label no-padding-right">Subject<span class="impColor">*</span></label>
@@ -167,6 +185,7 @@ background:#006699;
 <!-- <script type='text/javascript' src='js/customValidation.js'></script> -->
 
 
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
 function checkInAndOut(x) {
@@ -299,11 +318,10 @@ function openRequestModal()
 <script type="text/javascript">
 /* /* For display calender from today */
 /* var date = new Date();
-var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+var today = new Date(date.getFullYear(), date.getMonth(), date.getDate()); */
 /* For display calender from today */
-/* $('#fromDate').datetimepicker({
-	minDate: today,    /*  For display calender from today */
-	/* useCurrent : false,
+ /*  $('#fromDate').datetimepicker({
+	 useCurrent : false,
 	format : 'DD-MMM-YYYY',
 	showTodayButton : true,
 	sideBySide : true,
@@ -312,12 +330,12 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	focusOnShow : false, 
 	
 
-});  */
+});    */
 /* For display calender from today */
 /* var date = new Date();
-var today = new Date(date.getFullYear(), date.getMonth(), date.getDate()); */
+var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());  */
 /* For display calender from today */
-/* $('#toDate').datetimepicker({
+/*  $('#toDate').datetimepicker({
 	
 	minDate: today,
 	useCurrent : false,
@@ -327,22 +345,23 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate()); */
 	toolbarPlacement : 'top',
 	focusOnShow : false,
 	
-}); 
- */
- var minDate = new Date();
+});   */
+
+
+
+  $(function(){
+  var minDate = new Date();
  $("#fromDate").datepicker({
          showAnim:'drop',
          numberOfMonth:1,
          minDate:minDate ,
          dateFormat:'dd/mm/yy',
          onClose:function(selectedDate){
-
          $("#toDate").datepicker("option","minDate",selectedDate)
          }
-
-
-
  });
+
+ 
 
  $("#toDate").datepicker({
          showAnim:'drop',
@@ -350,14 +369,11 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate()); */
          minDate:minDate ,
          dateFormat:'dd/mm/yy',
          onClose:function(selectedDate){
-
-         $("#fromDate").datepicker("option","minDate",selectedDate)
+         $("#fromDate").datepicker("option","maxDate",selectedDate)
          }
-
-
-
- });
-
+ })
+  
+  });
 </script>
 </body>
 </html>

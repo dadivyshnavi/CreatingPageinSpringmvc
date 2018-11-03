@@ -53,12 +53,11 @@
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/css/styles.css' /> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<link href="${baseurl }/assets/css/datepicker1.css" rel="stylesheet" type="text/css" />
+<%-- <link href="${baseurl }/assets/css/datepicker1.css" rel="stylesheet" type="text/css" /> --%>
 
-<script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
+<%-- <script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script> --%>
 
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
-<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
 <link rel="stylesheet" href="${baseurl }/assets/css/select2.css">
@@ -278,10 +277,7 @@ padding:8px;
 			});   
 		}); 
 		
-</script>
 
-
-<script> 
 function toolTips(){
 	    $('.view').attr('data-toggle','tooltip');
 		$('.view').attr('data-original-title','View');
@@ -320,7 +316,7 @@ function toolTips(){
 
 		
 }
-						 <!-- This is for display dynamic notifications in bell icon -->
+					
 function getMailNotifications(){
 	
 	 var formData = new FormData();
@@ -365,7 +361,6 @@ function displayMailNotifications(listOrders) {
 				<!-- This is for display dynamic notifications in bell icon -->
 
 </script>
-</head>
 
 <body class="horizontal-nav ">
 	<c:if test="${not empty msg}">
@@ -402,9 +397,9 @@ function displayMailNotifications(listOrders) {
     <i class="fa fa-list-alt"></i><!-- <span class="badge">5</span> -->
     </div>
       <div id="ack" class="dropdown-content">
-      <a style="padding: 10px 16px;" href="#">
-      
       	<table class="table1">
+<!--       <a style="padding: 10px 16px;" href="#"> -->
+      
         	<thead>
 
             	 <tr class="tr1">               
@@ -428,9 +423,9 @@ function displayMailNotifications(listOrders) {
                
             	
             </tbody>
+<!--       </a> -->
         </table>
         
-      </a>
     </div>
   </div> 
 </div>
@@ -506,12 +501,9 @@ function displayMailNotifications(listOrders) {
 	                        <!-- </ul>
 	                        <li>Last LoginTime: </li>
 	                      </ul> -->
-	                    </li>
-	                </ul>
-	            </li>
+	                  
 	        </ul>
-        </div>
-    </header>
+        </div></header>
 <div class="clearfix"></div>
     <nav style="margin-top:35px;" class="navbar navbar-default yamm top20" role="navigation">
         <div class="navbar-header">
@@ -527,6 +519,7 @@ function displayMailNotifications(listOrders) {
              	<li class="employee"><a href="${baseurl }/employee"><i class="fa fa-users"></i> <span>Employees</span></a></li>
              	<li class="notification"><a href="${baseurl }/notification"><i class="fa fa-envelope"></i> <span>Email Notifications</span></a></li>
               </security:authorize>
+              </ul>
              
 		</div>
     </nav>
