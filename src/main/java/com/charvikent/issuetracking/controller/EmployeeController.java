@@ -391,39 +391,50 @@ public class EmployeeController {
 
 		User currentUser = userService.getCurrentUser();
 		String currentShiftId = getCurrentShiftId();
-		//User user=new User();
 		EmployeeAction empAction = new EmployeeAction();
-
+		User user=new User();
 		empAction.setActionId(actionId);
 		empAction.setEmpId(currentUser.getEmpId());
 		empAction.setShiftId(currentShiftId);
+		//empAction.getEmpId();
+		
+		/*EmployeeAction empAction1 = new EmployeeAction();
+		empAction1.getEmpId();
+		System.out.println(empAction1);
+	*/
 
 		if (actionId.equals("1"))
 
-		{
-			
-			/*if(empAction.getEmpId()==null) {*/
-			/*int actionTime = employeeActionDao.getTimeDiffereneOnCheckIn(empAction);
-			System.out.println(actionTime);
-			
-			int checkinaction = (Integer) actionTime;
-			if(checkinaction==0) {*/
-				//msg="9 hours not completed to checkin!";
-				
-			employeeActionDao.saveEmployeeAction(empAction);
-			msg = "checkin successfully";
-		/*	}
-		 else {
-			 msg="alredy exist";
-			
-		}*/
-		}
-		/*else {
-			msg="9 hours not completed to checkin!";*/
-			/*employeeActionDao.saveEmployeeAction(empAction);
-			msg = "checkin successfully";*/
-		/*}*/
+		{			
+			   /* if(empAction.getEmpId()!=user.getEmpId()) {
+			   
+			    System.out.println(empAction);*/
+				employeeActionDao.saveEmployeeAction(empAction);
+				msg = "checkin successfully";
+				}
 		
+			
+		/*else  {
+						int actionTime = employeeActionDao.getTimeDiffereneOnCheckIn(empAction);
+						System.out.println(actionTime);
+						
+						int checkoutaction = (Integer) actionTime;
+
+						if (checkoutaction <9)
+						{
+							msg = "9 hours not completed to checkin again!";
+							
+						} 
+						else 
+						{
+							employeeActionDao.saveEmployeeAction(empAction);
+							msg = "checkin successfully";
+
+						}
+					
+		
+	     }
+		*/
 		
 		else  {
 			

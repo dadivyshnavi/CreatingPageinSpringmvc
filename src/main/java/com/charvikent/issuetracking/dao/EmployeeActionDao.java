@@ -49,9 +49,9 @@ public class EmployeeActionDao {
 		return count;
 			
 		}
-	public int getTimeDiffereneOnCheckIn(EmployeeAction employeeaction) {
+	/*public int getTimeDiffereneOnCheckIn(EmployeeAction employeeaction) {
 		
-		  String hql="select TIMESTAMPDIFF(hour,  action_time, now()) as diff from employee_action where action_id='1' and emp_id='"+employeeaction.getEmpId()+"' order by action_time ";
+		  String hql="select TIMESTAMPDIFF(hour,  action_time, now()) as diff from employee_action where action_id='1' and emp_id='"+employeeaction.getEmpId()+"' order by action_time desc limit 1 ";
 		
 		
 		 
@@ -63,6 +63,6 @@ public class EmployeeActionDao {
 		 
 		return count;
 			
-		}
+		}*/
 	
 }

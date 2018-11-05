@@ -121,11 +121,11 @@ padding-right:8px;
 							<div class="form-group" >
 							<label for="focusedinput" class="col-md-4 control-label">From Date<span class="impColor">*</span></label>
 							<div class="col-md-5"><div class="input-group">
-							<form:input type="text" path="fromDate"  class="form-control validate"  placeholder="Enter FromDate" selected="selected" onfocus="removeBorder(this.id)" />
+							<form:input type="text" path="fromDate"  class="form-control validate"  placeholder="Enter FromDate" selected="selected" onfocus="removeBorder(this.id)"/>
 							
 							<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar" ></span>
-							<i class="fa fa-calendar" aria-hidden="true"></i></span>
+							<i class="fa fa-calendar" id="fromIcon" aria-hidden="true"></i></span>
 							
 
 							</div></div></div>
@@ -135,10 +135,10 @@ padding-right:8px;
 							<div class="form-group">
 							<label for="focusedinput" class="col-md-4 control-label">To Date<span class="impColor">*</span></label>
 							<div class="col-md-5"><div class="input-group">
-							<form:input type="text" path="toDate" class="form-control validate" placeholder="Enter ToDate" selected="selected" onfocus="removeBorder(this.id)" />
+							<form:input type="text" path="toDate" class="form-control validate" placeholder="Enter ToDate" selected="selected" onfocus="removeBorder(this.id)"/>
 							<span class="input-group-addon">
 							<span class="glyphicon glyphicon-calendar" ></span>
-							<i class="fa fa-calendar" aria-hidden="true"></i></span>
+							<i class="fa fa-calendar" id="toIcon" aria-hidden="true"></i></span>
 							</div></div></div>
 							
 <div class="clearfix"></div> 
@@ -171,21 +171,20 @@ padding-right:8px;
 				      		</div>
 				      	</div>
 			      	</div>
-<!-- <div class="modal-footer">onclick="requestleave();"
-<input  id="requestleave"  type="submit" class="btn btn-primary" value="Submit" />
-     
-    </div> -->
+
 </form:form>	
 </div>
   </div>
 </div>
 </div> 
 
+<script type='text/javascript' src='/JS/jquery-1.11.1.min.js'></script>
 
-<!-- <script type='text/javascript' src='js/customValidation.js'></script> -->
+<script type='text/javascript' src='JS/customValidation.js'></script> 
 
 
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
 function checkInAndOut(x) {
@@ -202,16 +201,7 @@ $.ajax({
        }, 
 		success : function(data) {
 			alert(data)
-			  /*  if(actionid==1)
-				{
-				$('#Checkin').prop('disabled', false);
-				$('#Checkout').prop('disabled', true);
-				}
-			else 
-				{
-				$('#Checkin').prop('disabled', true);
-				$('#Checkout').prop('disabled', false);
-				}    */
+			  
 			
 		},
 		complete: function () {
@@ -312,40 +302,20 @@ function openRequestModal()
 	makeEmptyRequestModal();
 	$('#requestModel').modal();
 	
+	
 }
 </script>
 
 <script type="text/javascript">
-/* /* For display calender from today */
-/* var date = new Date();
-var today = new Date(date.getFullYear(), date.getMonth(), date.getDate()); */
-/* For display calender from today */
- /*  $('#fromDate').datetimepicker({
-	 useCurrent : false,
-	format : 'DD-MMM-YYYY',
-	showTodayButton : true,
-	sideBySide : true,
-	
-	toolbarPlacement : 'top',
-	focusOnShow : false, 
-	
 
-});    */
-/* For display calender from today */
-/* var date = new Date();
-var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());  */
-/* For display calender from today */
-/*  $('#toDate').datetimepicker({
-	
-	minDate: today,
-	useCurrent : false,
-	format : 'DD-MMM-YYYY',
-	showTodayButton : true,
-	sideBySide : true,
-	toolbarPlacement : 'top',
-	focusOnShow : false,
-	
-});   */
+$('.fa-calendar').click(function (e) {
+	if(this.id=="fromIcon"){
+    $('#fromDate').datepicker('show');
+	}
+	if(this.id=="toIcon"){
+    $("#toDate").datepicker('show');
+	}
+}); 
 
 
 
@@ -360,7 +330,7 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());  */
          $("#toDate").datepicker("option","minDate",selectedDate)
          }
  });
-
+ 
  
 
  $("#toDate").datepicker({
@@ -371,9 +341,9 @@ var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());  */
          onClose:function(selectedDate){
          $("#fromDate").datepicker("option","maxDate",selectedDate)
          }
- })
+ });
   
-  });
+ });
 </script>
 </body>
 </html>
