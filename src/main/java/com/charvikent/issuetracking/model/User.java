@@ -18,7 +18,7 @@ import org.hibernate.annotations.UpdateTimestamp;
  *In the User class,We create fields with setters and getters,override toString() for User bean
  */
 @Entity
-@Table(name = "employee")
+@Table(name = "Employee")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,7 +34,6 @@ public class User {
 	private String aadharNo;
 	private String roleId;
 	private String shiftId;
-	//private String enabled;
 	
 	@Column
 	private String password;
@@ -330,13 +329,15 @@ public class User {
 	this.npassword=user.npassword;
 	this.cpassword=user.cpassword;
 	
-	//this.enabled=user.enabled;
 		
 		
 	}
 
 
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", empId=" + empId + ", firstName=" + firstName + ", lastName=" + lastName

@@ -358,7 +358,7 @@ function displayMailNotifications(listOrders) {
 } 
 
  
-				<!-- This is for display dynamic notifications in bell icon -->
+				/* <!-- This is for display dynamic notifications in bell icon --> */
 
 </script>
 
@@ -476,7 +476,7 @@ function displayMailNotifications(listOrders) {
 </div>
                 </li> -->
 	            <%--  <li style="float:left;margin-right:35px"><a href="${baseurl}/task" style="color:white;">Create Task</a></li>  --%> 
-	            <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/task" style="color:white;">Create Task</a></li>
+	            <%--  <li style="float:left; margin-right:5px; margin-top:5px;"><a href="${baseurl}/task" style="color:white;">Create Task</a></li>  --%>
 	   
 	            <li style=" margin-top:5px;" class="dropdown">
 	               <a href="#" class="dropdown-toggle username" data-toggle="dropdown" style="color: white;"><span class="hidden-xs" > <%= userDesignation.getRole() %> <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>  
@@ -531,10 +531,10 @@ function displayMailNotifications(listOrders) {
 	        	<div class="col-md-6">
 					<h1 id="pageName">Dashboard</h1>
 				</div>
-				<div class="btn-toolbar pull-right">
+				<!-- <div class="btn-toolbar pull-right">
 		                    <a href="#" class="btn btn-danger "><span id="unseentasks"> </span><br>Unread Tasks</a>
 		                    <a href="#" class="btn btn-warning"><span id="reopentaskscount"></span><br>Reopen Tasks</a>
-		                    <!-- <a href="#" class="btn btn-info"><span id="totalGas1">27956</span><br>Gas in Kgs</a> -->
-		                </div>
+		                    <a href="#" class="btn btn-info"><span id="totalGas1">27956</span><br>Gas in Kgs</a>
+		                </div> -->
 	        </div>
 	        </div>

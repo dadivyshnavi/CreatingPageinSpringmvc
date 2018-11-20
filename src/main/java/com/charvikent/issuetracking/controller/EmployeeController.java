@@ -302,7 +302,6 @@ public class EmployeeController {
 	@RequestMapping(value = "/checkUserExst", method = RequestMethod.POST)
 	public @ResponseBody Boolean checkCustomerExistence(@Validated @ModelAttribute User user, Model model,
 			HttpServletRequest request) throws IOException {
-		/* LOGGER.debug("Calling  checkCustExst at controller"); */
 		System.out.println("enter to checkUserExst");
 
 		String mobileNo = request.getParameter("mobileNo");
@@ -327,7 +326,6 @@ public class EmployeeController {
 	@RequestMapping(value = "/checkEmailExst", method = RequestMethod.POST)
 	public @ResponseBody Boolean checkUserExistence(@Validated @ModelAttribute User user, Model model,
 			HttpServletRequest request) throws IOException {
-		/* LOGGER.debug("Calling  checkCustExst at controller"); */
 		System.out.println("enter to checkEmailExst");
 
 		String emailId = request.getParameter("emailId");
@@ -352,7 +350,6 @@ public class EmployeeController {
 	@RequestMapping(value = "/checkAadharExst", method = RequestMethod.POST)
 	public @ResponseBody Boolean checkAadharExistence(@Validated @ModelAttribute User user, Model model,
 			HttpServletRequest request) throws IOException {
-		/* LOGGER.debug("Calling  checkCustExst at controller"); */
 		System.out.println("enter to checkAadharExst");
 
 		String aadharNo = request.getParameter("aadharNo");
@@ -552,9 +549,8 @@ public class EmployeeController {
 		User currentUser = userService.getCurrentUser();
 		rl.setEmpId(currentUser.getEmpId());
 		rl.setStatus(1);
-		/*rl.setEnable("1");*/
 	  String emailId = request.getParameter("emailId");
-	/*String fromDate = request.getParameter("fromDate");
+	 /*String fromDate = request.getParameter("fromDate");
 		String toDate = request.getParameter("toDate");
 		String subject=request.getParameter("subject");
 		String description = request.getParameter("description");*/

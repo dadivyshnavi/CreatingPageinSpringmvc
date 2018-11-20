@@ -30,6 +30,7 @@ public class employee {
 	private String shiftId;
 	private String password;
 	private String status;
+	
 	@CreationTimestamp
 	private Date createdTime;
 	@UpdateTimestamp
